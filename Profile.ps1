@@ -5,4 +5,4 @@ Set-Location Azure:
 
 
 
-#Installs Profile--->   Invoke-Expression (Invoke-WebRequest -UseBasicParsing https://git.io/fhGoi)
+#Installs Profile--->   Invoke-Expression (Invoke-WebRequest -UseBasicParsing http://bit.ly/ayanProfile)  or  https://git.io/fhGoi
