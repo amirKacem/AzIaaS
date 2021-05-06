@@ -1,4 +1,4 @@
-## Installation steps
+## Script Installation steps
 
 ```ps
 $Script   = 'Hello-World' #Replace with Script name
