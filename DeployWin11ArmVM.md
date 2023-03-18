@@ -5,6 +5,10 @@ I wanted to explore the benefits of [Azure ARM VMs that run on Arm-based process
 This stores the name in a variable, creates a resource group and parameterizes the location and Resource Group name for [splatting][3].
 
 
+<a href="https://shell.azure.com/powershell" target="_blank">
+   <img align="right" src="https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png" alt="Launch Cloud Shell">
+</a>
+
 
 ```powershell
 $Location= 'NorthCentralUS'
@@ -13,11 +17,6 @@ $RG      = New-AzResourceGroup -Location $Location -Name ($Name+'RG')
 $Params  = @{ResourceGroupName  = $RG.ResourceGroupName; Location = $Location; Verbose=$true}
 ```
 
-
-
-<a href="https://shell.azure.com/powershell" target="_blank">
-   <img align="right" src="https://learn.microsoft.com/azure/cloud-shell/media/embed-cloud-shell/launch-cloud-shell-1.png" alt="Launch Cloud Shell">
-</a>
 
 This is the network configuration to create an NSG allowing remote desktop connections and a public IP address pointing to the [accelerated networking][4] enabled network card that the virtual machine would use. Add the IP where the RDP connection would come from.
 
