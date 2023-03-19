@@ -17,6 +17,7 @@ $RG      = New-AzResourceGroup -Location $Location -Name ($Name+'RG')
 $Params  = @{ResourceGroupName  = $RG.ResourceGroupName; Location = $Location; Verbose=$true}
 ```
 
+<img align="right" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9ki4cvu8jf2i1r0v9f7l.png" width="30%"  border="3"/>
 
 This is the network configuration to create an NSG allowing remote desktop connections and a public IP address pointing to the [accelerated networking][4] enabled network card that the virtual machine would use. Add the IP where the RDP connection would come from.
 
@@ -53,8 +54,6 @@ RequestId IsSuccessStatusCode StatusCode ReasonPhrase
                          True         OK OK
 ```
 
-
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9ki4cvu8jf2i1r0v9f7l.png)
 
 
 The Windows ARM image is still in preview and doesn't support [Trusted Launch][8] or [Secure Boot][9] yet and it's for validation purposes only.
