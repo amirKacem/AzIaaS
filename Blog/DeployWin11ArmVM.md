@@ -1,3 +1,5 @@
+<style>details summary {font-size: large; font-weight: 500;text-decoration: underline;}</style>
+
 # Azure PowerShell to deploy Win11 Arm VM
 
 I wanted to explore the benefits of [Azure ARM VMs that run on Arm-based processors][1]. They offer outstanding price-performance and power-efficiency for various workloads. In this snippet, I show how to deploy a [Generation 2][2] Windows 11 ARM virtual machine with basic [naming standard][11] and diagnostics using PowerShell cmdlets.
