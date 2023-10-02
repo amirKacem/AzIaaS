@@ -1,3 +1,5 @@
+1. [Azure PowerShell to deploy Win11 Arm VM](https://github.com/Ayanmullick/test/blob/master/blog/DeployWindows11ArmVM.md)
+
 ## Script Installation steps
 
 ```ps
