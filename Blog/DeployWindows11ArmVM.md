@@ -6,7 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/powershell.min.js"></script>
 
 <script>
-  let fetchRes = fetch("https://dev.azure.com/ayn/PowerShell/_apis/git/repositories/4d348186-f42e-4ea5-9ed0-ec47530caee1/items?path=/AzVM.ps1&api-version=7.0")
+  let fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/master/AzVM.ps1")
 
   fetchRes.then(response => response.clone().text()).then(data => {const lines = data.split("\n");
     document.getElementById("code1").textContent = lines.slice(1, 4).join("\n");
