@@ -18,13 +18,6 @@
   })
 </script>
 
-
-<script>
-fetch("https://raw.githubusercontent.com/Ayanmullick/test/master/AutomationAcc/test1.ps1")
-      .then(response => response.text())
-      .then(data => document.getElementById('code').textContent = data)
-</script>
-
 <pre id="code"></pre>
 
 I wanted to explore the benefits of [Azure ARM VMs that run on Arm-based processors][1]. They offer outstanding price-performance and power-efficiency for various workloads. In this snippet, I show how to deploy a [Generation 2][2] Windows 11 ARM virtual machine with basic [naming standard][11] and diagnostics using PowerShell cmdlets.
