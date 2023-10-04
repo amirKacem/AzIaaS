@@ -1,4 +1,4 @@
-1. [Azure PowerShell to deploy Win11 Arm VM](https://ayanmullick.github.io/AzIaaS/?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/master/Blog/DeployWindows11ArmVM.md)
+1. [Deploy Win11 Arm VM](https://ayanmullick.github.io/AzIaaS/?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/master/Blog/DeployWindows11ArmVM.md)
 2. 2nd blog
 3. 3rd blog  
 
