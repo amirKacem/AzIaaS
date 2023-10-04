@@ -13,7 +13,12 @@
   })
 </script>
 
+<details open>
+  <summary><u>Variables</u></summary>
+
 <pre id="code"></pre>
+
+</details>
 
 I wanted to explore the benefits of [Azure ARM VMs that run on Arm-based processors][1]. They offer outstanding price-performance and power-efficiency for various workloads. In this snippet, I show how to deploy a [Generation 2][2] Windows 11 ARM virtual machine with basic [naming standard][11] and diagnostics using PowerShell cmdlets.
 
