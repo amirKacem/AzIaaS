@@ -1,3 +1,5 @@
+#region DeployWindows11ArmVM.md
+
 #region Variables
 $Location= 'NorthCentralUS'
 $Name    = 'Win11ARM'
@@ -28,6 +30,7 @@ $vmConfig= New-AzVMConfig -VMName $Name'VM' -VMSize Standard_E4ps_v5 -LicenseTyp
 New-AzVM @Params -VM $vmConfig  #Deploys the VM
 #endregion
 
+#endregion
 
 #region testRegion
 test
