@@ -16,7 +16,7 @@
 <details open>
   <summary><u>Variables</u></summary>
 
-<pre id="code"></pre>
+<pre id="code1"></pre>
 
 </details>
 
@@ -30,7 +30,7 @@ This stores the name in a variable, creates a resource group and parameterizes t
 </a>
 
 
-<pre id="code1" class="powershell"></pre>
+<pre id="code2" class="powershell"></pre>
 
 
 <img align="right" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9ki4cvu8jf2i1r0v9f7l.png" width="30%"  border="3"/>
@@ -38,7 +38,7 @@ This stores the name in a variable, creates a resource group and parameterizes t
 
 This is the network configuration to create an NSG allowing remote desktop connections and a public IP address pointing to the [accelerated networking][4] enabled network card that the virtual machine would use. Add the IP where the RDP connection would come from.
 
-<pre id="code2" class="powershell"></pre>
+<pre id="code3" class="powershell"></pre>
 
 The virtual machine configuration specifies the name, [size][5], credentials, time zone, [image details][10], [update behavior][6] and [diagnostics configuration][7] of the VM. Add your password.
 
