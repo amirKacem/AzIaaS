@@ -1,4 +1,4 @@
-#region DeployWindows11ArmVM.md
+#region DeployWindows11ArmVM
 
 #region Variables
 $Location= 'NorthCentralUS'
