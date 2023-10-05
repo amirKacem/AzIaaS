@@ -35,3 +35,15 @@ New-AzVM @Params -VM $vmConfig  #Deploys the VM
 #region testRegion
 test
 #endRegion
+
+
+#region blogname2
+
+#region CodeSnippet
+code
+#endregion
+
+
+
+
+#endregion
