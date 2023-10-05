@@ -26,6 +26,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
           console.log(error);
         }
+        let links = document.querySelectorAll("a");
+        for (let i = 0; i < links.length; i++) {
+          links[i].setAttribute("target", "_blank");
+        }
       });
   }
 
@@ -35,4 +39,38 @@ document.addEventListener("DOMContentLoaded", function () {
   if (path !== "" && path !== null) {
     renderFileContent(path);
   } 
+
 });
+
+var findBlocks = function (data, variableNames) {
+  const regexPattern =
+    /#region(?<variableName>.*|\n)(?<content>[\s\S]*?)(#endregion)/g;
+  const matches = [];
+  while ((match = regexPattern.exec(data)) !== null) {
+    const variableName = match.groups.variableName.trim();
+    if (variableNames.includes(variableName)) {
+      const content = match.groups.content.trim();
+
+      matches.push({
+        variableName,
+        content,
+      });
+    }
+  }
+  return matches;
+};
+function showBlocks(data, variableNames) {
+  var blocks = findBlocks(data, variableNames);
+  blocks.forEach(function (item, index) {
+    let variableNameBlock = document.getElementById(item.variableName);
+    let codeBlock = document.getElementById("code" + index);
+    if (codeBlock !== null) {
+      codeBlock.textContent = item.content;
+      hljs.highlightElement(codeBlock);
+    }
+    if (variableNameBlock !== null) {
+      variableNameBlock.textContent = item.variableName;
+    }
+  });
+}
+
