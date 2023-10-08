@@ -15,8 +15,8 @@ I wanted to explore the benefits of [Azure ARM VMs that run on Arm-based process
 <br><br>
 
 
-<figure align="right">
-  <img src="Images/DeployWindows11ArmVM.png" width="25%"  border="3" alt="Azure Portal screenshot for output resources"/>
+<figure align="right" style="float:right; margin:0">
+  <img src="Images/DeployWindows11ArmVM.png" width="40%" alt="Azure Portal screenshot for output resources"/>
   <figcaption>Azure Portal screenshot for output resources</figcaption>
 </figure>
 
