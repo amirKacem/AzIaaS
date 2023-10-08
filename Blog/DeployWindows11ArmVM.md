@@ -15,10 +15,7 @@ I wanted to explore the benefits of [Azure ARM VMs that run on Arm-based process
 <br><br>
 
 
-<figure>
-  <img align="right" src="Images/DeployWindows11ArmVM.png" alt= "Azure Portal screenshot for output resources" width="30%"  border="3"/>
-  <figcaption>Azure Portal screenshot for output resources</figcaption>
-</figure>
+<img align="right" src="Images/DeployWindows11ArmVM.png" width="30%"  border="3"/>
 
 This stores the name in a variable, creates a resource group and parameterizes the location and Resource Group name for [splatting][3].
 
