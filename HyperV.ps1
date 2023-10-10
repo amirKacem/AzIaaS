@@ -202,3 +202,6 @@ END: Creating nested guest VM
 #>
 
 #endregion
+
+#Creates a repair VM, mounts a copy of the problem VM OS disk, creates and boots a Hyper-V VM inside it with that mounted as direct disk
+az vm repair create -g W10VmRG  -n W10VM --repair-username azure --repair-password 'RepairVMCred' --verbose --enable-nested
