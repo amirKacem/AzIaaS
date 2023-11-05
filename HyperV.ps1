@@ -33,7 +33,15 @@ Rename-NetAdapter -Name Ethernet -NewName IntConnection
 #endregion
 
 
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -Verbose  #Enable Hyper-V using PowerShell  on Windows 10
+
+#region v2:For Win11 client. Should work above Dv3 and Ev3
+Import-Module DISM -UseWindowsPowerShell
+Enable-WindowsOptionalFeature -Online -FeatureName NetFx3
+Get-WindowsOptionalFeature -Online -FeatureName *hy*|FT
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All -Verbose #Enable Hyper-V using PowerShell  on Windows 11
+#Restart
+Get-WindowsOptionalFeature -Online -FeatureName *hy*|FT
+#endregion
 
 
 #Get name of the HyperV host from VM
