@@ -7,7 +7,7 @@ Get-VM 2019OnDemand | Set-VMNetworkAdapter -MacAddressSpoofing On -Verbose
 
 Install-WindowsFeature -Name Hyper-V -IncludeAllSubFeature -IncludeManagementTools -Restart -Verbose
 
-New-VMSwitch -Name “InternalNATSwitch” -SwitchType Internal -Verbose
+New-VMSwitch -Name "InternalNATSwitch" -SwitchType Internal -Verbose
 
 Get-NetAdapter -Verbose   #mark the Index of the Hyper-V adapter
 Rename-NetAdapter -Name Ethernet -NewName IntConnection -Verbose
