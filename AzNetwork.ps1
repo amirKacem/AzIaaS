@@ -3,15 +3,15 @@ $RG             = New-AzResourceGroup -Location $Location -Name ($Name+'RG')
 $Params         = @{ResourceGroupName  = $RG.ResourceGroupName; Location = $Location; Verbose=$true }
 
 #v1
-$Subnets        = @{�myBackendSubnet�=�10.0.0.0/24�;�AzureBastionSubnet�=�10.0.1.0/24�}
+$Subnets        = @{"myBackendSubnet"="10.0.0.0/24";"AzureBastionSubnet"="10.0.1.0/24"}
 $Subnets.Keys | % {New-Variable -Name "$PSItem" -Value $(New-AzVirtualNetworkSubnetConfig -Name $_ -AddressPrefix $Subnets.Item($_) ) -Force} #-Force needed since A variable with name 'myBackendSubnet' already exists. Although it's empty
 $vnet           = New-AzVirtualNetwork @Params -Name ($Name+'vNet') -AddressPrefix 10.0.0.0/16 -Subnet $myBackendSubnet,$AzureBastionSubnet   # Create the virtual network
 
 #v2
 $SubnetArray=@()
-(@{�myBackendSubnet�=�10.0.0.0/24�;�AzureBastionSubnet�=�10.0.1.0/24�}).Keys | % { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $_ -AddressPrefix $Subnets.Item($_)    }
+(@{"myBackendSubnet"="10.0.0.0/24";"AzureBastionSubnet"="10.0.1.0/24"}).Keys | % { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $_ -AddressPrefix $Subnets.Item($_)    }
 
-@{�myBackendSubnet�=�10.0.0.0/24�} | ForEach-Object { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $_.Keys -AddressPrefix $_.Values    }   #Works
+@{"myBackendSubnet"="10.0.0.0/24"} | ForEach-Object { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $_.Keys -AddressPrefix $_.Values    }   #Works
 
 New-AzVirtualNetwork @Params -Name ($Name+'vNet') -AddressPrefix 10.0.0.0/16 -Subnet $SubnetArray
 
@@ -20,7 +20,7 @@ $MOTSid,$AppName,$Env,$Location = '30050','SPrehoming','PoC','EastUS2'
 $RG      = New-AzResourceGroup -Location $Location -Name "$MOTSid-$Location-$AppName-rg"
 $Params  = @{ResourceGroupName  = $RG.ResourceGroupName; Location = $Location; Verbose=$true }
 
-(@{�$Location-$MOTSid-$Env-vNet-SQ-snet-01�=�192.168.0.0/29�;�$Location-$MOTSid-$Env-vNet-Ap-snet-01�=�192.168.0.8/29�;�$Location-$MOTSid-$Env-vNet-FS-snet-01�=�192.168.0.16/29�}).GetEnumerator()| 
+(@{"$Location-$MOTSid-$Env-vNet-SQ-snet-01"="192.168.0.0/29";"$Location-$MOTSid-$Env-vNet-Ap-snet-01"="192.168.0.8/29";"$Location-$MOTSid-$Env-vNet-FS-snet-01"="192.168.0.16/29"}).GetEnumerator()| 
         ForEach-Object { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $Psitem.Key -AddressPrefix $Psitem.Value -NetworkSecurityGroup $NSG} #NSG to be created separately
 
 $Vnet    = New-AzVirtualNetwork @Params -Name "$Location-$MOTSid-$Env-vnet-$AppName" -AddressPrefix 192.168.0.0/27 -Subnet $SubnetArray
@@ -105,7 +105,7 @@ Get-AzureRmNetworkInterface -ResourceGroupName NLGSUSUTMRASRG2|select -Property 
 
 
 
-#Get Vnet DNS server
+#GEt Vnet DNS server
 (Get-AzureRmVirtualNetwork -ResourceGroupName NLGNUSUTMRASRG-asrTest -Name NLGNUSUATDRMRASVN01-asrTest).DhcpOptionsText
 
 
