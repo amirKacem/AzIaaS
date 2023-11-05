@@ -10,11 +10,12 @@ Install-WindowsFeature -Name Hyper-V -IncludeAllSubFeature -IncludeManagementToo
 New-VMSwitch -Name “InternalNATSwitch” -SwitchType Internal -Verbose
 
 Get-NetAdapter -Verbose   #mark the Index of the Hyper-V adapter
+Rename-NetAdapter -Name Ethernet -NewName IntConnection -Verbose
 Get-NetIPAddress|ft
 
 New-NetIPAddress -IPAddress 192.168.0.1 -PrefixLength 24 -InterfaceIndex 13 -Verbose #Index should be the same as that of the hyper-V adapter
 
-New-NetNat -Name InternalNat -InternalIPInterfaceAddressPrefix 192.168.0.0/24 -Verbose
+New-NetNat -Name InternalNat -InternalIPInterfaceAddressPrefix 192.168.0.0/24 -Verbose  #Will make you lose RDP connection on an AzVM
 
 #Change VM's NIC's IP to be in the same subnet as the switch
 Get-NetIPConfiguration
@@ -28,7 +29,7 @@ Set-DnsClientServerAddress -InterfaceIndex 2 -ServerAddresses 8.8.8.8
 ping google.com  #worked
 
 
-Rename-NetAdapter -Name Ethernet -NewName IntConnection
+
 
 #endregion
 
