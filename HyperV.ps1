@@ -45,6 +45,37 @@ Get-WindowsOptionalFeature -Online -FeatureName *hy*|FT
 #endregion
 
 
+New-VMSwitch -Name "InternalNATSwitch" -SwitchType Internal -Verbose  #Switch creation
+
+
+#region VM creation from passthru disk. An unattached Azure managed disk used in this case
+New-VM -Name W11TPM2 -MemoryStartupBytes 4GB -Generation 2 -NoVHD -SwitchName Internal -Verbose
+Set-VMProcessor -VMName W11TPM2 -Count 4 -Verbose
+Set-VMMemory -VMName W11TPM2 -DynamicMemoryEnabled $true
+
+
+Set-Disk -Number 2 -IsOffline $true
+Add-VMHardDiskDrive -VMName W11TPM2 -ControllerType SCSI -DiskNumber 2 -Verbose
+
+Get-VMHardDiskDrive -VMName W11TPM2
+Set-VMFirmware -VMName W11TPM2 -EnableSecureBoot On -FirstBootDevice (Get-VMHardDiskDrive -VMName W11TPM2) -Verbose  
+
+
+Enable-VMTPM -VMName W11TPM -Verbose #Check enabling tpm
+<#VERBOSE: Enable-VMTPM will enable the TPM for the virtual machine "W11TPM".
+Enable-VMTPM : The operation failed.
+The selected security settings of a virtual machine cannot be changed without a valid key protector configured.
+The operation failed.
+#>
+
+Start-VM -Name W11TPM -Verbose
+Stop-VM -Name W11TPM -Verbose
+
+#endregion
+
+
+
+
 #Get name of the HyperV host from VM
 (get-item "HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters").GetValue("PhysicalHostName")
 (get-item "HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters").GetValue("VirtualMachineName")
