@@ -315,4 +315,10 @@ $nic    = Get-AzNetworkInterface -Name w11repair670
 
 $nic | Set-AzNetworkInterfaceIpConfig -Name ipconfig1 -PrivateIpAddress 10.0.0.5 -Subnet $subnet -PublicIpAddress $pip -Primary -Verbose
 $nic | Set-AzNetworkInterface -Verbose
+
+
+#CLI | Resolved Error: Remote Desktop Connection : A certification authority could not be contacted for authentication. If you are using a Remote Desktop Gateway with a smart card, try connecting to the remote computer using a password. For assistance, contact your system administrator or technical support.
+az vm repair reset-nic -g W11ARMRG -n W11ARM --subscription <> --yes --verbose
+#This command is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus
+
 #endregion
