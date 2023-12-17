@@ -76,3 +76,7 @@ function showBlocks(data, variableNames) {
   });
 }
 
+function handleDocumentWrite(content) {
+  var contentPlaceholder = document.getElementById("content");
+  contentPlaceholder.innerHTML += content}
+  window.document.write = handleDocumentWrite;
