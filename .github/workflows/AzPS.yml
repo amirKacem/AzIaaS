@@ -14,6 +14,8 @@ jobs:
        # ref: main  # Specify the branch or commit
        # path: 3TierApp/  # Specify the folder path if the script doesn't need the entire repo for execution. 
        #However, this is presenting the entire repo under a '3TierApp' folder. Verified using 'Get-ChildItem -Recurse'
+       #https://github.com/marketplace/actions/checkout
+       #https://github.com/actions/checkout/blob/cd7d8d697e10461458bc61a30d094dc601a8b017/.github/workflows/check-dist.yml#L50  #Example
 
     - name: Login Azure
       uses: azure/login@v2
