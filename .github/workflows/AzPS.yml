@@ -10,9 +10,9 @@ jobs:
     
     - name: Check Out
       uses: actions/checkout@v4
-      #with:      #Checkout presents the repo to the Pipeline execution runtime.
-       # ref: main  # Specify the branch or commit
-       # path: ./3TierApp  # Specify the folder path if the script doesn't need the entire repo for execution. 
+      with:      #Checkout presents the repo to the Pipeline execution runtime.
+        ref: main  # Specify the branch or commit
+        path: 3TierApp/  # Specify the folder path if the script doesn't need the entire repo for execution. 
        #However, this is presenting the entire repo under a '3TierApp' folder. Verified using 'Get-ChildItem -Recurse'
 
     - name: Login Azure
@@ -24,5 +24,6 @@ jobs:
     - name: Run Azure PowerShell Script File
       uses: azure/powershell@v2
       with:
-        inlineScript: ./3TierApp/GetRG.ps1
+        inlineScript: | #./3TierApp/GetRG.ps1
+            Get-ChildItem -Recurse
         azPSVersion: "latest"
