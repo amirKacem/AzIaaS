@@ -29,9 +29,6 @@ jobs:
         inlineScript: ./3TierApp/GetRG.ps1
         azPSVersion: "latest"
     
-  VMs:
-    runs-on: ubuntu-latest 
-    steps:
-        - name: TestStep
-          shell: pwsh
-          run: ./3TierApp/GetRG.ps1
+    - name: TestStep
+      shell: pwsh
+      run: ./3TierApp/GetRG.ps1
