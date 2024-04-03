@@ -1,0 +1,28 @@
+# File: ./scripts/run_azps_cmdlets.ps1
+on: [workflow_dispatch]
+
+name: AzurePowerShellScript
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Check Out
+      uses: actions/checkout@v4
+      with:
+        ref: main  # Specify the branch or commit
+        path: ./3TierApp  # Specify the folder path if the script doesn't need the entire repo for execution
+
+    - name: Login Azure
+      uses: azure/login@v2
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+        enable-AzPSSession: true 
+
+    - name: Run Azure PowerShell Script File
+      uses: azure/powershell@v2
+      with:
+        inlineScript: ./3TierApp/GetRG.ps1
+        azPSVersion: "latest"
