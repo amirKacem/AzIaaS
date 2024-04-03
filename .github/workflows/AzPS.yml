@@ -23,5 +23,5 @@ jobs:
       uses: azure/powershell@v2
       with:
         inlineScript: | #GetRG.ps1
-            Get-ChildItem
+            Get-ChildItem -Recurse
         azPSVersion: "latest"
