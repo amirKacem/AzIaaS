@@ -27,8 +27,10 @@ jobs:
       uses: azure/powershell@v2
       with:
         inlineScript: ./3TierApp/GetRG.ps1
-        azPSVersion: "latest"
+        azPSVersion: 'latest'
     
     - name: TestStep
-      shell: pwsh
-      run: ./3TierApp/GetRG.ps1
+      uses: azure/powershell@v2
+      with:
+        inlineScript: ./3TierApp/GetRG.ps1
+        azPSVersion: 'latest'
