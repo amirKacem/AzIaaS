@@ -9,13 +9,13 @@ function Get-Suffix {
 
 $RG             = Get-AzResourceGroup -Name GitHubAction24
 $AzParams       = @{Location = 'NorthCentralUS'; ResourceGroupName  = $RG.ResourceGroupName; Verbose=$true}
-<#
-$Identity       = New-AzUserAssignedIdentity @AzParams -Name ('3Tier' + (Get-Suffix))
+
+$Identity       = New-AzUserAssignedIdentity @AzParams -Name ('tiered' + (Get-Suffix))
 $SaParams       = @{SkuName = 'Standard_LRS'; Kind = 'StorageV2'; AccessTier = 'Hot'; LargeFileSharesState = 'Disabled'; EnableHierarchicalNamespace = $true}
 $SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2'; EncryptionServices = 'Blob'; AllowBlobPublicAccess = 'Disabled'; }
 $SaSecParams    = @{AllowStorageAccountKeyAccess = 'Disabled'; AllowSharedAccessSignatureExpiryIntervalInYear = 1; EnableAzureActiveDirectoryAuthorization = $true; UserAssignedIdentityId = $Identity.Id}
-New-AzStorageAccount -Name ('3Tier' + (Get-Suffix)) @AzParams @SaParams @SaNwParams @SaSecParams
-#>
+New-AzStorageAccount -Name ('tiered' + (Get-Suffix)) @AzParams @SaParams @SaNwParams @SaSecParams
+
 
 #New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -RetentionInDays 30 
-New-AzKeyvault -Name ('Tiered' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
+#New-AzKeyvault -Name ('Tiered' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
