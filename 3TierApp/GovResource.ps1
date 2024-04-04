@@ -12,7 +12,7 @@ $AzParams       = @{Location = 'NorthCentralUS'; ResourceGroupName  = $RG.Resour
 
 $Identity       = New-AzUserAssignedIdentity @AzParams -Name ('tiered' + (Get-Suffix))
 $SaParams       = @{SkuName = 'Standard_LRS'; Kind = 'StorageV2'; AccessTier = 'Hot'; LargeFileSharesState = 'Disabled'; EnableHierarchicalNamespace = $true}
-$SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2'; EncryptionServices = 'Blob'; AllowBlobPublicAccess = 'Disabled'; }
+$SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2'; EncryptionServices = 'Blob'; AllowBlobPublicAccess = $false }
 $SaSecParams    = @{AllowStorageAccountKeyAccess = 'Disabled'; AllowSharedAccessSignatureExpiryIntervalInYear = 1; EnableAzureActiveDirectoryAuthorization = $true; UserAssignedIdentityId = $Identity.Id}
 New-AzStorageAccount -Name ('tiered' + (Get-Suffix)) @AzParams @SaParams @SaNwParams @SaSecParams
 
