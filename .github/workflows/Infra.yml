@@ -11,13 +11,13 @@ jobs:
         creds: ${{secrets.AZURE_CREDENTIALS}}
         enable-AzPSSession: true 
 
-    - name: Run Azure PowerShell Script File
+    - name: Deploy Governance resources
       uses: azure/powershell@v2
       with:
         inlineScript: ./3TierApp/GovResource.ps1
         azPSVersion: 'latest'
     
-    - name: TestStep
+    - name: Deploy Virtual machines
       uses: azure/powershell@v2
       with:
         inlineScript: ./3TierApp/GetRG.ps1
