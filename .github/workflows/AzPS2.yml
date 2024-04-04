@@ -1,4 +1,4 @@
-name: AzurePowerShellScript
+name: AzurePowerShellScript2
 on: [workflow_dispatch]
 jobs:
 
