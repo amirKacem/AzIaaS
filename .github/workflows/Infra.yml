@@ -1,8 +1,8 @@
-name: AzurePowerShellScript2
+name: AzPSInfraDeployment
 on: [workflow_dispatch]
 jobs:
 
-  Resources:
+  AzInfraDeployment:
     runs-on: ubuntu-latest  
     steps:   
     - uses: actions/checkout@v4
