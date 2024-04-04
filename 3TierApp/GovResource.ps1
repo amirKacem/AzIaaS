@@ -13,7 +13,7 @@ $AzParams       = @{Location = 'NorthCentralUS'; ResourceGroupName  = $RG.Resour
 $Identity       = New-AzUserAssignedIdentity @AzParams -Name ('tiered' + (Get-Suffix))
 $SaParams       = @{SkuName = 'Standard_LRS'; Kind = 'StorageV2'; AccessTier = 'Hot'; EnableHierarchicalNamespace = $true}
 $SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2';  }
-$SaSecParams    = @{AllowSharedKeyAccess  = $false; UserAssignedIdentityId = $Identity.Id } 
+$SaSecParams    = @{AllowSharedKeyAccess  = $false; AssignIdentity = $true; UserAssignedIdentityId = $Identity.Id } 
 New-AzStorageAccount -Name $('tiered' + (Get-Suffix)).ToLower() @AzParams @SaParams @SaNwParams @SaSecParams
 
 
