@@ -10,10 +10,10 @@ function Get-Suffix {
 $RG             = Get-AzResourceGroup -Name GitHubAction24
 $AzParams       = @{Location = 'NorthCentralUS'; ResourceGroupName  = $RG.ResourceGroupName; Verbose=$true}
 
-$Identity       = New-AzUserAssignedIdentity @AzParams -Name ('tiered' + (Get-Suffix))
+#$Identity       = New-AzUserAssignedIdentity @AzParams -Name ('tiered' + (Get-Suffix))
 $SaParams       = @{SkuName = 'Standard_LRS'; Kind = 'StorageV2'; AccessTier = 'Hot'; EnableHierarchicalNamespace = $true}
-$SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2'; EncryptionServices = 'Blob'; AllowBlobPublicAccess = $false }
-$SaSecParams    = @{AllowStorageAccountKeyAccess = 'Disabled'; AllowSharedAccessSignatureExpiryIntervalInYear = 1; EnableAzureActiveDirectoryAuthorization = $true; UserAssignedIdentityId = $Identity.Id}
+$SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2';  }
+$SaSecParams    = @{AllowSharedKeyAccess  = $false; } #UserAssignedIdentityId = $Identity.Id
 New-AzStorageAccount -Name ('tiered' + (Get-Suffix)) @AzParams @SaParams @SaNwParams @SaSecParams
 
 
