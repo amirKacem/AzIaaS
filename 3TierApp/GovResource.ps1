@@ -16,5 +16,5 @@ $SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2'
 $SaSecParams    = @{AllowStorageAccountKeyAccess = 'Disabled'; AllowSharedAccessSignatureExpiryIntervalInYear = 1; EnableAzureActiveDirectoryAuthorization = $true; UserAssignedIdentityId = $Identity.Id}
 New-AzStorageAccount -Name ('Func' + (Get-Suffix)) @AzParams @SaParams @SaNwParams @SaSecParams
 #>
-New-AzOperationalInsightsWorkspace -Name ('Func' + (Get-Suffix)) @AzParams -Sku premium -RetentionInDays 30 
+New-AzOperationalInsightsWorkspace -Name ('Func' + (Get-Suffix)) @AzParams -SkuCapacity Premium -RetentionInDays 30 
 New-AzKeyvault -Name ('Func' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
