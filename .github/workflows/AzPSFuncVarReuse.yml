@@ -14,7 +14,7 @@ jobs:
     - name: Run Azure PowerShell Script File
       uses: azure/powershell@v2
       with:
-        inlineScript: ./3TierApp/Func&Var.ps1
+        inlineScript: ./3TierApp/FuncVar.ps1
         azPSVersion: 'latest'
     
     - name: Use RG Name
