@@ -1,3 +1,4 @@
+#Retry on Winndows
 #$Host.UI.RawUI.BufferSize = New-Object Management.Automation.Host.Size(127, $Host.UI.RawUI.BufferSize.Height)  #Exception: setting "BufferSize": "Operation is not supported on this platform."
 
 function Get-Suffix {
