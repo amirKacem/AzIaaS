@@ -1,4 +1,4 @@
-name: AzurePowerShellScript2
+name: AzPSFuncVarReuse
 on: [workflow_dispatch]
 jobs:
 
@@ -22,4 +22,3 @@ jobs:
         $rgName = "${{ env.RG_NAME }}"
         Write-Host "Using Resource Group Name: $rgName"
       shell: pwsh
-     
