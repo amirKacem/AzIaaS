@@ -8,4 +8,4 @@ New-AzStorageAccount -Name $('tiered' + (Get-Suffix)).ToLower() @AzParams @SaPar
 
 New-AzUserAssignedIdentity @AzParams -Name ('tiered' + (Get-Suffix))
 New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -RetentionInDays 30 
-New-AzKeyvault -Name ('Tiered' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
+New-AzKeyvault -Name ('Tiered1' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
