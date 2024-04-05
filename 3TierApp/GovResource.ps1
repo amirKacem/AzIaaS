@@ -13,10 +13,11 @@ New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -Ret
 #This can happen if the vault was created by a service principal. Please use Set-AzKeyVaultAccessPolicy to set access policies.
 #>
 
-$rules = Convert-MdTable2PSObject -MarkdownFilePath .\3TierApp\NsgRules.md                                  #NSG Creation
-$ConstParams = @{Access = 'Allow'; SourcePortRange = '*'; Priority = '100'; Protocol = 'Tcp'}
-$NSGRulesArray = $rules | ForEach-Object {
-    $ruleParams = @{Name = $_.Name + 'Rule'; Description = $_.Description
-    Direction = $_.Direction; SourceAddressPrefix = $_.SourceAddressPrefix; DestinationAddressPrefix = $_.DestAddressPrefix; DestinationPortRange = $_.DestPortRange } + $ConstParams
+$rules          = Convert-MdTable2PSObject -MarkdownFilePath .\3TierApp\NsgRules.md                            #NSG Creation
+$ConstParams    = @{Access = 'Allow'; SourcePortRange = '*'; Priority = '100'; Protocol = 'Tcp'}
+$NSGRulesArray  = $rules | ForEach-Object {
+    $ruleParams = @{Name = $_.Name + 'Rule'; Description = $_.Description; Direction = $_.Direction; DestinationPortRange = $_.DestPortRange
+                    SourceAddressPrefix = $_.SourceAddressPrefix; DestinationAddressPrefix = $_.DestAddressPrefix
+                   } + $ConstParams
     New-AzNetworkSecurityRuleConfig @ruleParams}
 New-AzNetworkSecurityGroup -Name ('tiered' + (Get-Suffix)) @AzParams -SecurityRules $NSGRulesArray
