@@ -11,7 +11,7 @@ New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -Ret
 #New-AzKeyvault -Name ('Tiered1' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
 #>
 
-$rules = Convert-MdTable2PSObject -MarkdownFilePath .\NsgRules.md                                  #NSG Creation
+$rules = Convert-MdTable2PSObject -MarkdownFilePath .\3TierApp\NsgRules.md                                  #NSG Creation
 $ConstParams = @{Access = 'Allow'; SourcePortRange = '*'; Priority = '100'; Protocol = 'Tcp'}
 $NSGRulesArray = $rules | ForEach-Object {
     $ruleParams = @{Name = $_.Name + 'Rule'; Direction = $_.Direction; SourceAddressPrefix = $_.SourceAddressPrefix; DestinationAddressPrefix = $_.DestAddressPrefix; DestinationPortRange = $_.DestPortRange; Description = $_.Description} + $ConstParams
