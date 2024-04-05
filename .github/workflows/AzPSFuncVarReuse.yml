@@ -25,5 +25,6 @@ jobs:
     
     - name: Use Function
       run: |
+        . ./3TierApp/FuncVar.ps1
         Get-CurrentTime
       shell: pwsh  
