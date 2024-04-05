@@ -1,4 +1,4 @@
-name: AzPSFuncVarReuse
+name: AzPSVarReuse
 on: [workflow_dispatch]
 jobs:
 
@@ -22,9 +22,3 @@ jobs:
         $rgName = "${{ env.RG_NAME }}"
         Write-Host "Using Resource Group Name: $rgName"
       shell: pwsh
-    
-    - name: Use Function
-      run: |
-        . ./3TierApp/FuncVar.ps1
-        Get-CurrentTime
-      shell: pwsh  

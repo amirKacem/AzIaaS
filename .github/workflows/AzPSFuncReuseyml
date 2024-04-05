@@ -1,0 +1,13 @@
+name: AzPSFuncReuse
+on: [workflow_dispatch]
+jobs:
+
+  Resources:
+    runs-on: ubuntu-latest  
+    steps:   
+    - uses: actions/checkout@v4    
+    - name: Use Function
+      run: |
+        . ./3TierApp/FuncVar.ps1
+        Get-CurrentTime
+      shell: pwsh  
