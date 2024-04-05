@@ -1,3 +1,5 @@
+$Host.UI.RawUI.BufferSize = New-Object Management.Automation.Host.Size(127, $Host.UI.RawUI.BufferSize.Height)  
+
 function Get-Suffix {
     $ast        = ([System.Management.Automation.Language.Parser]::ParseInput($MyInvocation.Line, [ref]$null, [ref]$null)).EndBlock.Statements[0]
     $pipeline   = $ast.left ? $ast.right.PipelineElements : $ast.PipelineElements
