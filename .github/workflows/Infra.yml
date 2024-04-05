@@ -14,7 +14,9 @@ jobs:
     - name: Deploy Governance resources
       uses: azure/powershell@v2
       with:
-        inlineScript: ./3TierApp/GovResource.ps1
+        inlineScript: |
+          . ./3TierApp/Functions.ps1
+          ./3TierApp/GovResource.ps1
         azPSVersion: 'latest'
     
     - name: Deploy Virtual machines
