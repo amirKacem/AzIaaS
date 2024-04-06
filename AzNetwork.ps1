@@ -19,7 +19,7 @@ New-AzVirtualNetwork @Params -Name ($Name+'vNet') -AddressPrefix 10.0.0.0/16 -Su
 $MOTSid,$AppName,$Env,$Location = '30050','SPrehoming','PoC','EastUS2'
 $RG      = New-AzResourceGroup -Location $Location -Name "$MOTSid-$Location-$AppName-rg"
 $Params  = @{ResourceGroupName  = $RG.ResourceGroupName; Location = $Location; Verbose=$true }
-
+$SubnetArray = @()
 (@{"$Location-$MOTSid-$Env-vNet-SQ-snet-01"="192.168.0.0/29";"$Location-$MOTSid-$Env-vNet-Ap-snet-01"="192.168.0.8/29";"$Location-$MOTSid-$Env-vNet-FS-snet-01"="192.168.0.16/29"}).GetEnumerator()| 
         ForEach-Object { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $Psitem.Key -AddressPrefix $Psitem.Value -NetworkSecurityGroup $NSG} #NSG to be created separately
 
