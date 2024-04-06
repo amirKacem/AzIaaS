@@ -17,7 +17,7 @@ New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -Ret
 #New-AzRoleAssignment -Scope $KV.ResourceId -ObjectId $Identity.PrincipalId -RoleDefinitionName 'Key Vault Administrator' #For UAI
 
 
-$rules          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\NsgRules.md                            #NSG Creation
+$rules          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\NsgRules.md                                #NSG Creation
 $ConstParams    = @{Access = 'Allow'; SourcePortRange = '*'; Priority = '100'; Protocol = 'Tcp'}
 $NSGRulesArray  = $rules | ForEach-Object {
     $ruleParams = @{Name = $_.Name + 'Rule'; Description = $_.Description; Direction = $_.Direction; DestinationPortRange = $_.DestPortRange
