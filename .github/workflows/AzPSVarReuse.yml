@@ -19,6 +19,8 @@ jobs:
     
     - name: Use RG Name
       run: |
-        $rgName = ${{ env.RG_NAME }}|ConvertFrom-Json
-        Write-Host "Using Resource Group : $rgName"
+        #$rgName = "${{ env.RG_NAME }}|ConvertFrom-Json"
+        #Write-Host "Using Resource Group : $rgName"
+        ${{ env.RG_NAME }}
+        ${{ env.RG_NAME }}|ConvertFrom-Json
       shell: pwsh
