@@ -19,5 +19,5 @@ jobs:
     
     - name: Use RG Name
       run: |
-        (Get-Content env:RG_NAME) | ConvertFrom-Json
+        (Get-Content $env:RG_NAME) | ConvertFrom-Json
       shell: pwsh
