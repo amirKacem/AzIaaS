@@ -11,7 +11,7 @@ function Get-Suffix {
                     }
 
 
-function Convert-MdTable2PSObject {param([Parameter(Mandatory=$true)][string]$MarkdownFilePath)
+function ConvertFrom-MdTable {param([Parameter(Mandatory=$true)][string]$MarkdownFilePath)
     $lines = (Get-Content -Path $MarkdownFilePath -Raw) -replace "`r`n", "`n" -split "`n"
     $headers = (($lines[0] -split '\|').Where({ $_.Trim() -ne '' })).Trim()
     ($lines[2..$lines.Length]).Where({ $_ -ne '' }) | ForEach-Object {
