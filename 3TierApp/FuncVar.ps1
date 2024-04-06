@@ -6,3 +6,5 @@ $rgName = $RG.ResourceGroupName
 
 Write-Output "RG_NAME=$rgName" >> $Env:GITHUB_ENV  #Persists only across 'steps' in the same job. And is deleted after GHWorkflow run
 #>
+
+Write-Output "RG_NAME=$(Get-AzResourceGroup -Name GitHubAction24)" >> $Env:GITHUB_ENV
