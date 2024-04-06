@@ -13,6 +13,10 @@ New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -Ret
 #This can happen if the vault was created by a service principal. Please use Set-AzKeyVaultAccessPolicy to set access policies.
 #>
 
+#New-AzRoleAssignment -Scope $KV.ResourceId -SignInName <> -RoleDefinitionName 'Key Vault Administrator'  #For user
+#New-AzRoleAssignment -Scope $KV.ResourceId -ObjectId $Identity.PrincipalId -RoleDefinitionName 'Key Vault Administrator' #For UAI
+
+
 $rules          = Convert-MdTable2PSObject -MarkdownFilePath .\3TierApp\NsgRules.md                            #NSG Creation
 $ConstParams    = @{Access = 'Allow'; SourcePortRange = '*'; Priority = '100'; Protocol = 'Tcp'}
 $NSGRulesArray  = $rules | ForEach-Object {
@@ -20,4 +24,8 @@ $NSGRulesArray  = $rules | ForEach-Object {
                     SourceAddressPrefix = $_.SourceAddressPrefix; DestinationAddressPrefix = $_.DestAddressPrefix
                    } + $ConstParams
     New-AzNetworkSecurityRuleConfig @ruleParams}
-New-AzNetworkSecurityGroup -Name ('tiered' + (Get-Suffix)) @AzParams -SecurityRules $NSGRulesArray
+$NSG            = New-AzNetworkSecurityGroup -Name ('tiered' + (Get-Suffix)) @AzParams -SecurityRules $NSGRulesArray
+
+(@{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; WebTier = '192.168.0.16/29'}).GetEnumerator()| 
+        ForEach-Object { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $Psitem.Key -AddressPrefix $Psitem.Value -NetworkSecurityGroup $NSG}
+New-AzVirtualNetwork -Name ('tiered' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetArray        
