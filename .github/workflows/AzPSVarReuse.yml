@@ -19,12 +19,13 @@ jobs:
     
     - name: Use RG Name
       run: |
-        ((GC env:RG_NAME) | ConvertFrom-Json).ResourceGroupName
+        $env:RG_NAME | ConvertFrom-Json
       shell: pwsh
 
 
 # (Get-Content $env:RG_NAME) | ConvertFrom-Json      #Doesn't work
 # (Get-Content env:RG_NAME) | ConvertFrom-Json       #works
+# ((GC env:RG_NAME) | ConvertFrom-Json).ResourceGroupName
 
 # $rgName = "${{ env.RG_NAME }}"                    #Works for string, not for PSObjects
 # Write-Host "Using Resource Group Name: $rgName"
