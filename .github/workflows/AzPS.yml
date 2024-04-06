@@ -26,13 +26,13 @@ jobs:
     - name: Run Azure PowerShell Script File
       uses: azure/powershell@v2
       with:
-        inlineScript: ./3TierApp/GetRG.ps1
+        inlineScript: ./GHActionTest/GetRG.ps1
         azPSVersion: 'latest'
     
     - name: TestStep
       uses: azure/powershell@v2
       with:
-        inlineScript: ./3TierApp/GetRG.ps1
+        inlineScript: ./GHActionTest/GetRG.ps1
         azPSVersion: 'latest'
 
 #2nd job triggers in parallel.         
