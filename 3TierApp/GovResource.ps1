@@ -26,6 +26,6 @@ $NSGRulesArray  = $rules | ForEach-Object {
     New-AzNetworkSecurityRuleConfig @ruleParams}
 $NSG            = New-AzNetworkSecurityGroup -Name ('tiered' + (Get-Suffix)) @AzParams -SecurityRules $NSGRulesArray
 
-(@{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; WebTier = '192.168.0.16/29'}).GetEnumerator()| 
+(@{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; WebTier = '192.168.0.16/29'}).GetEnumerator()|    #Vnet Creation
         ForEach-Object { $SubnetArray+= New-AzVirtualNetworkSubnetConfig -Name $Psitem.Key -AddressPrefix $Psitem.Value -NetworkSecurityGroup $NSG}
 New-AzVirtualNetwork -Name ('tiered' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetArray        
