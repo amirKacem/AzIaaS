@@ -26,6 +26,13 @@ $SubnetArray = @()
 $Vnet    = New-AzVirtualNetwork @Params -Name "$Location-$MOTSid-$Env-vnet-$AppName" -AddressPrefix 192.168.0.0/27 -Subnet $SubnetArray
 #endregion
 
+#region: v4
+$SubnetConfigs = @{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; WebTier = '192.168.0.16/29'}.GetEnumerator() | 
+                        ForEach-Object {New-AzVirtualNetworkSubnetConfig -Name $_.Key -AddressPrefix $_.Value -NetworkSecurityGroup $NSG}
+New-AzVirtualNetwork -Name ('tiered' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetConfigs  
+#endregion
+
+
 
 #region  Check resource usage against limits|   https://docs.microsoft.com/en-us/azure/networking/check-usage-against-limits
 Get-AzNetworkUsage -Location eastus | Where-Object {$_.CurrentValue -gt 0} | Format-Table ResourceType, CurrentValue, Limit
