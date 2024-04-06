@@ -15,7 +15,7 @@ jobs:
       uses: azure/powershell@v2
       with:
         inlineScript: |
-          . ./3TierApp/Functions.ps1
+          . ./3TierApp/HelperFunctions.ps1
           ./3TierApp/GovResource.ps1
         azPSVersion: 'latest'
     
