@@ -2,7 +2,7 @@
 
 #region Variables
 $Params   = @{Location = 'NorthCentralUS'; Verbose=$true}
-$RG       = New-AzResourceGroup -Name ($Name+'RG') @Params
+$RG       = New-AzResourceGroup @Params -Name ($Name+'RG')
 $Params  += @{ResourceGroupName  = $RG.ResourceGroupName }
 #endregion
 
