@@ -20,7 +20,7 @@ jobs:
     - name: Use RG Name
       run: |
         $env:RG_NAME | ConvertFrom-Json
-        Get-ChildItem env:|? Name -like 'GITHUB_*'|Sort Name
+        Get-ChildItem env:|? Name -like 'GITHUB_*'
       shell: pwsh
 
 
