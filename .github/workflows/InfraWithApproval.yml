@@ -1,4 +1,4 @@
-name: AzPSInfraDeployment
+name: AzPSInfraDeploymentWithApproval
 on: [workflow_dispatch]
 
 jobs:
