@@ -20,6 +20,7 @@ jobs:
     - name: Use RG Name
       run: |
         $env:RG_NAME | ConvertFrom-Json
+        Get-ChildItem env:
       shell: pwsh
 
 
