@@ -1,7 +1,7 @@
 $RG             = Get-AzResourceGroup -Name GitHubAction24
 $AzParams       = @{Location = 'NorthCentralUS'; ResourceGroupName  = $RG.ResourceGroupName; Verbose=$true}
 
-#region GovernanceResources
+<#region GovernanceResources
 $SaParams       = @{SkuName = 'Standard_LRS'; Kind = 'StorageV2'; AccessTier = 'Hot'; EnableHierarchicalNamespace = $true}
 $SaNwParams     = @{EnableHttpsTrafficOnly = $true; MinimumTlsVersion = 'TLS1_2';  }
 $SaSecParams    = @{AllowSharedKeyAccess  = $false } 
@@ -30,3 +30,4 @@ $Vnet           = New-AzVirtualNetwork -Name ('tiered1' + (Get-Suffix)) @AzParam
 
 $envVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"KV_NAME"=$KV.VaultName; "NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name}
 foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $Env:GITHUB_ENV -Append}                         #Env variables for next steps
+#>
