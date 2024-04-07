@@ -20,7 +20,6 @@ jobs:
     - name: Use RG Name
       run: |
         $env:RG_NAME | ConvertFrom-Json
-        Get-ChildItem env:|? Name -like 'GITHUB_*'
       shell: pwsh
 
 
@@ -30,3 +29,5 @@ jobs:
 
 # $rgName = "${{ env.RG_NAME }}"                    #Works for string, not for PSObjects
 # Write-Host "Using Resource Group Name: $rgName"
+
+#Get-ChildItem env:|? Name -like 'GITHUB_*'
