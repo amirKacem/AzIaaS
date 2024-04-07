@@ -3,3 +3,5 @@
 
 
 [NSGRules.md]
+
+#include "NSGRules.md"
