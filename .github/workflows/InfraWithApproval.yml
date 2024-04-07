@@ -2,13 +2,11 @@ name: AzPSInfraDeploymentWithApproval
 on: [workflow_dispatch]
 
 jobs:
-  deploy_governance_resources:
+  GovernanceResourcesJob:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Azure Login
-        uses: azure/login@v2
+      - uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
@@ -21,16 +19,14 @@ jobs:
             ./3TierApp/GovResource.ps1
           azPSVersion: 'latest'
 
-  deploy_virtual_machines:
-    needs: deploy_governance_resources
+  DeployVirtualMachines:
+    needs: GovernanceResourcesJob
     runs-on: ubuntu-latest
     environment: 
       name: VMEnvironment  # This environment should have manual approval configured
     steps:
       - uses: actions/checkout@v4
-
-      - name: Azure Login
-        uses: azure/login@v2
+      - uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: true
