@@ -9,7 +9,7 @@ $StorageAcc     = New-AzStorageAccount -Name $('tiered' + (Get-Suffix)).ToLower(
 
 $Identity       = New-AzUserAssignedIdentity -Name ('tiered' + (Get-Suffix)) @AzParams 
 $LAW            = New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -RetentionInDays 30 
-$KV             = New-AzKeyvault -Name ('Tiered3' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
+$KV             = New-AzKeyvault -Name ('Tiered4' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium -EnableRbacAuthorization -EnablePurgeProtection
 #Set-AzKeyVaultAccessPolicy -VaultName $KV.VaultName -PermissionsToSecrets get,list -Verbose -ObjectId $Identity.PrincipalId -ErrorAction SilentlyContinue
 #endregion
 
