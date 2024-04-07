@@ -30,7 +30,7 @@ This stores the name in a variable, creates a resource group and parameterizes t
 This is the network configuration to create an NSG allowing remote desktop connections and a public IP address pointing to the [accelerated networking][4] enabled network card that the virtual machine would use. Add the IP where the RDP connection would come from.
 <details open>
 <summary><u id="NetworkConfiguration"></u></summary>
-<pre id="code1" class="powershell"></pre>
+<pre class="powershell" id="code1"></pre>
 </details>
 
 The virtual machine configuration specifies the name, [size][5], credentials, time zone, [image details][10], [update behavior][6] and [diagnostics configuration][7] of the VM. Add your password.
