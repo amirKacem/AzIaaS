@@ -17,15 +17,15 @@ New-AzOperationalInsightsWorkspace -Name ('3Tier' + (Get-Suffix)) @AzParams -Ret
 #New-AzRoleAssignment -Scope $KV.ResourceId -ObjectId $Identity.PrincipalId -RoleDefinitionName 'Key Vault Administrator' #For UAI
 
 
-$rules          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\NsgRules.md                                #NSG Creation
+$rules          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\NsgRules.md                                                  #NSG Creation
 $ConstParams    = @{Access = 'Allow'; SourcePortRange = '*'; Priority = '100'; Protocol = 'Tcp'}
 $NSGRulesArray  = $rules | ForEach-Object {
-    $ruleParams = @{Name = $_.Name + 'Rule'; Description = $_.Description; Direction = $_.Direction; DestinationPortRange = $_.DestPortRange
+    $DynParams = @{Name = $_.Name + 'Rule'; Description = $_.Description; Direction = $_.Direction; DestinationPortRange = $_.DestPortRange
                     SourceAddressPrefix = $_.SourceAddressPrefix; DestinationAddressPrefix = $_.DestAddressPrefix
                    } + $ConstParams
-    New-AzNetworkSecurityRuleConfig @ruleParams}
+    New-AzNetworkSecurityRuleConfig @DynParams}
 $NSG            = New-AzNetworkSecurityGroup -Name ('tiered' + (Get-Suffix)) @AzParams -SecurityRules $NSGRulesArray
                                                                                             
-$SubnetConfigs = @{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; WebTier = '192.168.0.16/29'}.GetEnumerator() |     #Vnet creation
+$SubnetConfigs  = @{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; WebTier = '192.168.0.16/29'}.GetEnumerator() |     #Vnet creation
                     ForEach-Object {New-AzVirtualNetworkSubnetConfig -Name $_.Key -AddressPrefix $_.Value -NetworkSecurityGroup $NSG}
 New-AzVirtualNetwork -Name ('tiered1' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetConfigs        
