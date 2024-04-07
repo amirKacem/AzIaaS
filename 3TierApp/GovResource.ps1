@@ -25,7 +25,7 @@ $NSG            = New-AzNetworkSecurityGroup -Name ('tiered' + (Get-Suffix)) @Az
                                                                                             
 $SubnetConfigs  = @{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; WebTier = '192.168.0.16/29'}.GetEnumerator() |     #Vnet creation
                     ForEach-Object {New-AzVirtualNetworkSubnetConfig -Name $_.Key -AddressPrefix $_.Value -NetworkSecurityGroup $NSG}
-$Vnet           =New-AzVirtualNetwork -Name ('tiered1' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetConfigs     
+$Vnet           = New-AzVirtualNetwork -Name ('tiered1' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetConfigs     
 #endregion
 
 $envVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"KV_NAME"=$KV.VaultName; "NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name}
