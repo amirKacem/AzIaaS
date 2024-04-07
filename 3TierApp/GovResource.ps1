@@ -16,7 +16,7 @@ New-AzRoleAssignment -Scope $KV.ResourceId -ObjectId $Identity.PrincipalId -Role
 $rules          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\NsgRules.md                                                  #NSG Creation
 $ConstParams    = @{Access = 'Allow'; SourcePortRange = '*'; Priority = '100'; Protocol = 'Tcp'}
 $NSGRulesArray  = $rules | ForEach-Object {
-    $DynParams = @{Name = $_.Name + 'Rule'; Description = $_.Description; Direction = $_.Direction; DestinationPortRange = $_.DestPortRange
+    $DynParams  = @{Name = $_.Name + 'Rule'; Description = $_.Description; Direction = $_.Direction; DestinationPortRange = $_.DestPortRange
                     SourceAddressPrefix = $_.SourceAddressPrefix; DestinationAddressPrefix = $_.DestAddressPrefix
                    } + $ConstParams
     New-AzNetworkSecurityRuleConfig @DynParams}
