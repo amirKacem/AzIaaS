@@ -23,20 +23,17 @@ I wanted to explore the benefits of [Azure ARM VMs that run on Arm-based process
 This stores the name in a variable, creates a resource group and parameterizes the location and Resource Group name for [splatting][3].
 
 <details open>
-<summary><u id="Variables"></u></summary>
-<pre class="powershell" id="code0"></pre>
+<summary><u id="Variables"></u></summary> <pre class="powershell" id="code0"></pre>
 </details>
 
 This is the network configuration to create an NSG allowing remote desktop connections and a public IP address pointing to the [accelerated networking][4] enabled network card that the virtual machine would use. Add the IP where the RDP connection would come from.
 <details open>
-<summary><u id="NetworkConfiguration"></u></summary>
-<pre class="powershell" id="code1"></pre>
+<summary><u id="NetworkConfiguration"></u></summary> <pre class="powershell" id="code1"></pre>
 </details>
 
 The virtual machine configuration specifies the name, [size][5], credentials, time zone, [image details][10], [update behavior][6] and [diagnostics configuration][7] of the VM. Add your password.
 <details open>
-<summary><u id="VirtualMachineConfiguration"></u></summary>
-<pre id="code2" class="powershell"></pre>
+<summary><u id="VirtualMachineConfiguration"></u></summary> <pre id="code2" class="powershell"></pre>
 </details>
 
 <pre id="code3" class="powershell"></pre>
