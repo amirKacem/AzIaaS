@@ -6,8 +6,8 @@ jobs:
       outputs:
         rg_name: ${{ steps.set_rg.outputs.rg_name }}
       steps:
-        - name: Login to Azure                             
-          uses: azure/login@v2
+        - uses: actions/checkout@v4                             
+        - uses: azure/login@v2
           with:
             creds: ${{ secrets.AZURE_CREDENTIALS }}  
             enable-AzPSSession: true 
