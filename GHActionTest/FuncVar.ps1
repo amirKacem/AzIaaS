@@ -19,4 +19,6 @@ Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
 #Get
 $rgName = "${{ needs.set_resource_group.outputs.rg }}"
 Write-Host "Using Resource Group Name: $rgName"
+
+$env:needs.set_resource_group.outputs.rg | ConvertFrom-Json
 #>
