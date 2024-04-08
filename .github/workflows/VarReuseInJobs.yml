@@ -18,7 +18,7 @@ jobs:
             inlineScript: |                                 
               $RG = Get-AzResourceGroup -Name GitHubAction24 
               $rgName = $RG.ResourceGroupName
-              Write-Output "rg_name=$rgName" | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
+              Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
             azPSVersion: 'latest'
   
     use_resource_group:
