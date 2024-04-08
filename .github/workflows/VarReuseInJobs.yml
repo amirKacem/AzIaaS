@@ -16,8 +16,9 @@ jobs:
           uses: azure/powershell@v2
           with:
             inlineScript: |                                 
-              $RG = Get-AzResourceGroup -Name GitHubAction24 
+              $RG = Get-AzResourceGroup -Name GitHubAction24 -Verbose
               $rgName = $RG.ResourceGroupName
+              $rgName
               Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
             azPSVersion: 'latest'
   
