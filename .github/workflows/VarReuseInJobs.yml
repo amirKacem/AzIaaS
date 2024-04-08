@@ -13,6 +13,7 @@ jobs:
             enable-AzPSSession: true 
         
         - name: Setup Azure PowerShell
+          id: set_rg
           uses: azure/powershell@v2
           with:
             inlineScript: |                                 
