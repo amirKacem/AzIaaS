@@ -26,6 +26,5 @@ jobs:
       steps:
         - name: Use RG Name
           run: |
-            $rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
-            $rgNAME | ConvertFrom-Json
+            ${{ needs.set_resource_group.outputs.rg_name }}
           shell: pwsh
