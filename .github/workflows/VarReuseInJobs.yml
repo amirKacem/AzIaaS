@@ -31,6 +31,3 @@ jobs:
             $rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
             Write-Host "Using Resource Group Name: $rgName"
           shell: pwsh
-  
-  
-  
