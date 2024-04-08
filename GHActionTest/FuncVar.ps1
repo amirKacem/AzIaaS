@@ -16,9 +16,13 @@ $RG = Get-AzResourceGroup -Name GitHubAction24 -Verbose
 $rgName = $RG.ResourceGroupName
 Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
 
+Write-Output "RG=$(Get-AzResourceGroup -Name GitHubAction24|ConvertTo-Json -Compress)" >> $Env:GITHUB_OUTPUT  #v2            
+
+
+
 #Get
 $rgName = "${{ needs.set_resource_group.outputs.rg }}"
 Write-Host "Using Resource Group Name: $rgName"
 
-$env:needs.set_resource_group.outputs.rg | ConvertFrom-Json
+$env:needs.set_resource_group.outputs.rg | ConvertFrom-Json  #v2
 #>
