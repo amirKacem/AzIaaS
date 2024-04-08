@@ -36,4 +36,6 @@ Line |
      | Unexpected token ':"GitHubAction24"' in expression or statement.
 Error: Process completed with exit code 1.
 
+#$Env:needs.set_resource_group.outputs.rg_name  #Doesn't work either
+
 #>
