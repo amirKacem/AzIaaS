@@ -16,7 +16,9 @@ jobs:
           uses: azure/powershell@v2
           with:
             inlineScript: |                                 
-             ./GHActionTest/FuncVar.ps1
+              $RG = Get-AzResourceGroup -Name GitHubAction24 
+              $rgName = $RG.ResourceGroupName
+              Write-Output "rg_name=$rgName" | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
             azPSVersion: 'latest'
   
     use_resource_group:
