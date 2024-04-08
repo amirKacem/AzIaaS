@@ -1,4 +1,4 @@
-name: FuncVarReuseInJobs
+name: VarReuseInJobs
 on: [workflow_dispatch]
 jobs:
     set_resource_group:
@@ -20,6 +20,7 @@ jobs:
               $rgName = $RG.ResourceGroupName
               $rgName
               Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
+              echo "::set-output name=rg_name::$rgName"
             azPSVersion: 'latest'
   
     use_resource_group:
