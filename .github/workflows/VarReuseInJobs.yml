@@ -4,7 +4,7 @@ jobs:
     set_resource_group:
       runs-on: ubuntu-latest
       outputs:
-        rg_name: ${{ steps.set_rg.outputs.rg }}
+        rg_name: ${{ steps.set_rg.outputs.rg_name }}
       steps:
         - uses: actions/checkout@v4                             
         - uses: azure/login@v2
@@ -28,6 +28,6 @@ jobs:
       steps:
         - name: Use RG Name
           run: |
-            $rgName = "${{ needs.set_resource_group.outputs.rg }}"
+            $rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
             Write-Host "Using Resource Group Name: $rgName"
           shell: pwsh
