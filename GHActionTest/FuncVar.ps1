@@ -21,7 +21,7 @@ Write-Output "RG=$(Get-AzResourceGroup -Name GitHubAction24|ConvertTo-Json -Comp
 
 
 #Get
-$rgName = "${{ needs.set_resource_group.outputs.rg }}"
+$rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
 Write-Host "Using Resource Group Name: $rgName"
 
 ${{ needs.set_resource_group.outputs.rg_name }}| ConvertFrom-Json  #v2: It gets the values but results in a parser error

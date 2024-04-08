@@ -28,6 +28,6 @@ jobs:
       steps:
         - name: Use RG Name
           run: |
-            $rgName = "${{ needs.set_resource_group.outputs.rg }}"
+            $rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
             Write-Host "Using Resource Group Name: $rgName"
           shell: pwsh
