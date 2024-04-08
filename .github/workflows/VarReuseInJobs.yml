@@ -17,7 +17,9 @@ jobs:
           uses: azure/powershell@v2
           with:
             inlineScript: |                                 
-              Write-Output "rg_name=$(Get-AzResourceGroup -Name GitHubAction24|ConvertTo-Json -Compress)" >> $Env:GITHUB_OUTPUT
+              $RG = Get-AzResourceGroup -Name GitHubAction24 -Verbose
+              $rgName = $RG.ResourceGroupName
+              Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
             azPSVersion: 'latest'
   
     use_resource_group:
@@ -26,5 +28,6 @@ jobs:
       steps:
         - name: Use RG Name
           run: |
-            ${{ needs.set_resource_group.outputs.rg_name }}| ConvertFrom-Json
+            $rgName = "${{ needs.set_resource_group.outputs.rg }}"
+            Write-Host "Using Resource Group Name: $rgName"
           shell: pwsh
