@@ -11,11 +11,11 @@ jobs:
     - name: Check Out
       uses: actions/checkout@v4                      #with:      #Checkout presents the repo to the Pipeline execution runtime.
       with:
-        sparse-checkout: |             #This presents the file in the root of the repo and the folder
+        sparse-checkout-cone-mode:  false           #This excludes the files in root of the repo from being checked out.
+        sparse-checkout: |                          #This presents the files in the root of the repo and the folder
           GHActionTest/ 
           3TierApp/
-        sparse-checkout-cone-mode:  false
-
+        
     - name: Login Azure
       uses: azure/login@v2
       with:
