@@ -11,8 +11,7 @@ jobs:
     - name: Check Out
       uses: actions/checkout@v4                      #with:      #Checkout presents the repo to the Pipeline execution runtime.
       with:
-        fetch-depth: 1
-        sparse-checkout: GHActionTest/
+        sparse-checkout: GHActionTest/              #This presents the file in the root of the repo and the folder
        
 
     - name: Login Azure
