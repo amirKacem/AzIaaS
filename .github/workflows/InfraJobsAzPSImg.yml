@@ -9,7 +9,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Deploy Governance resources
         shell: pwsh
-        run: . ./3TierApp/HelperFunctions.ps1 
+        run: |
+            . ./3TierApp/HelperFunctions.ps1 
             Connect-MySubscription -TenantId ${{ vars.MULLICKTENANTID }} -SubId ${{ vars.FTESUBID }} -ClientId ${{ vars.PSGHACTIONSCLIENTID }} -SPNPswd ${{ secrets.PSGHACTIONSSECRET }}
             ./3TierApp/GovResource.ps1
 
@@ -23,6 +24,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Deploy Virtual machines
         shell: pwsh
-        run: . ./3TierApp/HelperFunctions.ps1 
+        run: |
+            . ./3TierApp/HelperFunctions.ps1 
              Connect-MySubscription -TenantId ${{ vars.MULLICKTENANTID }} -SubId ${{ vars.FTESUBID }} -ClientId ${{ vars.PSGHACTIONSCLIENTID }} -SPNPswd ${{ secrets.PSGHACTIONSSECRET }} 
              ./GHActionTest/GetRG.ps1
