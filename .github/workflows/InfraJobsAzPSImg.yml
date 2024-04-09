@@ -4,7 +4,7 @@ on: [workflow_dispatch]
 jobs:
   GovernanceResourcesJob:
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/azure-powershell:latest
+    container: mcr.microsoft.com/azure-powershell:latest   #Execution in the container is quicker than azure/powershell@v2
     steps:
       - uses: actions/checkout@v4
       - name: Deploy Governance resources
