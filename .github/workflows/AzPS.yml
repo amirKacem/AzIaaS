@@ -14,6 +14,7 @@ jobs:
         sparse-checkout: |             #This presents the file in the root of the repo and the folder
           GHActionTest/ 
           3TierApp/
+        sparse-checkout-cone-mode:  false
 
     - name: Login Azure
       uses: azure/login@v2
