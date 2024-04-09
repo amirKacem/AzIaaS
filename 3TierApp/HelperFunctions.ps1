@@ -1,10 +1,10 @@
 #Retry on Winndows
 #$Host.UI.RawUI.BufferSize = New-Object Management.Automation.Host.Size(127, $Host.UI.RawUI.BufferSize.Height)  #Exception: setting "BufferSize": "Operation is not supported on this platform."
 
-function Connect-MySubscription {param ( $TenantId, $SubscriptionId, $ClientId, $SPNPswd )
+function Connect-MySubscription {param ( $TenantId, $SubId, $ClientId, $SPNPswd )
     $Secret     = ConvertTo-SecureString -String $SPNPswd -AsPlainText -Force -Verbose
     $PScred     = New-Object -TypeName System.Management.Automation.PSCredential($ClientId,$Secret)
-    Connect-AzAccount -ServicePrincipal -Tenant $TenantId -Subscription $SubscriptionId -Credential $PScred -Verbose
+    Connect-AzAccount -ServicePrincipal -Tenant $TenantId -Subscription $SubId -Credential $PScred -Verbose
 }
 
 function Get-Suffix {
