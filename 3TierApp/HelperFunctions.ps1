@@ -1,6 +1,12 @@
 #Retry on Winndows
 #$Host.UI.RawUI.BufferSize = New-Object Management.Automation.Host.Size(127, $Host.UI.RawUI.BufferSize.Height)  #Exception: setting "BufferSize": "Operation is not supported on this platform."
 
+function Connect-MySubscription {param ( $TenantId, $SubscriptionId, $ClientId, $SPNPswd )
+    $Secret     = ConvertTo-SecureString -String $SPNPswd -AsPlainText -Force -Verbose
+    $PScred     = New-Object -TypeName System.Management.Automation.PSCredential($ClientId,$Secret)
+    Connect-AzAccount -ServicePrincipal -Tenant $TenantId -Subscription $SubscriptionId -Credential $PScred -Verbose
+}
+
 function Get-Suffix {
     $ast        = ([System.Management.Automation.Language.Parser]::ParseInput($MyInvocation.Line, [ref]$null, [ref]$null)).EndBlock.Statements[0]
     $pipeline   = $ast.left ? $ast.right.PipelineElements : $ast.PipelineElements
@@ -9,7 +15,6 @@ function Get-Suffix {
     
     $command.Noun.TrimStart('A') -creplace '[^A-Z]'
                     }
-
 
 function ConvertFrom-MdTable {param([Parameter(Mandatory=$true)][string]$MarkdownFilePath)
     $lines = (Get-Content -Path $MarkdownFilePath -Raw) -replace "`r`n", "`n" -split "`n"
