@@ -25,6 +25,6 @@ jobs:
       - name: Deploy Virtual machines
         shell: pwsh
         run: |
-            . ./3TierApp/HelperFunctions.ps1 
+             . ./3TierApp/HelperFunctions.ps1 
              Connect-MySubscription -TenantId ${{ vars.MULLICKTENANTID }} -SubId ${{ vars.FTESUBID }} -ClientId ${{ vars.PSGHACTIONSCLIENTID }} -SPNPswd ${{ secrets.PSGHACTIONSSECRET }} 
              ./GHActionTest/GetRG.ps1
