@@ -17,7 +17,9 @@ jobs:
             . ./3TierApp/HelperFunctions.ps1 
             Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }}
             ./3TierApp/GovResource.ps1
-
+            $RG = Get-AzResourceGroup -Name GitHubAction24 -Verbose
+            $rgName = $RG.ResourceGroupName
+            Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
   DeployVirtualMachines:
     needs: GovernanceResourcesJob
     runs-on: ubuntu-latest
@@ -29,10 +31,12 @@ jobs:
         with:
           sparse-checkout-cone-mode:  false           
           sparse-checkout: 3TierApp/
-          
+
       - name: Deploy Virtual machines
         shell: pwsh
         run: |
              . ./3TierApp/HelperFunctions.ps1 
              Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }} 
              ./GHActionTest/GetRG.ps1
+             $rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
+             Write-Host "Using Resource Group Name: $rgName"
