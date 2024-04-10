@@ -22,7 +22,7 @@ jobs:
           Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }}
           Get-ChildItem -Recurse
             
-#This only shows the checked out repo folders. However, in another workflow, calling even a non checked out folder item worked
+#This only shows the checked out repo folders while NOT using a container image. However, in another the container, sparse checkout isn't working.
       
     - name: TestStep
       shell: pwsh
