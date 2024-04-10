@@ -1,7 +1,6 @@
 name: AzurePowerShellScript
 on: [workflow_dispatch]
 jobs:
-
   Resources:
     runs-on: ubuntu-latest  #Windows has the RM modules along with Az. 'ubuntu-latest' works. But both have 2 versions older modules. 11.3 instead of 11.5.
     container: mcr.microsoft.com/azure-powershell:latest  # azure/login@v2 fails to run inside the container.
