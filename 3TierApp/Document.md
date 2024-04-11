@@ -8,7 +8,8 @@
 
 
 
-
+Currently bloocked by bug.
+https://github.com/actions/checkout/issues/1602#issuecomment-2048656906
 
  
 Potential Tables: vNet details, NSG rules, VM details, storage account restrictions
