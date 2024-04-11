@@ -10,6 +10,7 @@
 
 Currently bloocked by bug.
 https://github.com/actions/checkout/issues/1602#issuecomment-2048656906
+Resume once the 'Deploy Virtual machines' step in the 'AzPSImageInfraDeploymentWithApproval' workflow populates the resource group name in the end correctly.
 
  
 Potential Tables: vNet details, NSG rules, VM details, storage account restrictions
