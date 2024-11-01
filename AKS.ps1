@@ -1,6 +1,6 @@
 $Name,$Loc = 'myCluster','NorthCentralUS'
 $RG        = New-AzResourceGroup -Location $Loc -Name ($Name+'RG') 
-$Params   += @{ResourceGroupName  = $RG.ResourceGroupName; Location = $Location; Verbose=$true }
+$Params    = @{ResourceGroupName  = $RG.ResourceGroupName; Location = $Location; Verbose=$true }
 
 #Uses default parameters. didn't work but created SSH key using the passphrase. And it created an SPN in Entra
 New-AzAksCluster @Params -Name $Name -GenerateSshKey  #Enter passphrase:  <>
