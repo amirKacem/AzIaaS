@@ -12,6 +12,7 @@ New-AzAksCluster @Params -Name $Name -GenerateSshKey  #Enter passphrase:  <>
 ssh-keygen -t rsa -b 4096 -f C:\Users\AyanMullick\.ssh\id_rsa -C "Ayan@machine"  #Enter passphrase:  <>
 New-AzAksCluster @Params -Name $Name -SshKeyValue (Get-Content 'C:\Users\AyanMullick\.ssh\id_rsa.pub')  #Worked
 #Creates a new RG: MC_AKSRG_myCluster_northcentralus, with a Vnet, VMSS, NSG, LB and PIP
+#Deleting the RG with the cluster from the portal deletes the other RG as well.
 #endregion
 
 #region Explore AKS cluster
