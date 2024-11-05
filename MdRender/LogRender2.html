@@ -67,7 +67,29 @@
                 }
             };
 
-            // Call the function with the appropriate file URL
+            const createStepsElements = () => {
+                const setupStep = document.createElement('div');
+                setupStep.id = 'setupStep';
+                document.body.appendChild(setupStep);
+
+                const completeStep = document.createElement('div');
+                completeStep.id = 'completeStep';
+                document.body.appendChild(completeStep);
+            };
+
+            const formatContent = (content) => {
+                return ansi_up.ansi_to_html(content);
+            };
+
+            const getStepsContent = (content) => {
+                // Implement the logic to extract setupStepContent, completeStepContent, and betweenContent
+                // This is a placeholder implementation
+                const setupStepContent = content.split('\n')[0];
+                const completeStepContent = content.split('\n').slice(-1)[0];
+                const betweenContent = content.split('\n').slice(1, -1).join('\n');
+                return [completeStepContent, setupStepContent, betweenContent];
+            };
+
             const fileUrl = new URLSearchParams(window.location.search).get('path');
             if (fileUrl) {
                 renderFileContent(fileUrl);
