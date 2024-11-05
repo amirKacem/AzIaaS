@@ -35,7 +35,7 @@
                 content = formatContent(content);
                 const [setupStepContent, completeStepContent, betweenContent] = getStepsContent(content);
 
-                renderSteps(setupStepContent, completeStepContent, betweenContent);
+                renderSteps(setupStepContent, betweenContent, completeStepContent);
             } catch (error) {
                 console.error('Error fetching or rendering content:', error);
             }
@@ -60,21 +60,21 @@
             const completeStepStart = content.indexOf('Post job');
             return [
                 content.slice(0, setupStepEnd),
-                content.slice(completeStepStart),
-                content.slice(content.indexOf("/usr/bin/git"), completeStepStart)
+                content.slice(content.indexOf("/usr/bin/git"), completeStepStart),
+                content.slice(completeStepStart)
             ];
         }
 
-        function renderSteps(setupContent, completeContent, betweenContent) {
+        function renderSteps(setupContent, betweenContent, completeContent) {
             const container = document.getElementById('betweenContent');
-            container.innerHTML = marked.parse(betweenContent).replace(/(<\/div>|<\/a>)\s*<br\s*\/?>/g, '$1');
             createStepDetails(container, 'setupStep', 'Setup, Checkout', marked.parse(setupContent));
-            createStepDetails(container, 'completeStep', 'Checkout, Complete', marked.parse(completeContent));
+            container.innerHTML += marked.parse(betweenContent).replace(/(<\/div>|<\/a>)\s*<br\s*\/?>/g, '$1');
+            createStepDetails(container, 'completeStep', 'Checkout, Complete', marked.parse(completeContent), true);
 
             document.querySelectorAll("a").forEach(link => link.setAttribute("target", "_blank"));
         }
 
-        function createStepDetails(referenceNode, stepId, stepText, stepContent) {
+        function createStepDetails(referenceNode, stepId, stepText, stepContent, append = false) {
             const detailsElement = document.createElement('details');
             detailsElement.className = 'Details-element CheckStep rounded-2 details-reset js-checks-log-details px-2 border';
             detailsElement.innerHTML = `
@@ -90,7 +90,8 @@
                     </div>
                 </summary>
                 <div class="text-mono text-small py-1 my-2 js-checks-log-display-container ml-5 pl-3">${stepContent}</div>`;
-            referenceNode.parentNode.insertBefore(detailsElement, referenceNode);
+            
+            append ? referenceNode.parentNode.append(detailsElement) : referenceNode.parentNode.insertBefore(detailsElement, referenceNode);
         }
     </script>
 </body>
