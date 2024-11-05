@@ -1,120 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-color-mode="dark" data-dark-theme="dark">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log Render</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/21.1.1/primer.css"
+        integrity="sha512-DQRZcDaNuIkb4JiH6PHalnncWllAK5txkJVocLdyfglJSavW/HxQaJRJeRw5eEPnp+kD1QImSxCwUiOsRrCMEw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .text-mono {
-            font-family: monospace;
-        }
-        .text-small {
-            font-size: 0.875rem;
-        }
-        .py-1 {
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-        }
-        .my-2 {
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .ml-5 {
-            margin-left: 3rem;
-        }
-        .pl-3 {
-            padding-left: 1rem;
-        }
-        .js-checks-log-display-container {
-            white-space: pre-wrap;
-        }
-        .foldable {
-            cursor: pointer;
-        }
-        .folded + .fold-content {
-            display: none;
-        }
+        p {overflow-x: auto;white-space: pre-wrap;}
+        .log-line-command {color: var(--fgColor-accent, var(--color-accent-fg))}
+        [open] .CheckStep-chevron {transform: rotate(90deg);}
     </style>
 </head>
+
 <body>
     <div class="text-mono text-small py-1 my-2 js-checks-log-display-container ml-5 pl-3" id="betweenContent"></div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script type="module">
-        import { AnsiUp } from "https://cdn.jsdelivr.net/npm/ansi-up@1.0.0/dist/ansi-up.min.js";
+        import { AnsiUp } from "https://cdn.jsdelivr.net/npm/ansi-up@1.0.0/dist/ansi-up.min.js"
         const ansi_up = new AnsiUp();
 
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", function () {
+
             marked.use({ breaks: true });
 
-            const renderFileContent = async (fileUrl) => {
-                try {
-                    const response = await fetch(fileUrl);
-                    let content = await response.text();
 
-                    createStepsElements();
+            function renderFileContent(fileUrl) {
+                return fetch(fileUrl)
+                    .then((response) => response.text())
+                    .then((content) => {
+                        
+                        createStepsElements();
 
-                    content = formatContent(content);
+                        content = formatContent(content);
+                        
+                        let [
+                            completeStepContent,
+                            setupStepContent,
+                            betweenContent
+                        ] = getStepsContent(content)
 
-                    const [completeStepContent, setupStepContent, betweenContent] = getStepsContent(content);
 
-                    document.getElementById("setupStep").innerHTML = marked.parse(setupStepContent);
-                    document.getElementById("completeStep").innerHTML = marked.parse(completeStepContent);
-                    document.getElementById('betweenContent').innerHTML = marked.parse(betweenContent)
-                        .replace(/(<\/div>|<\/a>)\s*<br\s*\/?>/g, '$1');
+                        document.getElementById("setupStep").innerHTML = marked.parse(setupStepContent);
+                        document.getElementById("completeStep").innerHTML = marked.parse(completeStepContent);
+                        document.getElementById('betweenContent').innerHTML = marked.parse(betweenContent).replace(/(<\/div>|<\/a>)\s*<br\s*\/?>/g, '$1');
 
-                    document.querySelectorAll("a").forEach(link => {
-                        link.target = "_blank";
-                    });
 
-                    addFoldingFunctionality();
-                } catch (error) {
-                    console.error('Error fetching or parsing content:', error);
-                }
-            };
-
-            const createStepsElements = () => {
-                const setupStep = document.createElement('div');
-                setupStep.id = 'setupStep';
-                document.body.appendChild(setupStep);
-
-                const completeStep = document.createElement('div');
-                completeStep.id = 'completeStep';
-                document.body.appendChild(completeStep);
-            };
-
-            const formatContent = (content) => {
-                return ansi_up.ansi_to_html(content);
-            };
-
-            const getStepsContent = (content) => {
-                // Implement the logic to extract setupStepContent, completeStepContent, and betweenContent
-                // This is a placeholder implementation
-                const setupStepContent = content.split('\n')[0];
-                const completeStepContent = content.split('\n').slice(-1)[0];
-                const betweenContent = content.split('\n').slice(1, -1).join('\n');
-                return [completeStepContent, setupStepContent, betweenContent];
-            };
-
-            const addFoldingFunctionality = () => {
-                document.querySelectorAll('.foldable').forEach(header => {
-                    header.addEventListener('click', () => {
-                        header.classList.toggle('folded');
-                        const content = header.nextElementSibling;
-                        if (content) {
-                            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                        let links = document.querySelectorAll("a");
+                        for (let i = 0; i < links.length; i++) {
+                            links[i].setAttribute("target", "_blank");
                         }
                     });
-                });
-            };
-
-            const fileUrl = new URLSearchParams(window.location.search).get('path');
-            if (fileUrl) {
-                renderFileContent(fileUrl);
             }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const path = urlParams.get("path");
+            if (path !== "" && path !== null) {
+                renderFileContent(path);
+            }
+
         });
+
+        function createStepsElements() {
+            document.getElementById('betweenContent').before(createStepDetails('setupStep', 'Setup, Checkout'));
+            document.getElementById('betweenContent').after(createStepDetails('completeStep', 'Checkout, Complete'));
+        }
+        
+        function formatContent(content) {
+            content = ansi_up.ansi_to_html(content);
+            content = cleanDateTime(replaceGroups(content));
+            return content;
+        }
+
+        const cleanDateTime = (result) => result.replaceAll(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{7}Z/g, '');
+
+        function getStepsContent(content) {
+            content = replaceCommands(content);
+            let completeStepContent = content.substring(content.indexOf('Post job'))
+            let setupStepContent = content.substring(0, content.indexOf("'origin/main'."));
+            console.log(setupStepContent);
+            let betweenContent = content.substring(
+                content.indexOf("/usr/bin/git"),
+                content.indexOf('Post job')
+            );
+            return [completeStepContent,setupStepContent,betweenContent];
+        }
+
+
+        function replaceCommands(input) {
+            return input
+                   .replaceAll(/\[command\](.*)/gm, 
+                   '<span class="log-line-command">$1</span>'
+                   );
+        }
+
+        function replaceGroups(input) {
+            const groupRegex = /##\[\s*group\s*\](.*?)##\[\s*endgroup\s*\]/gs;
+            const result = input.replace(groupRegex, (match, content) => {
+                // Extract the summary and the list items
+                const lines = content.trim().split('\n').map(line => line.trim()).filter(line => line);
+                const summary = lines.shift();
+                lines.pop();
+                const lists = lines;
+
+                if (lines.length > 0) {
+                    return `<details><summary><u>${summary}</u></summary>
+        ${lists.map((text, index) => {
+                        return `<div class='js-check-step-line CheckStep-line d-flex log-line-plain'>
+                                <a class="CheckStep-line-number color-fg-muted d-inline-block text-mono text-normal flex-shrink-0"></a>
+                                <span class="CheckStep-line-content d-inline-block flex-auto ml-3 js-check-line-content">
+                                <span class="" style=""> ${text} </span>
+                                </span>
+                               </div>`;
+                                }
+                               ).join('')}
+                            </details>`;
+                } else {
+                    return content;
+                }
+
+            });
+
+            return result;
+        }
+
+        function createStepDetails(stepId, stepText) {
+
+            let detailsElement = document.createElement('details');
+            detailsElement.className = 'Details-element CheckStep rounded-2 details-reset js-checks-log-details px-2 border';
+
+            detailsElement.innerHTML = `
+            <summary class="CheckStep-header p-2 mb-1 rounded-2 js-check-step-summary uxr_CheckStep-header mx-2" style="top: 88px;">
+            <div class="d-flex flex-items-center">
+
+                <svg class="octicon octicon-chevron-right js-check-step-chevron mr-2 flex-shrink-0 CheckStep-chevron" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="false" style="">
+                    <path fill-rule="evenodd" d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"></path>
+                </svg>
+
+                <svg class="octicon octicon-check-circle-fill mr-3 flex-shrink-0 ml-1" title="This step passed" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+                <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+                </svg>
+
+                <span class="flex-1 ml-n1 mr-1 css-truncate css-truncate-overflow user-select-none"> ${stepText} </span>
+
+                <div class="text-mono text-normal text-small float-right">s</div>
+            </div>
+            </summary>
+
+            <div class="text-mono text-small py-1 my-2 js-checks-log-display-container ml-5 pl-3" id="${stepId}">
+            </div>
+            `;
+
+            return detailsElement;
+        }
+
     </script>
+
 </body>
+
 </html>
