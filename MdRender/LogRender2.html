@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Render</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .text-mono {
+            font-family: monospace;
+        }
+        .text-small {
+            font-size: 0.875rem;
+        }
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .my-2 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .ml-5 {
+            margin-left: 3rem;
+        }
+        .pl-3 {
+            padding-left: 1rem;
+        }
+        .js-checks-log-display-container {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-mono text-small py-1 my-2 js-checks-log-display-container ml-5 pl-3" id="betweenContent"></div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script type="module">
+        import { AnsiUp } from "https://cdn.jsdelivr.net/npm/ansi-up@1.0.0/dist/ansi-up.min.js";
+        const ansi_up = new AnsiUp();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            marked.use({ breaks: true });
+
+            const renderFileContent = async (fileUrl) => {
+                try {
+                    const response = await fetch(fileUrl);
+                    let content = await response.text();
+
+                    createStepsElements();
+
+                    content = formatContent(content);
+
+                    const [completeStepContent, setupStepContent, betweenContent] = getStepsContent(content);
+
+                    document.getElementById("setupStep").innerHTML = marked.parse(setupStepContent);
+                    document.getElementById("completeStep").innerHTML = marked.parse(completeStepContent);
+                    document.getElementById('betweenContent').innerHTML = marked.parse(betweenContent)
+                        .replace(/(<\/div>|<\/a>)\s*<br\s*\/?>/g, '$1');
+
+                    document.querySelectorAll("a").forEach(link => {
+                        link.target = "_blank";
+                    });
+                } catch (error) {
+                    console.error('Error fetching or parsing content:', error);
+                }
+            };
+
+            // Call the function with the appropriate file URL
+            const fileUrl = new URLSearchParams(window.location.search).get('path');
+            if (fileUrl) {
+                renderFileContent(fileUrl);
+            }
+        });
+    </script>
+</body>
+</html>
