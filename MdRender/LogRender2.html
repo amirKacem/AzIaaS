@@ -31,6 +31,12 @@
         .js-checks-log-display-container {
             white-space: pre-wrap;
         }
+        .foldable {
+            cursor: pointer;
+        }
+        .folded + .fold-content {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -62,6 +68,8 @@
                     document.querySelectorAll("a").forEach(link => {
                         link.target = "_blank";
                     });
+
+                    addFoldingFunctionality();
                 } catch (error) {
                     console.error('Error fetching or parsing content:', error);
                 }
@@ -88,6 +96,18 @@
                 const completeStepContent = content.split('\n').slice(-1)[0];
                 const betweenContent = content.split('\n').slice(1, -1).join('\n');
                 return [completeStepContent, setupStepContent, betweenContent];
+            };
+
+            const addFoldingFunctionality = () => {
+                document.querySelectorAll('.foldable').forEach(header => {
+                    header.addEventListener('click', () => {
+                        header.classList.toggle('folded');
+                        const content = header.nextElementSibling;
+                        if (content) {
+                            content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                        }
+                    });
+                });
             };
 
             const fileUrl = new URLSearchParams(window.location.search).get('path');
