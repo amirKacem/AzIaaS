@@ -1,0 +1,52 @@
+function formatContent(content) {
+    return cleanDateTime(replaceGroups(ansi_up.ansi_to_html(content)));
+}
+
+const cleanDateTime = (result) => result.replaceAll(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{7}Z/g, '');
+
+function getStepsContent(content) {
+    content = replaceCommands(content);
+    return [
+        content.substring(content.indexOf('Post job')),
+        content.substring(0, content.indexOf("'origin/main'.")),
+        content.substring(content.indexOf("/usr/bin/git"), content.indexOf('Post job'))
+    ];
+}
+
+function replaceCommands(input) {
+    return input.replaceAll(/\[command\](.*)/gm, '<span class="log-line-command">$1</span>');
+}
+
+function replaceGroups(input) {
+    return input.replace(/##\[\s*group\s*\](.*?)##\[\s*endgroup\s*\]/gs, (match, content) => {
+        const lines = content.trim().split('\n').map(line => line.trim()).filter(line => line);
+        const summary = lines.shift();
+        lines.pop();
+        return lines.length > 0
+            ? `<details><summary><u>${summary}</u></summary>${lines.map(text => `
+                <div class='js-check-step-line CheckStep-line d-flex log-line-plain'>
+                    <a class="CheckStep-line-number color-fg-muted d-inline-block text-mono text-normal flex-shrink-0"></a>
+                    <span class="CheckStep-line-content d-inline-block flex-auto ml-3 js-check-line-content">
+                        <span>${text}</span>
+                    </span>
+                </div>`).join('')}</details>`
+            : content;
+    });
+}
+
+function createStepDetails(stepId, stepText) {
+    return `
+        <details class='Details-element CheckStep rounded-2 details-reset js-checks-log-details px-2 border'>
+            <summary class="CheckStep-header p-2 mb-1 rounded-2 js-check-step-summary uxr_CheckStep-header mx-2" style="top: 88px;">
+                <div class="d-flex flex-items-center">
+                    <svg class="octicon octicon-chevron-right js-check-step-chevron mr-2 flex-shrink-0 CheckStep-chevron" viewBox="0 0 16 16" width="16" height="16">
+                        <path fill-rule="evenodd" d="M6.22 3.22a.75.75 0 011.06 0l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 010-1.06z"></path>
+                    </svg>
+                    <svg class="octicon octicon-check-circle-fill mr-3 flex-shrink-0 ml-1" title="This step passed" viewBox="0 0 16 16" width="16" height="16">
+                        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm3.78-9.72a.751.751 0 0 0-.018-1.042.751.751 0 0 0-1.042-.018L6.75 9.19 5.28 7.72a.751.751 0 0 0-1.042.018.751.751 0 0 0-.018 1.042l2 2a.75.75 0 0 0 1.06 0Z"></path>
+                    </svg>
+                </div>
+            </summary>
+            <div id="${stepId}">${stepText}</div>
+        </details>`;
+}
