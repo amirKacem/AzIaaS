@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimized Log Render</title>
+    <style>
+        .log-entry {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        #filter-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="filter-input" placeholder="Filter logs...">
+    <div id="log-container"></div>
+
+    <script>
+        // Function to render logs
+        function renderLogs(logs) {
+            const logContainer = document.getElementById('log-container');
+            logContainer.innerHTML = '';
+            logs.forEach(log => {
+                const logElement = document.createElement('div');
+                logElement.className = 'log-entry';
+                logElement.textContent = log;
+                logContainer.appendChild(logElement);
+            });
+        }
+
+        // Function to filter logs
+        function filterLogs() {
+            const filterInput = document.getElementById('filter-input').value.toLowerCase();
+            const logs = document.querySelectorAll('.log-entry');
+            logs.forEach(log => {
+                if (log.textContent.toLowerCase().includes(filterInput)) {
+                    log.style.display = '';
+                } else {
+                    log.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listener for filter input
+        document.getElementById('filter-input').addEventListener('input', filterLogs);
+
+        // Initial log rendering
+        const logs = [
+            "Log entry 1",
+            "Log entry 2",
+            "Log entry 3",
+            "Log entry 4",
+            "Log entry 5"
+        ];
+        renderLogs(logs);
+    </script>
+</body>
+</html>
