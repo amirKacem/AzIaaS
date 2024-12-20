@@ -239,6 +239,38 @@ Get-AzureRmVirtualNetworkGatewayConnection -ResourceGroupName NLGPRDHubVNRG -Nam
 
 
 
+
+
+#region Peer existing spoke vnet with existing Vwan hub
+Select-AzSubscription '<>'
+$SpokeVnet = Get-AzVirtualNetwork -ResourceGroupName 'rg-avd-d-c-02' -Name 'vnet-AVDEnt-d-01'
+
+
+Select-AzSubscription '<>'
+# Get Virtual WAN and Virtual Hub
+$Vwan = Get-AzVirtualWan -ResourceGroupName 'rg-vwan-p-c-01' -Name 'vwan-p-c-01'
+$Vhub = Get-AzVirtualHub -ResourceGroupName 'rg-vwan-p-c-01' -Name 'vhub-p-c-01'
+
+#$rt1 = Get-AzVHubRouteTable -ResourceGroupName 'rg-vwan-p-c-01' -VirtualHubName 'vhub-p-c-01' -Name DefaultRouteTable
+#$routingconfig = New-AzRoutingConfiguration -AssociatedRouteTable $rt1.Id -Label @("default") -Id @($rt1.Id)|fl  #-StaticRoute @($route1)
+
+#$connection = Get-AzVirtualHubVnetConnection -ResourceGroupName 'rg-vwan-p-c-01' -ParentResourceName vhub-p-c-01 -Name 'vnet-dvsonline-d-c-01'
+
+
+
+# Create VNet connection to Virtual Hub
+New-AzVirtualHubVnetConnection -ResourceGroupName 'rg-vwan-p-c-01' -VirtualHubName 'vhub-p-c-01' -Name 'vnet-AVDEnt-d-01' -RemoteVirtualNetworkId $SpokeVnet.Id  -Verbose
+
+    #-RoutingConfiguration $routingconfig   #Didn't work. Error: RoutingConfiguration'. Specified method is not supported.
+    #-EnableInternetSecurity $false  #Didn't try
+
+# Verify the connection
+$vhub = Get-AzVirtualHub -ResourceGroupName $resourceGroupName -Name $vhubName
+$vhub.VirtualNetworkConnections|? Name -eq 'vnet-AVDEnt-d-01'|FL
+
+#endregion
+
+
 #check Azure latency. Module  AzSpeedTest
 Test-AzRegionLatency -Region centralindia -Verbose
 
