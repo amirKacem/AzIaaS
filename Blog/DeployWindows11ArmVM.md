@@ -62,3 +62,8 @@ The Windows ARM image is still in preview and doesn't support [Trusted Launch][8
 [10]: <https://azuremarketplace.microsoft.com/en-us/marketplace/apps/microsoftwindowsdesktop.windows11preview-arm64>
 [11]: <https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming>
 
+{% include NSG.md %}
+
+{% include VMs.md %}
+
+{% include Vnet.md %}

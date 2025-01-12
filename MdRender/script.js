@@ -5,10 +5,22 @@ document.addEventListener("DOMContentLoaded", function () {
     renderMarkDownFile(markdownFileUrl);
   }
 
-  function renderMarkDownFile(fileUrl) {
+  async function renderMarkDownFile(fileUrl) {
     return fetch(fileUrl)
       .then((response) => response.text())
       .then((markdown) => {
+        const fileIncludesPaths = [];
+
+        const regexPattern = `{%.+include(.+)%}`;
+        let regex = new RegExp(regexPattern, "g");
+        markdown = markdown.replaceAll(regex, function (...groups) {
+          const path = groups[1].trim();
+          fileIncludesPaths.push(path);
+          return `<details open id="${path.replace('.md','')}">
+            <summary>${path}</summary> 
+            </details>`;
+        });
+
         document.getElementById("content").innerHTML = marked.parse(markdown);
         var scriptTags = document.querySelectorAll("#content script");
 
@@ -30,6 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < links.length; i++) {
           links[i].setAttribute("target", "_blank");
         }
+        return fileIncludesPaths;
+      }).then((fileIncludesPaths) => {
+        fileIncludesPaths.forEach(async (path) => {
+          const baseIncludesFolderPath = 'https://raw.githubusercontent.com/amirKacem/AzIaaS/refs/heads/main/_includes/';
+          const fileContent = await getMarkdownFileContent(baseIncludesFolderPath + path);
+          document.getElementById(path.replace('.md','')).innerHTML += marked.parse(fileContent);
+        });
       });
   }
 
@@ -80,3 +99,7 @@ function handleDocumentWrite(content) {
   var contentPlaceholder = document.getElementById("content");
   contentPlaceholder.innerHTML += content}
   window.document.write = handleDocumentWrite;
+
+async function getMarkdownFileContent(markdownFileUrl) {
+  return fetch(markdownFileUrl).then(response => response.text());
+}
