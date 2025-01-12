@@ -12,4 +12,3 @@
 | Virtual Machine | NLGPDJAMSCHVM2 | SouthCentralUs | NLGSUSPDJAMRG | Standard_D4S_V3 | NLGPDJAMSCHAS1 | SN_10.191.10.128_AT | 512   |       |       |       |
 | Virtual Machine | NLGPDJAMAGTVM1 | SouthCentralUs | NLGSUSPDJAMRG | Standard_D4S_V3 | NLGPDJAMAGTAS1 | SN_10.191.10.128_AT | 512   |       |       |       |
 | Virtual Machine | NLGPDJAMAGTVM2 | SouthCentralUs | NLGSUSPDJAMRG | Standard_D4S_V3 | NLGPDJAMAGTAS1 | SN_10.191.10.128_AT | 512   |       |       |       |
-|                 |                |                |               |                 |                |                     |       |       |       |       |
