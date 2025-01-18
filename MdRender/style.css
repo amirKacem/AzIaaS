@@ -8,3 +8,17 @@ a {
 .clear {
   clear:both;
 }
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin: 20px 0px;
+}
+
+tr {
+  border: 1px solid white;
+}
+th,td{
+  border: 1px solid white;
+  padding: 8px;
+  text-align: left;
+}
