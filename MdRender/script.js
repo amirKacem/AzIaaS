@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const githubUserName = 'Ayanmullick';
   marked.use({ break: true });
 
   function renderFileContent(markdownFileUrl) {
@@ -8,12 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function renderMarkDownFile(fileUrl) {
     return fetch(fileUrl).then(response => response.text()).then(markdown => {
-      const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)`, regex = new RegExp(regexPattern, "g");
+      const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)(\\s*\\[align=([a-zA-Z]+)\\])?`, regex = new RegExp(regexPattern, "g");
       let groupIndex = 0;
       markdown = markdown.replaceAll(regex, (...groups) => {
         groupIndex++;
+
+
+
         const title = groups[1], path = groups[2].trim(), blockId = path.replace('.md', '') + groupIndex;
-        contentIncludesInfo.push({ filePath: path, blockId: blockId });
+        const includeInfo = { filePath: path, blockId: blockId };
+
+        if(groups[4]) includeInfo['alignPosition'] = groups[4];
+        contentIncludesInfo.push(includeInfo);
         return `<details open id="${blockId}"><summary><strong><u>${title}</u></strong></summary></details>`;
       });
 
@@ -33,8 +38,12 @@ document.addEventListener("DOMContentLoaded", function () {
       return contentIncludesInfo;
     }).then(contentIncludesInfo => {
       contentIncludesInfo.forEach(async includeInfo => {
+        let blockWrapper = '<div';
         const fileContent = await getMarkdownFileContent(includeInfo.filePath.trim());
-        document.getElementById(includeInfo.blockId).innerHTML += marked.parse(fileContent);
+        if(includeInfo['alignPosition']) blockWrapper += ` align=${includeInfo['alignPosition']}`;
+        document.getElementById(includeInfo.blockId).innerHTML += `${blockWrapper}>
+          ${marked.parse(fileContent)}
+        </div>`;
       });
     });
   }
