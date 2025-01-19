@@ -9,6 +9,14 @@
 </details>
 
 
+
+[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %) 
+
+
+[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
+
+
+
 Sparse checkout is currently blocked by bug.
 https://github.com/actions/checkout/issues/1602#issuecomment-2048656906
 Resume once the 'Deploy Virtual machines' step in the 'AzPSImageInfraDeploymentWithApproval' workflow populates the resource group name in the end correctly.
@@ -28,7 +36,4 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
 ≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
 
-[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %) [align=right]
 
-
-[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) [align=right]
