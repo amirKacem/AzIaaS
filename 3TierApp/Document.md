@@ -1,4 +1,6 @@
-* [Section 1](VMs.md)
+[Virtual Machines](% include VMs.md %)
+
+
 * [Section 2](NSGRules.md)
 
 
