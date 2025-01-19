@@ -1,6 +1,7 @@
-#Retry on Winndows
+#Retry on Windows
 #$Host.UI.RawUI.BufferSize = New-Object Management.Automation.Host.Size(127, $Host.UI.RawUI.BufferSize.Height)  #Exception: setting "BufferSize": "Operation is not supported on this platform."
 
+#Example Connection function if not using azure/powershell@v2 action.
 function Connect-MySubscription {param ( $TenantId, $SubId, $ClientId, $SPNPswd )
     $Secret     = ConvertTo-SecureString -String $SPNPswd -AsPlainText -Force -Verbose
     $PScred     = New-Object -TypeName System.Management.Automation.PSCredential($ClientId,$Secret)

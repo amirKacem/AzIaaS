@@ -361,3 +361,20 @@ az vm repair reset-nic -g W11ARMRG -n W11ARM --subscription <> --yes --verbose
 #This command is in preview and under development. Reference and support levels: https://aka.ms/CLI_refstatus
 
 #endregion
+
+
+#region  get the vnets that are peered along with the number of devices connected to it.
+$vnets = Get-AzVirtualNetwork
+$results = $vnets | ForEach-Object {
+    $addressRange = $_.AddressSpace.AddressPrefixes -join ', '
+    $connectedDevicesCount = (Get-AzNetworkInterface | Where-Object { $_.IpConfigurations.Subnet.Id -like "*$($_.Id)/*" }).Count
+    [PSCustomObject]@{
+        VNetName         = $_.Name
+        AddressRange     = $addressRange
+        ConnectedDevices = $connectedDevicesCount
+        Peering          = $_.VirtualNetworkPeerings
+    }
+}
+
+$results | Sort-Object Peering | Format-Table -AutoSize
+#endregion
