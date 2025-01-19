@@ -2,8 +2,8 @@
 
 
 [Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %)
-<details open>
-<summary><u>Test</u></summary>
+<details>
+<summary><u>Naming Standard</u></summary>
 <div style="display:flex;gap:3rem">
 [Naming Convention] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NamingConvention.md %)
 [Abbreviatons] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/Abbreviations.md %) 
