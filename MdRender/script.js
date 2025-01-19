@@ -33,8 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return contentIncludesInfo;
     }).then(contentIncludesInfo => {
       contentIncludesInfo.forEach(async includeInfo => {
-        const baseIncludesPath = `https://raw.githubusercontent.com/${githubUserName}/AzIaaS/refs/heads/main/_includes/`;
-        const fileContent = await getMarkdownFileContent(baseIncludesPath + includeInfo.filePath);
+        const fileContent = await getMarkdownFileContent(includeInfo.filePath.trim());
         document.getElementById(includeInfo.blockId).innerHTML += marked.parse(fileContent);
       });
     });

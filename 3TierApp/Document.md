@@ -1,4 +1,4 @@
-[Virtual Machines] (% include VMs.md %)
+[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %)
 
 
 * [Section 2](NSGRules.md)
