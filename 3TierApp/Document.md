@@ -1,7 +1,3 @@
-[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %)
-
-
-[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %)
 
 
 <details>
@@ -31,3 +27,8 @@ https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-softw
 https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
 ≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
+
+[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %) [align=right]
+
+
+[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) [align=right]
