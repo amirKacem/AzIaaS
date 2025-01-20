@@ -9,7 +9,7 @@ $StorageAcc     = New-AzStorageAccount -Name $('Tiered' + (Get-Suffix)).ToLower(
 
 $Identity       = New-AzUserAssignedIdentity -Name ('Tiered' + (Get-Suffix)) @AzParams 
 $LAW            = New-AzOperationalInsightsWorkspace -Name ('Tiered' + 'LAW') @AzParams -RetentionInDays 30 
-$KV             = New-AzKeyvault -Name ('Tiered2' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium 
+$KV             = New-AzKeyvault -Name ('Tiered3' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium 
 #Set-AzKeyVaultAccessPolicy -VaultName $KV.VaultName -PermissionsToSecrets get,list -Verbose -ObjectId $Identity.PrincipalId -ErrorAction SilentlyContinue
 #endregion
 
@@ -32,4 +32,5 @@ $envVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.Stora
 foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $Env:GITHUB_ENV -Append}                         #Env variables for next steps
 
 Get-Content -Path $Env:GITHUB_ENV                                                                                               # Print the contents of the GITHUB_ENV file
+Write-Output $env:RG_NAME                                                                                                       # Print the Resource Group Name
 #>
