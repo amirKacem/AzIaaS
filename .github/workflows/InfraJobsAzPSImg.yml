@@ -37,6 +37,6 @@ jobs:
         run: |
              . ./3TierApp/HelperFunctions.ps1 
              Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }} 
-             ./GHActionTest/GetRG.ps1
-             $rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
+             ./3TierApp/VMs.ps1
+             $rgName = $RG.ResourceGroupName
              Write-Host "Using Resource Group Name: $rgName"
