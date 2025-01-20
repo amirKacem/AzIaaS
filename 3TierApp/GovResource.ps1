@@ -32,5 +32,6 @@ $envVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.Stora
 foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $Env:GITHUB_ENV -Append}                         #Env variables for next steps
 
 Get-Content -Path $Env:GITHUB_ENV                                                                                               # Print the contents of the GITHUB_ENV file
+Get-ChildItem env:
 Write-Output "Resource group is $env:RG_NAME"                                                                                   # Print the Resource Group Name
 #>
