@@ -34,4 +34,5 @@ foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $
 Get-Content -Path $Env:GITHUB_ENV                                                                                               # Print the contents of the GITHUB_ENV file
 Get-ChildItem env:
 Write-Output "Resource group is $env:RG_NAME"                                                                                   # Print the Resource Group Name
+Write-Output "Resource group is $RG_NAME"
 #>
