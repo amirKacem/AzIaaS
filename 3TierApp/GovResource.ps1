@@ -9,7 +9,7 @@ $StorageAcc     = New-AzStorageAccount -Name $('Tiered' + (Get-Suffix)).ToLower(
 
 $Identity       = New-AzUserAssignedIdentity -Name ('Tiered' + (Get-Suffix)) @AzParams 
 $LAW            = New-AzOperationalInsightsWorkspace -Name ('Tiered' + 'LAW') @AzParams -RetentionInDays 30 
-$KV             = New-AzKeyvault -Name ('Tiered1' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium 
+$KV             = New-AzKeyvault -Name ('Tiered2' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium 
 #Set-AzKeyVaultAccessPolicy -VaultName $KV.VaultName -PermissionsToSecrets get,list -Verbose -ObjectId $Identity.PrincipalId -ErrorAction SilentlyContinue
 #endregion
 
@@ -30,4 +30,6 @@ $Vnet           = New-AzVirtualNetwork -Name ('Tiered' + (Get-Suffix)) @AzParams
 
 $envVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"KV_NAME"=$KV.VaultName; "NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name; "ID"=$Identity.Id}
 foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $Env:GITHUB_ENV -Append}                         #Env variables for next steps
+
+Get-Content -Path $Env:GITHUB_ENV                                                                                               # Print the contents of the GITHUB_ENV file
 #>
