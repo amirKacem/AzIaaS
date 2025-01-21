@@ -4,14 +4,17 @@ on: [workflow_dispatch]
 jobs:
   set-env-variable:
     runs-on: ubuntu-latest
+    outputs:
+      rg_name: ${{ steps.set-env.outputs.rg_name }}
     steps:
       - name: Set RG_NAME environment variable
+        id: set-env
         uses: azure/powershell@v2
         with:
           azPSVersion: 'latest'
           inlineScript: |
             $RG_NAME = "GitHubAction24"
-            Add-Content -Path $env:GITHUB_ENV -Value "RG_NAME=$RG_NAME"
+            Write-Output "::set-output name=rg_name::$RG_NAME"
 
   use-env-variable:
     runs-on: ubuntu-latest
@@ -21,11 +24,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Print RG_NAME value
-        run: echo "Resource group is $RG_NAME"
+        run: echo "Resource group is ${{ needs.set-env-variable.outputs.rg_name }}"
 
       - name: Use RG_NAME in Azure PowerShell
         uses: azure/powershell@v2
         with:
           azPSVersion: 'latest'
           inlineScript: |
-            Write-Output "Using resource group: $env:RG_NAME"
+            $RG_NAME = '${{ needs.set-env-variable.outputs.rg_name }}'
+            Write-Output "Using resource group: $RG_NAME"
