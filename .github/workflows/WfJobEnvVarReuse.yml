@@ -1,4 +1,4 @@
-name: Example Workflow
+name: WfJobEnvVarReuse
 on: [workflow_dispatch]
 
 jobs:
