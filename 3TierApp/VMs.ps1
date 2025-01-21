@@ -1,4 +1,4 @@
-$EnvVars      = ConvertFrom-Json '${{ needs.GovernanceResourcesJob.outputs.Env_Vars }}'
+#$EnvVars      = ConvertFrom-Json '${{ needs.GovernanceResourcesJob.outputs.Env_Vars }}'
 $AzParams     = @{Location = 'NorthCentralUS'; ResourceGroupName  = $($EnvVars.RG_NAME); Verbose=$true}
 
 $VMs          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\VMs.md                                                  

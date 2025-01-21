@@ -19,7 +19,8 @@ jobs:
         run: |
             . ./3TierApp/HelperFunctions.ps1 
             Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }}
-            ./3TierApp/GovResource.ps1           
+            ./3TierApp/GovResource.ps1
+            Write-Output "Using resource group: $($EnvVars.RG_NAME)"           
             
   DeployVirtualMachines:
     needs: GovernanceResourcesJob
@@ -36,6 +37,8 @@ jobs:
       - name: Deploy Virtual machines
         shell: pwsh
         run: |
+            $EnvVars      = ConvertFrom-Json '${{ needs.GovernanceResourcesJob.outputs.Env_Vars }}'
+            Write-Output "Using resource group: $($EnvVars.RG_NAME)"
              . ./3TierApp/HelperFunctions.ps1 
              Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }} 
              ./3TierApp/VMs.ps1
