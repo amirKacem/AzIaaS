@@ -10,7 +10,7 @@ $VMs|ForEach-Object {
     $Nic.IpConfigurations[0].PrivateIpAllocationMethod = 'Static'
     $Nic|Set-AzNetworkInterface
 
-    $vmConfig = New-AzVMConfig -VMName $Psitem.Name -VMSize $Psitem.Tier -IdentityType UserAssigned -IdentityId $env:ID|
+    $vmConfig = New-AzVMConfig -VMName $Psitem.Name -VMSize $Psitem.Tier -IdentityType UserAssigned -IdentityId $($EnvVars.ID)|
        Set-AzVMOperatingSystem -Windows -ComputerName $Psitem.Name -Credential $Cred -TimeZone 'Central Standard Time' -ProvisionVMAgent -EnableAutoUpdate -PatchMode AutomaticByPlatform|
        Set-AzVMSourceImage -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus '2025-datacenter-azure-edition-core-smalldisk' -Version latest -Verbose|
        Set-AzVMOSDisk -Name ('Tiered' + $Psitem.Name+ (Get-Suffix)) -Caching ReadWrite -CreateOption FromImage|
