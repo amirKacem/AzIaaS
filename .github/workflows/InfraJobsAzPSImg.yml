@@ -20,6 +20,7 @@ jobs:
             $RG = Get-AzResourceGroup -Name GitHubAction24 -Verbose
             $rgName = $RG.ResourceGroupName
             Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
+            
   DeployVirtualMachines:
     needs: GovernanceResourcesJob
     runs-on: ubuntu-latest
