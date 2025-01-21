@@ -41,9 +41,9 @@ jobs:
         shell: pwsh
         run: |
             $envVars = ConvertFrom-Json '${{ needs.set-env-variable.outputs.env_vars }}'
-            Write-Output "Using resource group: $envVars.RG_NAME"
-            Write-Output "Using storage account: $envVars.SA_NAME"
-            Write-Output "Using log analytics workspace: $envVars.LAW_NAME"
-            Write-Output "Using network security group: $envVars.NSG_NAME"
-            Write-Output "Using virtual network: $envVars.VNET_NAME"
-            Write-Output "Using identity: $envVars.ID"
+            Write-Output "Using resource group: $($envVars.RG_NAME)"
+            Write-Output "Using storage account: $($envVars.SA_NAME)"
+            Write-Output "Using log analytics workspace: $($envVars.LAW_NAME)"
+            Write-Output "Using network security group: $($envVars.NSG_NAME)"
+            Write-Output "Using virtual network: $($envVars.VNET_NAME)"
+            Write-Output "Using identity: $($envVars.ID)"
