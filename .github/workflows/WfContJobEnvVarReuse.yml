@@ -21,6 +21,7 @@ jobs:
             Get-Content -Path $Env:GITHUB_ENV
             Write-Output '-------------------------------------------------------------------------------'
             Get-ChildItem env:
+            Write-Output "Using resource group: $RG_NAME"
 
   use-env-variable:
     runs-on: ubuntu-latest
