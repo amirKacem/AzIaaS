@@ -17,6 +17,12 @@
 
 
 
+[Governance resources deployment execution](https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log)
+
+[VM deployment execution](https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log)
+
+
+
 Sparse checkout is currently blocked by bug.
 https://github.com/actions/checkout/issues/1602#issuecomment-2048656906
 Resume once the 'Deploy Virtual machines' step in the 'AzPSImageInfraDeploymentWithApproval' workflow populates the resource group name in the end correctly.
