@@ -6,17 +6,26 @@ jobs:
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/azure-powershell:latest
     outputs:
-      rg_name: ${{ steps.set-env.outputs.rg_name }}
+      env_vars: ${{ steps.set-env.outputs.env_vars }}
     steps:
       - uses: actions/checkout@v4  
-      - name: Set RG_NAME environment variable
+      - name: Set environment variables
         id: set-env
         shell: pwsh
         run: |
             . ./3TierApp/HelperFunctions.ps1  
             Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }}
             $RG_NAME = (Get-AzResourceGroup -Name GitHubAction24).ResourceGroupName
-            Write-Output "RG_name=$RG_Name" >> $Env:GITHUB_OUTPUT
+            $envVars = @{
+              "RG_NAME" = $RG_NAME
+              "SA_NAME" = 'tieredsa'
+              "LAW_NAME" = 'TieredLAW'
+              "NSG_NAME" = 'TieredNSG'
+              "VNET_NAME" = 'TieredVnet'
+              "ID" = 'TieredUAI'
+            }
+            $jsonEnvVars = $envVars | ConvertTo-Json
+            Write-Output "env_vars=$jsonEnvVars" >> $Env:GITHUB_OUTPUT
             Write-Output '-------------------------------------------------------------------------------'
             Get-Content -Path $Env:GITHUB_ENV
             Write-Output '-------------------------------------------------------------------------------'
@@ -28,8 +37,19 @@ jobs:
     container: mcr.microsoft.com/azure-powershell:latest
     needs: set-env-variable
     steps:
-      - name: Use RG_NAME in Azure PowerShell
+      - name: Use environment variables in Azure PowerShell
         shell: pwsh
         run: |
-            $RG_NAME = '${{ needs.set-env-variable.outputs.rg_name }}'
+            $envVars = ConvertFrom-Json '${{ needs.set-env-variable.outputs.env_vars }}'
+            $RG_NAME = $envVars.RG_NAME
+            $SA_NAME = $envVars.SA_NAME
+            $LAW_NAME = $envVars.LAW_NAME
+            $NSG_NAME = $envVars.NSG_NAME
+            $VNET_NAME = $envVars.VNET_NAME
+            $ID = $envVars.ID
             Write-Output "Using resource group: $RG_NAME"
+            Write-Output "Using storage account: $SA_NAME"
+            Write-Output "Using log analytics workspace: $LAW_NAME"
+            Write-Output "Using network security group: $NSG_NAME"
+            Write-Output "Using virtual network: $VNET_NAME"
+            Write-Output "Using identity: $ID"
