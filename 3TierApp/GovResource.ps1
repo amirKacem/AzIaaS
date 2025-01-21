@@ -29,8 +29,5 @@ $Vnet           = New-AzVirtualNetwork -Name ('Tiered' + (Get-Suffix)) @AzParams
 #endregion
 
 $EnvVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name; "ID"=$Identity.Id}
-#foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $Env:GITHUB_ENV -Append}                         #Env variables for next steps
 $JsonEnvVars = $EnvVars | ConvertTo-Json -Compress
-Write-Output "Env_Vars=$JsonEnvVars" >> $Env:GITHUB_OUTPUT
-
-#>
+Write-Output "Env_Vars=$JsonEnvVars" >> $Env:GITHUB_OUTPUT      #Not working

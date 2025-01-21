@@ -17,7 +17,7 @@ $VMs|ForEach-Object {
 
     $disks    = ($Psitem|Select-Object -Property Drive*).psobject.Properties|Select-Object -Property Name,Value|Where-Object value
     $disks|ForEach-Object{
-        Add-AzVMDataDisk -VM $vmConfig -Name ('Tiered'+ $VmName + $Psitem.Name+ (Get-Suffix)) -Caching ReadWrite -DiskSizeInGB $Psitem.Value -Lun  $([array]::indexof($disks,$PSItem)+1) -CreateOption Empty
+        Add-AzVMDataDisk -VM $vmConfig -Name ('Tiered'+ $VmName + (Get-Suffix)+ $Psitem.Name) -Caching ReadWrite -DiskSizeInGB $Psitem.Value -Lun  $([array]::indexof($disks,$PSItem)+1) -CreateOption Empty
                         }
 
     New-AzVM @AzParams -VM $vmConfig
