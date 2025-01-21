@@ -1,35 +1,27 @@
-name: WfJobEnvVarReuse
+name: WfContJobEnvVarReuse
 on: [workflow_dispatch]
 
 jobs:
   set-env-variable:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/azure-powershell:latest
     outputs:
       rg_name: ${{ steps.set-env.outputs.rg_name }}
     steps:
       - name: Set RG_NAME environment variable
         id: set-env
-        uses: azure/powershell@v2
-        with:
-          azPSVersion: 'latest'
-          inlineScript: |
+        shell: pwsh
+        run: |
             $RG_NAME = "GitHubAction24"
             Write-Output "::set-output name=rg_name::$RG_NAME"
 
   use-env-variable:
     runs-on: ubuntu-latest
+    container: mcr.microsoft.com/azure-powershell:latest
     needs: set-env-variable
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Print RG_NAME value
-        run: echo "Resource group is ${{ needs.set-env-variable.outputs.rg_name }}"
-
       - name: Use RG_NAME in Azure PowerShell
-        uses: azure/powershell@v2
-        with:
-          azPSVersion: 'latest'
-          inlineScript: |
+        shell: pwsh
+        run: |
             $RG_NAME = '${{ needs.set-env-variable.outputs.rg_name }}'
             Write-Output "Using resource group: $RG_NAME"
