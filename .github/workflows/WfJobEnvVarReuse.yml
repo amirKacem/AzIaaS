@@ -1,0 +1,31 @@
+name: Example Workflow
+on: [workflow_dispatch]
+
+jobs:
+  set-env-variable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set RG_NAME environment variable
+        uses: azure/powershell@v2
+        with:
+          azPSVersion: 'latest'
+          inlineScript: |
+            $RG_NAME = "GitHubAction24"
+            Add-Content -Path $env:GITHUB_ENV -Value "RG_NAME=$RG_NAME"
+
+  use-env-variable:
+    runs-on: ubuntu-latest
+    needs: set-env-variable
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Print RG_NAME value
+        run: echo "Resource group is $RG_NAME"
+
+      - name: Use RG_NAME in Azure PowerShell
+        uses: azure/powershell@v2
+        with:
+          azPSVersion: 'latest'
+          inlineScript: |
+            Write-Output "Using resource group: $env:RG_NAME"
