@@ -28,11 +28,9 @@ $SubnetConfigs  = @{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; Web
 $Vnet           = New-AzVirtualNetwork -Name ('Tiered' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetConfigs     
 #endregion
 
-$envVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name; "ID"=$Identity.Id}
-foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $Env:GITHUB_ENV -Append}                         #Env variables for next steps
+$EnvVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name; "ID"=$Identity.Id}
+#foreach ($key in $envVars.Keys) {"$key=$($envVars[$key])" | Out-File -FilePath $Env:GITHUB_ENV -Append}                         #Env variables for next steps
+$JsonEnvVars = $EnvVars | ConvertTo-Json -Compress
+Write-Output "Env_Vars=$JsonEnvVars" >> $Env:GITHUB_OUTPUT
 
-Get-Content -Path $Env:GITHUB_ENV                                                                                               # Print the contents of the GITHUB_ENV file
-Get-ChildItem env:
-Write-Output "Resource group is $env:RG_NAME"                                                                                   # Print the Resource Group Name
-Write-Output "Resource group is $RG_NAME"
 #>
