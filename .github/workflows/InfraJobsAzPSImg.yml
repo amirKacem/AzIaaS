@@ -39,5 +39,3 @@ jobs:
              . ./3TierApp/HelperFunctions.ps1 
              Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }} 
              ./3TierApp/VMs.ps1
-             $rgName = $RG.ResourceGroupName
-             Write-Host "Using Resource Group Name: $rgName"
