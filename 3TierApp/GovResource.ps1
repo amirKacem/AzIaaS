@@ -12,7 +12,7 @@ $LAW            = New-AzOperationalInsightsWorkspace -Name ('Tiered' + 'LAW') @A
 #$KV             = New-AzKeyvault -Name ('Tiered3' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium 
 #Set-AzKeyVaultAccessPolicy -VaultName $KV.VaultName -PermissionsToSecrets get,list -Verbose -ObjectId $Identity.PrincipalId -ErrorAction SilentlyContinue
 
-(ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\VMs.md).AvSet|Select-Object -Unique| ForEach-Object {New-AzAvailabilitySet -Name $PSItem @AzParams -Sku Aligned}
+(ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\VMs.md).AvSet|Select-Object -Unique| ForEach-Object {New-AzAvailabilitySet -Name $PSItem @AzParams -Sku Aligned -PlatformFaultDomainCount 2}
 #endregion
 
 #region NetworkResources
