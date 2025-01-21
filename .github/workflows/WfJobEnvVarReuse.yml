@@ -17,7 +17,9 @@ jobs:
             Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }}
             $RG_NAME = (Get-AzResourceGroup -Name GitHubAction24).ResourceGroupName
             Write-Output "::set-output name=rg_name::$RG_NAME"
+            #-------------------------------------------------------------------------------
             Get-Content -Path $Env:GITHUB_ENV
+            #-------------------------------------------------------------------------------
             Get-ChildItem env:
 
   use-env-variable:
