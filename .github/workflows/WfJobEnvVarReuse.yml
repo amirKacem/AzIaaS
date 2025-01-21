@@ -8,6 +8,7 @@ jobs:
     outputs:
       rg_name: ${{ steps.set-env.outputs.rg_name }}
     steps:
+      - uses: actions/checkout@v4  
       - name: Set RG_NAME environment variable
         id: set-env
         shell: pwsh
