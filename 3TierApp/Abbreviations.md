@@ -1,24 +1,27 @@
-| Development                   | D         |
-| ----------------------------- | --------- |
-| Test                          | T         |
-| Production                    | P         |
-| Disaster Recovery             | Dr        |
-| Central US                    | C         |
-| East US2                      | E2        |
-| Aplication Server             | Ap        |
-| Web Front End Server          | Wb        |
-| Domain Controller             | Dc        |
-| Business PolicyBot            | PolicyBot |
-| Monitoring Boards             | Boards    |
-| Search AI POC                 | Sai       |
-| Large Language Model          | Llm       |
-| Primary (MC)                  | MC        |
-| PD                            | PD        |
-| PCI                           | PC        |
-| DMZ                           | DZ        |
-| LRT                           | LR        |
-| TEST                          | TS        |
-| Transport Information         | Ti        |
-| NO DOMAIN                     | ND        |
-| Enterprise Content Management | Ecm       |
-| Azure Infrastructure Team     | Ai        |
+| Abbreviations                          |       |
+| -------------------------------------- | ----- |
+| Development                            | DV    |
+| Test                                   | TT    |
+| UAT/Staging                            | UT    |
+| Production                             | PD    |
+| Disaster Recovery                      | DR    |
+| South Central US                       | SUS   |
+| East US 2                              | EUS2  |
+| East US                                | EUS   |
+| Aplication Server                      | AP    |
+| Web Front End Server                   | wb    |
+| Domain Controller                      | dc    |
+| Cubic                                  | cu    |
+| Engineering - Text Capture - Weybridge | EnTCW |
+|                                        |       |
+| Primary (MC)                           | MC    |
+| PD                                     | PD    |
+| PCI                                    | PC    |
+| DMZ                                    | DZ    |
+| LRT                                    | LR    |
+| TEST                                   | TS    |
+| PCG                                    | …     |
+| NO DOMAIN                              | ND    |
+|                                        |       |
+|                                        |       |
+|                                        |       |

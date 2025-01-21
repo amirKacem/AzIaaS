@@ -11,6 +11,8 @@ $Identity       = New-AzUserAssignedIdentity -Name ('Tiered' + (Get-Suffix)) @Az
 $LAW            = New-AzOperationalInsightsWorkspace -Name ('Tiered' + 'LAW') @AzParams -RetentionInDays 30 
 #$KV             = New-AzKeyvault -Name ('Tiered3' + (Get-Suffix)) @AzParams -EnabledForDiskEncryption -Sku Premium 
 #Set-AzKeyVaultAccessPolicy -VaultName $KV.VaultName -PermissionsToSecrets get,list -Verbose -ObjectId $Identity.PrincipalId -ErrorAction SilentlyContinue
+
+(ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\VMs.md).AvSet|Select-Object -Unique| ForEach-Object {New-AzAvailabilitySet -Name $PSItem @AzParams -Sku Aligned}
 #endregion
 
 #region NetworkResources
@@ -28,6 +30,8 @@ $SubnetConfigs  = @{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; Web
 $Vnet           = New-AzVirtualNetwork -Name ('Tiered' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetConfigs     
 #endregion
 
+#region Output for next Job
 $EnvVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name; "ID"=$Identity.Id}
 $JsonEnvVars = $EnvVars | ConvertTo-Json -Compress
 Write-Output "Env_Vars=$JsonEnvVars" >> $Env:GITHUB_OUTPUT      #Not working
+#endregion

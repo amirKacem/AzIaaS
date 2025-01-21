@@ -1,6 +1,6 @@
 $AzParams     = @{Location = 'NorthCentralUS'; ResourceGroupName  = $($EnvVars.RG_NAME); Verbose=$true}
 $VMs          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\VMs.md                                                  
-$Cred         = New-Object System.Management.Automation.PSCredential "TestAdmin",$(ConvertTo-SecureString "Passw0rd" -asplaintext -force)
+$Cred         = New-Object System.Management.Automation.PSCredential "TestAdmin",$(ConvertTo-SecureString "Passw0rd" -asplaintext -force)        #Use a Password secret
 
 $VMs|ForEach-Object {
     $SubnetId = ((Get-AzVirtualNetwork -ResourceGroupName $($EnvVars.RG_NAME) -Name $($EnvVars.VNET_NAME)).Subnets|Where-Object name -EQ $PSItem.Subnet).Id
@@ -8,7 +8,8 @@ $VMs|ForEach-Object {
     $Nic.IpConfigurations[0].PrivateIpAllocationMethod = 'Static'
     $Nic|Set-AzNetworkInterface
 
-    $vmConfig = New-AzVMConfig -VMName ('Tiered' + $Psitem.Name+ 'VM') -VMSize $Psitem.Tier -IdentityType UserAssigned -IdentityId $($EnvVars.ID)|
+    $vmConfig = New-AzVMConfig -VMName ('Tiered' + $Psitem.Name+ 'VM') -VMSize $Psitem.Tier -IdentityType UserAssigned -IdentityId $($EnvVars.ID) `
+                    -AvailabilitySetId $((Get-AzureRmAvailabilitySet -ResourceGroupName $($EnvVars.RG_NAME) -Name $Psitem.AvSet).Id)|
        Set-AzVMOperatingSystem -Windows -ComputerName ('Tiered' + $Psitem.Name+ 'VM') -Credential $Cred -TimeZone 'Central Standard Time' -ProvisionVMAgent -EnableAutoUpdate -PatchMode AutomaticByPlatform|
        Set-AzVMSourceImage -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus '2025-datacenter-azure-edition-core-smalldisk' -Version latest -Verbose|
        Set-AzVMOSDisk -Name ('Tiered' + $Psitem.Name+ (Get-Suffix)) -Caching ReadWrite -CreateOption FromImage|

@@ -1,16 +1,14 @@
-| Resource Type                                           | Domain                  | Business | Roles | Location | Environment | ResourceType | Seq# | Example                 |
-| ------------------------------------------------------- | ----------------------- | -------- | ----- | -------- | ----------- | ------------ | ---- | ----------------------- |
-| Subscription                                            |                         |          |       |          |             |              |      | SubAIPoC                |
-| Resource group                                          | 3                       | 3        |       | 1-2      | 1-2         | 2            | 1-2  | EcmSaiE2DRg1            |
-| AI Foundry \| Azure AI hub                              | 2                       | 3        |       | 1-2      | 1-2         | 2            | 1-2  | EcmSaiE2DAif1           |
-| AI Foundry Project\| Azure AI project                   | 2                       | 3        | 3-10  | 1-2      | 1-2         | 4            | 0    | EcmSaiPolicyBotE2DAifp1 |
-| Cognitive Services\|  AI services multi-service account | 2                       | 3        |       | 1-2      | 1-2         | 2            | 0    | EcmSaiE2DCs1            |
-| Search service                                          | 2                       | 3        |       | 1-2      | 1-2         | 2            | 1-2  | EcmSaiE2DSs1            |
-|                                                         |                         |          |       |          |             |              |      |                         |
-| Log Analytics workspace                                 | 2                       | 3        |       | 1-2      | 1-2         | 3            | 1-2  | EcmSaiE2DLaw1           |
-| Application Insights                                    | Log Analytics workspace |          |       |          |             | 2            |      | EcmSaiE2DLaw1Ai         |
-| User Assigned Identities                                | 2                       | 3        |       | 1-2      | 1-2         | 4            | 1-2  | EcmSaiE2DUami1          |
-| Storage Account                                         | 2                       | 3        |       | 1-2      | 1-2         | 2            | 1-2  | ecmsaie2dsa1            |
-| Blob container name                                     | Storage Account         |          |       |          |             | 2            | 1-2  | ecmsaie2dsa1bc          |
-| Distribution List for Teams apps                        | 2                       | 3        |       |          |             | 2            |      | EcmSaiDL                |
-| Fabric Capacity                                         |                         |          | 3-10  | 1-2      | 1-2         | 2            |      | InfraBoardsE2DFc        |
+| Resource Type               | ResourceType | Domain | Type | Roles | Location               | Environment | Organisation | Role | Seq#                   | Example           |
+| --------------------------- | ------------ | ------ | ---- | ----- | ---------------------- | ----------- | ------------ | ---- | ---------------------- | ----------------- |
+| Subscription                |              |        |      |       |                        |             |              |      |                        |                   |
+| Resource group              | 2-4          |        |      |       | 3-4                    | 2           | 2-6          | 0    | 0                      | EusPdEnTCWRG      |
+| Virtual Machine             | 2            | 2      | 2    | 2-4   | 3-4                    | 2           | 2-6          | 2    | 1-2                    | az-pc-dc          |
+| Network Interface           | 2-4          |        |      |       | Virtual Machine        |             | 0            | 0    | EusPdEnTCWDbVm1Nic     |
+| Network Security Group      | 2-4          |        |      |       | Virtual Machine        |             | 0            | 0    | EusPdEnTCWDbVm1Nsg     |
+| Network Security Group Rule | 2-4          |        |      |       | Network Security Group |             | 0            | 1-2  | EusPdEnTCWDbVm1NsgR1   |
+| Public IP Address           | 2-4          |        |      |       | Virtual Machine        |             | 0            | 1-2  | EusPdEnTCWDbVm1Pip     |
+| Storage account name        | 2-4          |        |      |       | 3-4                    | 2           | 2-6          | 0    | 1-2                    | eus_pd_entcw_sa_1 |
+| Storage Container name      | 2-4          |        |      |       | Storage account name   |             | 0            | 1-2  | eus_pd_entcw_sa_1_sc_1 |
+| Blob name                   | 2-4          |        |      |       | Storage Container name |             | 0            | 1-2  |                        |
+| Virtual Network             | 2-4          |        |      |       | 3-4                    | 2           | 2-6          | 0    | 1-2                    |                   |
+| Load Balancer               |              |        |      |       |                        |             |              | 0    |                        |                   |
