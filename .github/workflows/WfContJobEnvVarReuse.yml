@@ -24,7 +24,7 @@ jobs:
               "VNET_NAME" = 'TieredVnet'
               "ID" = 'TieredUAI'
             }
-            $jsonEnvVars = $envVars | ConvertTo-Json
+            $jsonEnvVars = $envVars | ConvertTo-Json -Compress
             Write-Output "env_vars=$jsonEnvVars" >> $Env:GITHUB_OUTPUT
             Write-Output '-------------------------------------------------------------------------------'
             Get-Content -Path $Env:GITHUB_ENV
