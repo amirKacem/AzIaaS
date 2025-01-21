@@ -16,7 +16,7 @@ jobs:
             . ./3TierApp/HelperFunctions.ps1  
             Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }}
             $RG_NAME = (Get-AzResourceGroup -Name GitHubAction24).ResourceGroupName
-            Write-Output "RG_name=$RGName" >> $Env:GITHUB_OUTPUT
+            Write-Output "RG_name=$RG_Name" >> $Env:GITHUB_OUTPUT
             Write-Output '-------------------------------------------------------------------------------'
             Get-Content -Path $Env:GITHUB_ENV
             Write-Output '-------------------------------------------------------------------------------'
