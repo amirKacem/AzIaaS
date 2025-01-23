@@ -72,18 +72,17 @@ Here is a link to the [VM deployment execution](https://ayanmullick.github.io/Az
 
 
 
-Sparse checkout is currently blocked by bug.
+Currently the 'Sparse checkout' feature is blocked by bug.
 https://github.com/actions/checkout/issues/1602#issuecomment-2048656906
-Resume once the 'Deploy Virtual machines' step in the 'AzPSImageInfraDeploymentWithApproval' workflow populates the resource group name in the end correctly.
 
  
+One could get more detailed in their implementation of the code. 
 Potential Tables: vNet details, NSG rules, VM details, storage account restrictions
+Potential environment variables: RG name, KV, Sa, secret, admin name, 
 
-RG name, KV, Sa, secret, admin name, 
-
-Put your tabularizable configuration in a markdown table. And the other configurations in a hash table.
-You get a single source of truth for configuration and documentation.
-And adding to configuration doesn't require you to add to the code
+One could put all tabularizable configuration in a markdown table and the other configurations in a hash table.
+This gives you a single source of truth for configuration and documentation unlike other declarative methods that could result in a doc-config mismatch.
+And adding to configuration doesn't require you to add to the code.
 
 = Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
 https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
