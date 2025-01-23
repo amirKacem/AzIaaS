@@ -39,14 +39,14 @@ This prestages the Network resources in Azure for the VMs' Deployment job.
 
 
 <details open>
-<summary><u id="NetworkResources"></u></summary> <pre class="powershell" id="code0"></pre>
+<summary><u id="NetworkResources"></u></summary> <pre class="powershell" id="code1"></pre>
 </details>
 
 
 This passes the resources' details between the Governance resources and the VM deployment jobs in the GitHub Actions workflow.
 
 <details open>
-<summary><u id="OutputForNextJob"></u></summary> <pre class="powershell" id="code0"></pre>
+<summary><u id="OutputForNextJob"></u></summary> <pre class="powershell" id="code2"></pre>
 </details>
 
 
