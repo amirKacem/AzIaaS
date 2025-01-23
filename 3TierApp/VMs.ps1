@@ -2,6 +2,7 @@ $AzParams     = @{Location = 'NorthCentralUS'; ResourceGroupName  = $($EnvVars.R
 $VMs          = ConvertFrom-MdTable -MarkdownFilePath .\3TierApp\VMs.md                                                  
 $Cred         = New-Object System.Management.Automation.PSCredential "TestAdmin",$(ConvertTo-SecureString "Passw0rd" -asplaintext -force)        #Use a Password secret
 
+#region VirtualMachineCreation
 $VMs|ForEach-Object {
     $SubnetId = ((Get-AzVirtualNetwork -ResourceGroupName $($EnvVars.RG_NAME) -Name $($EnvVars.VNET_NAME)).Subnets|Where-Object name -EQ $PSItem.Subnet).Id
     $NIC      = New-AzNetworkInterface @AzParams -Name ('Tiered' + $($VmName=$Psitem.Name;$VmName)+ (Get-Suffix)) -IpConfiguration $(New-AzNetworkInterfaceIpConfig -Name IPconfig -SubnetId $SubnetId -Primary)
@@ -23,3 +24,4 @@ $VMs|ForEach-Object {
 
     New-AzVM @AzParams -VM $vmConfig
                   }
+#endregion                  

@@ -1,13 +1,4 @@
-
-
-<script>
-  var allowedVariables = ["GovernanceResources", "NetworkResources", "OutputForNextJob"];
-  var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1")
-  fetchRes.then(response => response.clone().text()).then(data => {
-    showBlocks(data,allowedVariables);
-  })
-</script>
-
+# Three Tier Applicaiton Infrastructure deployment in Azure
 
 This is deploying a [three-tier application architecture][1] on virtual machines in Azure. 
 
@@ -26,6 +17,15 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 [Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
 
+
+
+<script>
+  var allowedVariables = ["GovernanceResources", "NetworkResources", "OutputForNextJob"];
+  var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1")
+  fetchRes.then(response => response.clone().text()).then(data => {
+    showBlocks(data,allowedVariables);
+  })
+</script>
 
 
 This prestages the governance resources in Azure for the VMs' Deployment job.
@@ -52,6 +52,20 @@ This passes the resources' details between the Governance resources and the VM d
 
 Here is a link to the [Governance resources deployment execution](https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log)
 
+
+<script>
+  var allowedVariables = ["VirtualMachineCreation"];
+  var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.ps1")
+  fetchRes.then(response => response.clone().text()).then(data => {
+    showBlocks(data,allowedVariables);
+  })
+</script>
+
+This deploys the required virtual machines in the same resource group using the previously prestaged governance resources.
+
+<details open>
+<summary><u id="VirtualMachineCreation"></u></summary> <pre class="powershell" id="code3"></pre>
+</details>
 
 
 [VM deployment execution](https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log)
