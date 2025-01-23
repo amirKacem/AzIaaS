@@ -1,4 +1,4 @@
-
+This is deploying a [three-tier application architecture][1] on virtual machines in Azure. 
 
 <details>
 <summary><u>Naming Standard</u></summary>
@@ -43,3 +43,4 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 ≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
 
 
+[1]: <https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/#n-tier>
