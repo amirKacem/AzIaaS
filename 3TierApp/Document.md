@@ -1,3 +1,14 @@
+
+
+<script>
+  var allowedVariables = ["GovernanceResources", "NetworkResources", "OutputForNextJob"];
+  var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1")
+  fetchRes.then(response => response.clone().text()).then(data => {
+    showBlocks(data,allowedVariables);
+  })
+</script>
+
+
 This is deploying a [three-tier application architecture][1] on virtual machines in Azure. 
 
 <details>
@@ -14,6 +25,15 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 
 [Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
+
+
+
+This prestages the governance resources in Azure for the VMs' Deployment job.
+
+
+<details open>
+<summary><u id="GovernanceResources"></u></summary> <pre class="powershell" id="code0"></pre>
+</details>
 
 
 

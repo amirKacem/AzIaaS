@@ -30,7 +30,7 @@ $SubnetConfigs  = @{DataTier = '192.168.0.0/29'; AppTier = '192.168.0.8/29'; Web
 $Vnet           = New-AzVirtualNetwork -Name ('Tiered' + (Get-Suffix)) @AzParams -AddressPrefix 192.168.0.0/27 -Subnet $SubnetConfigs     
 #endregion
 
-#region Output for next Job
+#region OutputForNextJob
 $EnvVars        = @{"RG_NAME"=$RG.ResourceGroupName; "SA_NAME"=$StorageAcc.StorageAccountName; "LAW_NAME"=$LAW.Name;"NSG_NAME"=$NSG.Name; "VNET_NAME"=$Vnet.Name; "ID"=$Identity.Id}
 $JsonEnvVars = $EnvVars | ConvertTo-Json -Compress
 Write-Output "Env_Vars=$JsonEnvVars" >> $Env:GITHUB_OUTPUT      #Not working
