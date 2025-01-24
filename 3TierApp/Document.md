@@ -50,7 +50,7 @@ This passes the resources' details between the Governance resources and the VM d
 </details>
 
 
-Here is a link to the [Governance resources deployment execution](https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log)
+Here is a link to the [Governance resources deployment execution][2] 
 
 
 <script>
@@ -68,12 +68,12 @@ This deploys the required virtual machines in the same resource group using the 
 </details>
 
 
-Here is a link to the [VM deployment execution](https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log)
+Here is a link to the [VM deployment execution][3]
 
 
 
 Currently the 'Sparse checkout' feature is blocked by bug.
-https://github.com/actions/checkout/issues/1602#issuecomment-2048656906
+[sparse-checkout not working when running in a container. · Issue #1602 · actions/checkout][4] 
 
  
 One could get more detailed in their implementation of the code. 
@@ -82,7 +82,8 @@ Potential environment variables: RG name, KV, Sa, secret, admin name,
 
 One could put all tabularizable configuration in a markdown table and the other configurations in a hash table.
 This gives you a single source of truth for configuration and documentation unlike other declarative methods that could result in a doc-config mismatch.
-And adding to configuration doesn't require you to add to the code.
+And adding to configuration doesn't require you to add to the code. One could also parameterize the table paths once the table data has been validated. 
+The tables could be generated with proper Excel formulas.
 
 = Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
 https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
@@ -92,3 +93,6 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
 
 [1]: <https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/#n-tier>
+[2]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log>
+[3]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log>
+[4]: <https://github.com/actions/checkout/issues/1602#issuecomment-2048656906>
