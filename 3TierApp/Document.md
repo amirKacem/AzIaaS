@@ -21,6 +21,7 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 <script>
   var allowedVariables = ["GovernanceResources", "NetworkResources", "OutputForNextJob"];
+  
   var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1")
   fetchRes.then(response => response.clone().text()).then(data => {
     showBlocks(data,allowedVariables);
@@ -54,7 +55,7 @@ Here is a link to the [Governance resources deployment execution][2]
 
 
 <script>
-  var allowedVariables = ["VirtualMachineCreation"];
+  allowedVariables[]= "VirtualMachineCreation";
   var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.ps1")
   fetchRes.then(response => response.clone().text()).then(data => {
     showBlocks(data,allowedVariables);
