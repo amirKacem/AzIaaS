@@ -13,6 +13,29 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 
 
+
+
+Currently the 'Sparse checkout' feature is blocked by bug.
+[sparse-checkout not working when running in a container. · Issue #1602 · actions/checkout][4] 
+
+ 
+One could get more detailed in their implementation of the code. 
+Potential Tables: vNet details, NSG rules, VM details, storage account restrictions
+Potential environment variables: RG name, KV, Sa, secret, admin name, 
+
+One could put all tabularizable configuration in a markdown table and the other configurations in a hash table.
+This gives you a single source of truth for configuration and documentation unlike other declarative methods that could result in a doc-config mismatch.
+And adding to configuration doesn't require you to add to the code. One could also parameterize the table paths once the table data has been validated. 
+The tables could be generated with proper Excel formulas.
+
+= Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
+https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
+https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
+
+≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
+
+
+
 [Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %) 
 
 
@@ -20,15 +43,16 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 
 
+
+
+
 <script>
-  var allowedVariables = { code0 : "GovernanceResources", code1 : "NetworkResources", code2 : "OutputForNextJob"};
-  var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1");
-  fetchRes.then(response => response.clone().text()).then(data => {
-    showBlocks(data,allowedVariables);
+  fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1").then(response => response.clone().text()).then(data => {
+    showBlocks(data,{ code0 : "GovernanceResources", code1 : "NetworkResources", code2 : "OutputForNextJob"});
   });
 
    fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.ps1").then(response => response.clone().text()).then(data => {
-    showBlocks(data,{ code4 : "VirtualMachineCreation"});
+    showBlocks(data,{ code3 : "VirtualMachineCreation"});
   })
 </script>
 
@@ -67,26 +91,6 @@ This deploys the required virtual machines in the same resource group using the 
 
 Here is a link to the [VM deployment execution][3]
 
-
-
-Currently the 'Sparse checkout' feature is blocked by bug.
-[sparse-checkout not working when running in a container. · Issue #1602 · actions/checkout][4] 
-
- 
-One could get more detailed in their implementation of the code. 
-Potential Tables: vNet details, NSG rules, VM details, storage account restrictions
-Potential environment variables: RG name, KV, Sa, secret, admin name, 
-
-One could put all tabularizable configuration in a markdown table and the other configurations in a hash table.
-This gives you a single source of truth for configuration and documentation unlike other declarative methods that could result in a doc-config mismatch.
-And adding to configuration doesn't require you to add to the code. One could also parameterize the table paths once the table data has been validated. 
-The tables could be generated with proper Excel formulas.
-
-= Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
-https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
-https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
-
-≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
 
 
 [1]: <https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/#n-tier>
