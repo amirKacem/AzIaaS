@@ -54,22 +54,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 var findBlocks = function (data, variableNames) {
   const matches = [];
-  variableNames.forEach(function (variable) {
+  let variables = [];
+
+  for (const [index, variable] of Object.entries(variableNames)) {
+    variables.push(variable);
     const regexPattern = `#region(?<variableName> ${variable})(?<content>[\\s\\S]*?)(#endregion)`;
     let regex = new RegExp(regexPattern, "g");
     for (const match of data.matchAll(regex)) {
       const variableName = match.groups.variableName.trim();
-      if (variableNames.includes(variableName)) {
-        matches.push({ variableName, content: match.groups.content.trim() });
+      if (variables.includes(variableName)) {
+        matches.push({ variableName, content: match.groups.content.trim(), blockId:index });
       }
     }
-  });
+  }
   return matches;
 };
 
 function showBlocks(data, variableNames) {
-  findBlocks(data, variableNames).forEach((item, index) => {
-    let variableNameBlock = document.getElementById(item.variableName), codeBlock = document.getElementById("code" + index);
+  findBlocks(data, variableNames).forEach((item) => {
+    let variableNameBlock = document.getElementById(item.variableName), codeBlock = document.getElementById(item.blockId);
     if (codeBlock !== null) {
       codeBlock.textContent = item.content;
       hljs.highlightElement(codeBlock);
