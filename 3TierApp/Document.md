@@ -86,7 +86,7 @@ Here is a link to the [Governance resources deployment execution][2]
 This deploys the required virtual machines in the same resource group using the previously prestaged governance resources.
 
 <details open>
-<summary><u id="VirtualMachineCreation"></u></summary> <pre class="powershell" id="code4"></pre>
+<summary><u id="VirtualMachineCreation"></u></summary> <pre class="powershell" id="code3"></pre>
 </details>
 
 
