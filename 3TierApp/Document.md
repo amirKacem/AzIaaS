@@ -1,5 +1,6 @@
 # Three Tier Applicaiton Infrastructure deployment in Azure
 
+
 This is deploying a [three-tier application architecture][1] on virtual machines in Azure. 
 
 <details>
@@ -20,11 +21,12 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 
 <script>
-  var allowedVariables = ["GovernanceResources", "NetworkResources", "OutputForNextJob"];
-  
-  var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1")
-  fetchRes.then(response => response.clone().text()).then(data => {
-    showBlocks(data,allowedVariables);
+  fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/GovResource.ps1").then(response => response.clone().text()).then(data => {
+    showBlocks(data,{ code0 : "GovernanceResources", code1 : "NetworkResources", code2 : "OutputForNextJob"});
+  });
+
+   fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.ps1").then(response => response.clone().text()).then(data => {
+    showBlocks(data,{ code3 : "VirtualMachineCreation"});
   })
 </script>
 
@@ -53,14 +55,6 @@ This passes the resources' details between the Governance resources and the VM d
 
 Here is a link to the [Governance resources deployment execution][2] 
 
-
-<script>
-  var allowedVariables = ["VirtualMachineCreation"];
-  var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.ps1")
-  fetchRes.then(response => response.clone().text()).then(data => {
-    showBlocks(data,allowedVariables);
-  })
-</script>
 
 This deploys the required virtual machines in the same resource group using the previously prestaged governance resources.
 
