@@ -55,7 +55,7 @@ Here is a link to the [Governance resources deployment execution][2]
 
 
 <script>
-  allowedVariables[]= "VirtualMachineCreation";
+  var allowedVariables = ["VirtualMachineCreation"];
   var fetchRes = fetch("https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.ps1")
   fetchRes.then(response => response.clone().text()).then(data => {
     showBlocks(data,allowedVariables);
