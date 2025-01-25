@@ -1,0 +1,1502 @@
+2025-01-21T20:22:18.2196353Z Current runner version: '2.321.0'
+2025-01-21T20:22:18.2223172Z ##[group]Operating System
+2025-01-21T20:22:18.2224018Z Ubuntu
+2025-01-21T20:22:18.2224609Z 24.04.1
+2025-01-21T20:22:18.2225084Z LTS
+2025-01-21T20:22:18.2225559Z ##[endgroup]
+2025-01-21T20:22:18.2226122Z ##[group]Runner Image
+2025-01-21T20:22:18.2226667Z Image: ubuntu-24.04
+2025-01-21T20:22:18.2227237Z Version: 20250105.1.0
+2025-01-21T20:22:18.2228332Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250105.1/images/ubuntu/Ubuntu2404-Readme.md
+2025-01-21T20:22:18.2229762Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250105.1
+2025-01-21T20:22:18.2230646Z ##[endgroup]
+2025-01-21T20:22:18.2231227Z ##[group]Runner Image Provisioner
+2025-01-21T20:22:18.2231826Z 2.0.417.1
+2025-01-21T20:22:18.2232278Z ##[endgroup]
+2025-01-21T20:22:18.2234877Z ##[group]GITHUB_TOKEN Permissions
+2025-01-21T20:22:18.2237077Z Actions: write
+2025-01-21T20:22:18.2237937Z Attestations: write
+2025-01-21T20:22:18.2238543Z Checks: write
+2025-01-21T20:22:18.2239127Z Contents: write
+2025-01-21T20:22:18.2239625Z Deployments: write
+2025-01-21T20:22:18.2240136Z Discussions: write
+2025-01-21T20:22:18.2240711Z Issues: write
+2025-01-21T20:22:18.2241238Z Metadata: read
+2025-01-21T20:22:18.2241694Z Packages: write
+2025-01-21T20:22:18.2242276Z Pages: write
+2025-01-21T20:22:18.2243010Z PullRequests: write
+2025-01-21T20:22:18.2243639Z RepositoryProjects: write
+2025-01-21T20:22:18.2244214Z SecurityEvents: write
+2025-01-21T20:22:18.2244741Z Statuses: write
+2025-01-21T20:22:18.2245267Z ##[endgroup]
+2025-01-21T20:22:18.2247633Z Secret source: Actions
+2025-01-21T20:22:18.2248447Z Prepare workflow directory
+2025-01-21T20:22:18.2631588Z Prepare all required actions
+2025-01-21T20:22:18.2669373Z Getting action download info
+2025-01-21T20:22:18.4492091Z Download action repository 'actions/checkout@v4' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+2025-01-21T20:22:18.6197825Z Complete job name: DeployVirtualMachines
+2025-01-21T20:22:18.6719451Z ##[group]Checking docker version
+2025-01-21T20:22:18.6732834Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2025-01-21T20:22:18.8148428Z '1.45'
+2025-01-21T20:22:18.8173111Z Docker daemon API version: '1.45'
+2025-01-21T20:22:18.8174383Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2025-01-21T20:22:18.8334153Z '1.45'
+2025-01-21T20:22:18.8346085Z Docker client API version: '1.45'
+2025-01-21T20:22:18.8352248Z ##[endgroup]
+2025-01-21T20:22:18.8356093Z ##[group]Clean up resources from previous jobs
+2025-01-21T20:22:18.8361709Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=d37b2f"
+2025-01-21T20:22:18.8502409Z ##[command]/usr/bin/docker network prune --force --filter "label=d37b2f"
+2025-01-21T20:22:18.8641572Z ##[endgroup]
+2025-01-21T20:22:18.8642058Z ##[group]Create local container network
+2025-01-21T20:22:18.8653385Z ##[command]/usr/bin/docker network create --label d37b2f github_network_5f26895ea74b47109c9fc31c8a04d733
+2025-01-21T20:22:18.9495316Z 02e4f6d1404e699e675f9343cc0136728dd1b29068ad04be6d3fd3795b58059b
+2025-01-21T20:22:18.9512214Z ##[endgroup]
+2025-01-21T20:22:18.9537530Z ##[group]Starting job container
+2025-01-21T20:22:18.9556830Z ##[command]/usr/bin/docker pull mcr.microsoft.com/azure-powershell:latest
+2025-01-21T20:22:19.1172846Z latest: Pulling from azure-powershell
+2025-01-21T20:22:19.1177546Z 86e5016c2693: Pulling fs layer
+2025-01-21T20:22:19.1181915Z 789200447129: Pulling fs layer
+2025-01-21T20:22:19.1182912Z 79df21fd5a2e: Pulling fs layer
+2025-01-21T20:22:19.1183509Z 8a5727a1663d: Pulling fs layer
+2025-01-21T20:22:19.1184042Z 4f4fb700ef54: Pulling fs layer
+2025-01-21T20:22:19.1184580Z 5b2a8b8d477d: Pulling fs layer
+2025-01-21T20:22:19.1185124Z 47d9d8696f7e: Pulling fs layer
+2025-01-21T20:22:19.1185663Z 8a5727a1663d: Waiting
+2025-01-21T20:22:19.1186115Z 4f4fb700ef54: Waiting
+2025-01-21T20:22:19.1186575Z 5b2a8b8d477d: Waiting
+2025-01-21T20:22:19.1187023Z 47d9d8696f7e: Waiting
+2025-01-21T20:22:19.3173718Z 86e5016c2693: Verifying Checksum
+2025-01-21T20:22:19.3177260Z 86e5016c2693: Download complete
+2025-01-21T20:22:19.3543316Z 79df21fd5a2e: Verifying Checksum
+2025-01-21T20:22:19.3546169Z 79df21fd5a2e: Download complete
+2025-01-21T20:22:19.3901310Z 8a5727a1663d: Download complete
+2025-01-21T20:22:19.4254173Z 4f4fb700ef54: Verifying Checksum
+2025-01-21T20:22:19.4256136Z 4f4fb700ef54: Download complete
+2025-01-21T20:22:19.5110568Z 47d9d8696f7e: Verifying Checksum
+2025-01-21T20:22:19.5114700Z 47d9d8696f7e: Download complete
+2025-01-21T20:22:19.5790439Z 789200447129: Verifying Checksum
+2025-01-21T20:22:19.5793737Z 789200447129: Download complete
+2025-01-21T20:22:19.9106712Z 5b2a8b8d477d: Verifying Checksum
+2025-01-21T20:22:19.9108209Z 5b2a8b8d477d: Download complete
+2025-01-21T20:22:20.3506964Z 86e5016c2693: Pull complete
+2025-01-21T20:22:22.0301407Z 789200447129: Pull complete
+2025-01-21T20:22:23.0266771Z 79df21fd5a2e: Pull complete
+2025-01-21T20:22:23.0466493Z 8a5727a1663d: Pull complete
+2025-01-21T20:22:23.0626659Z 4f4fb700ef54: Pull complete
+2025-01-21T20:22:26.5911783Z 5b2a8b8d477d: Pull complete
+2025-01-21T20:22:26.6045911Z 47d9d8696f7e: Pull complete
+2025-01-21T20:22:26.6097990Z Digest: sha256:13b5d958192256c260963e6e36f88cf017a77a1697035120488c6c5fe9de8f38
+2025-01-21T20:22:26.6115769Z Status: Downloaded newer image for mcr.microsoft.com/azure-powershell:latest
+2025-01-21T20:22:26.6126912Z mcr.microsoft.com/azure-powershell:latest
+2025-01-21T20:22:26.6213987Z ##[command]/usr/bin/docker create --name 6411d1096743438d8c1c1a6bd52fd0dc_mcrmicrosoftcomazurepowershelllatest_176c69 --label d37b2f --workdir /__w/AzIaaS/AzIaaS --network github_network_5f26895ea74b47109c9fc31c8a04d733  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/runners/2.321.0/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" mcr.microsoft.com/azure-powershell:latest "-f" "/dev/null"
+2025-01-21T20:22:26.6498279Z 740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500
+2025-01-21T20:22:26.6521626Z ##[command]/usr/bin/docker start 740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500
+2025-01-21T20:22:26.9080292Z 740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500
+2025-01-21T20:22:26.9101251Z ##[command]/usr/bin/docker ps --all --filter id=740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2025-01-21T20:22:26.9225183Z 740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500 Up Less than a second
+2025-01-21T20:22:26.9244853Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500
+2025-01-21T20:22:26.9360831Z HOME=/github/home
+2025-01-21T20:22:26.9361245Z GITHUB_ACTIONS=true
+2025-01-21T20:22:26.9361511Z CI=true
+2025-01-21T20:22:26.9361901Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2025-01-21T20:22:26.9362539Z PS_INSTALL_FOLDER=/opt/microsoft/powershell/7
+2025-01-21T20:22:26.9363425Z DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+2025-01-21T20:22:26.9363964Z LC_ALL=en_US.UTF-8
+2025-01-21T20:22:26.9364493Z LANG=en_US.UTF-8
+2025-01-21T20:22:26.9365249Z PSModuleAnalysisCachePath=/var/cache/microsoft/powershell/PSModuleAnalysisCache/ModuleAnalysisCache
+2025-01-21T20:22:26.9366160Z POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-Ubuntu-20.04
+2025-01-21T20:22:26.9366737Z AZUREPS_HOST_ENVIRONMENT=dockerImage/13.1.0-ubuntu-20.04
+2025-01-21T20:22:26.9381205Z ##[endgroup]
+2025-01-21T20:22:26.9390307Z ##[group]Waiting for all services to be ready
+2025-01-21T20:22:26.9392023Z ##[endgroup]
+2025-01-21T20:22:26.9682339Z ##[group]Run actions/checkout@v4
+2025-01-21T20:22:26.9683075Z with:
+2025-01-21T20:22:26.9683288Z   sparse-checkout-cone-mode: false
+2025-01-21T20:22:26.9683820Z   sparse-checkout: 3TierApp/
+2025-01-21T20:22:26.9684077Z   repository: Ayanmullick/AzIaaS
+2025-01-21T20:22:26.9684501Z   token: ***
+2025-01-21T20:22:26.9684690Z   ssh-strict: true
+2025-01-21T20:22:26.9684883Z   ssh-user: git
+2025-01-21T20:22:26.9685069Z   persist-credentials: true
+2025-01-21T20:22:26.9685283Z   clean: true
+2025-01-21T20:22:26.9685456Z   fetch-depth: 1
+2025-01-21T20:22:26.9685678Z   fetch-tags: false
+2025-01-21T20:22:26.9685857Z   show-progress: true
+2025-01-21T20:22:26.9686041Z   lfs: false
+2025-01-21T20:22:26.9686204Z   submodules: false
+2025-01-21T20:22:26.9686382Z   set-safe-directory: true
+2025-01-21T20:22:26.9686833Z ##[endgroup]
+2025-01-21T20:22:26.9742402Z ##[command]/usr/bin/docker exec  740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500 sh -c "cat /etc/*release | grep ^ID"
+2025-01-21T20:22:27.3062534Z Syncing repository: Ayanmullick/AzIaaS
+2025-01-21T20:22:27.3064778Z ##[group]Getting Git version info
+2025-01-21T20:22:27.3065326Z Working directory is '/__w/AzIaaS/AzIaaS'
+2025-01-21T20:22:27.3066185Z ##[endgroup]
+2025-01-21T20:22:27.3066571Z Deleting the contents of '/__w/AzIaaS/AzIaaS'
+2025-01-21T20:22:27.3067158Z The repository will be downloaded using the GitHub REST API
+2025-01-21T20:22:27.3067920Z To create a local Git repository instead, add Git 2.18 or higher to the PATH
+2025-01-21T20:22:27.3068601Z Downloading the archive
+2025-01-21T20:22:27.5534959Z Writing archive to disk
+2025-01-21T20:22:27.5553246Z Extracting the archive
+2025-01-21T20:22:27.5641794Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /__w/AzIaaS/AzIaaS/99047a20-bf34-4b20-9c30-ee82ae469a53 -f /__w/AzIaaS/AzIaaS/99047a20-bf34-4b20-9c30-ee82ae469a53.tar.gz
+2025-01-21T20:22:27.5721179Z Resolved version Ayanmullick-AzIaaS-374c23b
+2025-01-21T20:22:27.6050380Z ##[group]Run $EnvVars      = ConvertFrom-Json '{"RG_NAME":"GitHubAction24","NSG_NAME":"TieredNSG","ID":"/subscriptions/8b77f191-3d4a-498e-8bb1-9e1fbb927ea7/resourcegroups/GitHubAction24/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TieredUAI","VNET_NAME":"TieredVN","SA_NAME":"tieredsa","LAW_NAME":"TieredLAW"}'                          #Needs to be in the Workflow. Fails in the script.
+2025-01-21T20:22:27.6053152Z $EnvVars      = ConvertFrom-Json '{"RG_NAME":"GitHubAction24","NSG_NAME":"TieredNSG","ID":"/subscriptions/8b77f191-3d4a-498e-8bb1-9e1fbb927ea7/resourcegroups/GitHubAction24/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TieredUAI","VNET_NAME":"TieredVN","SA_NAME":"tieredsa","LAW_NAME":"TieredLAW"}'                          #Needs to be in the Workflow. Fails in the script.
+2025-01-21T20:22:27.6054495Z Write-Output "Using resource group: $($EnvVars.RG_NAME)"
+2025-01-21T20:22:27.6054884Z  . ./3TierApp/HelperFunctions.ps1 
+2025-01-21T20:22:27.6055771Z  Connect-MySubscription 1054d918-a880-46d0-aa19-2dd47c7588d3 8b77f191-3d4a-498e-8bb1-9e1fbb927ea7 11d272b6-4221-44d7-9f18-d1830ca541ea *** 
+2025-01-21T20:22:27.6056349Z  ./3TierApp/VMs.ps1
+2025-01-21T20:22:27.6060116Z shell: pwsh -command ". '{0}'"
+2025-01-21T20:22:27.6060370Z ##[endgroup]
+2025-01-21T20:22:28.0307630Z Using resource group: GitHubAction24
+2025-01-21T20:22:28.5020644Z WARNING: The provided service principal secret or certifcate password will be included in the 'keystore.cache' file found in the user profile ( /github/home/.Azure ). Please ensure that this directory has appropriate protections.
+2025-01-21T20:22:28.5022575Z VERBOSE: Performing the operation "log in" on target "ServicePrincipal account in environment 'AzureCloud'".
+2025-01-21T20:22:29.6565732Z 
+2025-01-21T20:22:32.2425178Z VERBOSE: Performing the operation "Creating Resource" on target "TieredWeb1NI".
+2025-01-21T20:22:34.5354110Z Subscription name                         Tenant
+2025-01-21T20:22:34.5355146Z -----------------                         ------
+2025-01-21T20:22:34.5356053Z FTE Visual Studio Enterprise Subscription 1054d918-a880-46d0-aa19-2dd47c7588d3
+2025-01-21T20:22:34.5357302Z 
+2025-01-21T20:22:34.5357666Z VirtualMachine                     : 
+2025-01-21T20:22:34.5358375Z ExtendedLocation                   : 
+2025-01-21T20:22:34.5359116Z IpConfigurations                   : {IPconfig}
+2025-01-21T20:22:34.5359834Z TapConfigurations                  : {}
+2025-01-21T20:22:34.5360903Z DnsSettings                        : Microsoft.Azure.Commands.Network.Models.PS
+2025-01-21T20:22:34.5361569Z                                      NetworkInterfaceDnsSettings
+2025-01-21T20:22:34.5362093Z MacAddress                         : 
+2025-01-21T20:22:34.5362809Z Primary                            : 
+2025-01-21T20:22:34.5363477Z EnableAcceleratedNetworking        : False
+2025-01-21T20:22:34.5364132Z EnableIPForwarding                 : False
+2025-01-21T20:22:34.5364767Z DisableTcpStateTracking            : False
+2025-01-21T20:22:34.5365384Z HostedWorkloads                    : {}
+2025-01-21T20:22:34.5365979Z NetworkSecurityGroup               : 
+2025-01-21T20:22:34.5366619Z PrivateEndpoint                    : 
+2025-01-21T20:22:34.5367268Z ProvisioningState                  : Succeeded
+2025-01-21T20:22:34.5367960Z VnetEncryptionSupported            : False
+2025-01-21T20:22:34.5368662Z DefaultOutboundConnectivityEnabled : False
+2025-01-21T20:22:34.5369345Z AuxiliaryMode                      : None
+2025-01-21T20:22:34.5370008Z AuxiliarySku                       : None
+2025-01-21T20:22:34.5370607Z VirtualMachineText                 : null
+2025-01-21T20:22:34.5371589Z IpConfigurationsText               : [
+2025-01-21T20:22:34.5372065Z                                        {
+2025-01-21T20:22:34.5372477Z                                          "Name": "IPconfig",
+2025-01-21T20:22:34.5373184Z                                          "Etag": "W/\"92fb184f-a1f8-456e-8609-2
+2025-01-21T20:22:34.5373666Z                                      52aedaec002\"",
+2025-01-21T20:22:34.5374127Z                                          "Id": "/subscriptions/8b77f191-3d4a-49
+2025-01-21T20:22:34.5374667Z                                      8e-8bb1-9e1fbb927ea7/resourceGroups/GitHub
+2025-01-21T20:22:34.5375224Z                                      Action24/providers/Microsoft.Network/netwo
+2025-01-21T20:22:34.5375784Z                                      rkInterfaces/TieredWeb1NI/ipConfigurations
+2025-01-21T20:22:34.5376278Z                                      /IPconfig",
+2025-01-21T20:22:34.5376742Z                                          "PrivateIpAddress": "192.168.0.20",
+2025-01-21T20:22:34.5377429Z                                          "PrivateIpAllocationMethod": "Static",
+2025-01-21T20:22:34.5377964Z                                          "Subnet": {
+2025-01-21T20:22:34.5378456Z                                            "Id": "/subscriptions/8b77f191-3d4a-
+2025-01-21T20:22:34.5379019Z                                      498e-8bb1-9e1fbb927ea7/resourceGroups/GitH
+2025-01-21T20:22:34.5379585Z                                      ubAction24/providers/Microsoft.Network/vir
+2025-01-21T20:22:34.5380172Z                                      tualNetworks/TieredVN/subnets/WebTier",
+2025-01-21T20:22:34.5380714Z                                            "IpamPoolPrefixAllocations": [],
+2025-01-21T20:22:34.5381214Z                                            "IpAllocations": []
+2025-01-21T20:22:34.5381655Z                                          },
+2025-01-21T20:22:34.5382111Z                                          "ProvisioningState": "Succeeded",
+2025-01-21T20:22:34.5382871Z                                          "PrivateIpAddressVersion": "IPv4",
+2025-01-21T20:22:34.5383449Z                                          "LoadBalancerBackendAddressPools": [],
+2025-01-21T20:22:34.5383996Z                                          "LoadBalancerInboundNatRules": [],
+2025-01-21T20:22:34.5384801Z                                          "Primary": true,
+2025-01-21T20:22:34.5385256Z                                          
+2025-01-21T20:22:34.5385755Z                                      "ApplicationGatewayBackendAddressPools": 
+2025-01-21T20:22:34.5386251Z                                      [],
+2025-01-21T20:22:34.5386711Z                                          "ApplicationSecurityGroups": [],
+2025-01-21T20:22:34.5387223Z                                          "VirtualNetworkTaps": []
+2025-01-21T20:22:34.5387673Z                                        }
+2025-01-21T20:22:34.5388092Z                                      ]
+2025-01-21T20:22:34.5388672Z TapConfigurationsText              : []
+2025-01-21T20:22:34.5389259Z DnsSettingsText                    : {
+2025-01-21T20:22:34.5389731Z                                        "DnsServers": [],
+2025-01-21T20:22:34.5390185Z                                        "AppliedDnsServers": [],
+2025-01-21T20:22:34.5390717Z                                        "InternalDomainNameSuffix": "xls3hrqogqe
+2025-01-21T20:22:34.5391285Z                                      evlsblwqnewstra.ex.internal.cloudapp.net"
+2025-01-21T20:22:34.5391813Z                                      }
+2025-01-21T20:22:34.5392427Z NetworkSecurityGroupText           : null
+2025-01-21T20:22:34.5393436Z PrivateEndpointText                : null
+2025-01-21T20:22:34.5394089Z ExtendedLocationText               : null
+2025-01-21T20:22:34.5394845Z ResourceGroupName                  : GitHubAction24
+2025-01-21T20:22:34.5395627Z Location                           : northcentralus
+2025-01-21T20:22:34.5396713Z ResourceGuid                       : 11456196-468a-4966-91ab-567918961bc3
+2025-01-21T20:22:34.5397543Z Type                               : Microsoft.Network/networkInterfaces
+2025-01-21T20:22:34.5398231Z Tag                                : 
+2025-01-21T20:22:34.5398795Z TagsTable                          : 
+2025-01-21T20:22:34.5399398Z Name                               : TieredWeb1NI
+2025-01-21T20:22:34.5400099Z Etag                               : W/"92fb184f-a1f8-456e-8609-252aedaec002"
+2025-01-21T20:22:34.5400850Z Id                                 : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1
+2025-01-21T20:22:34.5401454Z                                      fbb927ea7/resourceGroups/GitHubAction24/pr
+2025-01-21T20:22:34.5402024Z                                      oviders/Microsoft.Network/networkInterface
+2025-01-21T20:22:34.5402526Z                                      s/TieredWeb1NI
+2025-01-21T20:22:34.5403080Z 
+2025-01-21T20:22:35.4084254Z 
+2025-01-21T20:22:35.4085343Z ResourceGroupName        : 
+2025-01-21T20:22:35.4085975Z Id                       : 
+2025-01-21T20:22:35.4086423Z VmId                     : 
+2025-01-21T20:22:35.4086872Z Name                     : TieredWeb1VM
+2025-01-21T20:22:35.4087228Z Type                     : 
+2025-01-21T20:22:35.4087520Z Location                 : 
+2025-01-21T20:22:35.4087814Z ExtendedLocation         : 
+2025-01-21T20:22:35.4088103Z LicenseType              : 
+2025-01-21T20:22:35.4088381Z Tags                     : 
+2025-01-21T20:22:35.4088896Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:22:35.4089361Z                            e
+2025-01-21T20:22:35.4089821Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:22:35.4090255Z                            sProfile
+2025-01-21T20:22:35.4090537Z Extensions               : 
+2025-01-21T20:22:35.4091007Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:22:35.4091425Z                            ofile
+2025-01-21T20:22:35.4091694Z InstanceView             : 
+2025-01-21T20:22:35.4092546Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:22:35.4093245Z                            file
+2025-01-21T20:22:35.4093700Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:22:35.4094118Z                            ofile
+2025-01-21T20:22:35.4094378Z OsName                   : 
+2025-01-21T20:22:35.4094650Z OsVersion                : 
+2025-01-21T20:22:35.4094936Z HyperVGeneration         : 
+2025-01-21T20:22:35.4095387Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:22:35.4095824Z BillingProfile           : 
+2025-01-21T20:22:35.4096106Z Plan                     : 
+2025-01-21T20:22:35.4096390Z ProvisioningState        : 
+2025-01-21T20:22:35.4097147Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:22:35.4097726Z                            file
+2025-01-21T20:22:35.4098149Z DisplayHint              : Compact
+2025-01-21T20:22:35.4098808Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:22:35.4099393Z                            hineIdentity
+2025-01-21T20:22:35.4099783Z Zones                    : 
+2025-01-21T20:22:35.4100258Z FullyQualifiedDomainName : 
+2025-01-21T20:22:35.4100736Z AdditionalCapabilities   : 
+2025-01-21T20:22:35.4101228Z ProximityPlacementGroup  : 
+2025-01-21T20:22:35.4101703Z Host                     : 
+2025-01-21T20:22:35.4102191Z VirtualMachineScaleSet   : 
+2025-01-21T20:22:35.4103161Z EvictionPolicy           : 
+2025-01-21T20:22:35.4103710Z Priority                 : 
+2025-01-21T20:22:35.4104188Z HostGroup                : 
+2025-01-21T20:22:35.4104700Z CapacityReservation      : 
+2025-01-21T20:22:35.4105223Z UserData                 : 
+2025-01-21T20:22:35.4105728Z ApplicationProfile       : 
+2025-01-21T20:22:35.4106326Z PlatformFaultDomain      : 
+2025-01-21T20:22:35.4106835Z TimeCreated              : 
+2025-01-21T20:22:35.4107318Z Etag                     : 
+2025-01-21T20:22:35.4107800Z RequestId                : 
+2025-01-21T20:22:35.4108295Z StatusCode               : 0
+2025-01-21T20:22:35.4108585Z 
+2025-01-21T20:22:35.4128452Z 
+2025-01-21T20:22:35.4129582Z ResourceGroupName        : 
+2025-01-21T20:22:35.4130387Z Id                       : 
+2025-01-21T20:22:35.4130885Z VmId                     : 
+2025-01-21T20:22:35.4131423Z Name                     : TieredWeb1VM
+2025-01-21T20:22:35.4131994Z Type                     : 
+2025-01-21T20:22:35.4132477Z Location                 : 
+2025-01-21T20:22:35.4133215Z ExtendedLocation         : 
+2025-01-21T20:22:35.4133722Z LicenseType              : 
+2025-01-21T20:22:35.4134194Z Tags                     : 
+2025-01-21T20:22:35.4135027Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:22:35.4135756Z                            e
+2025-01-21T20:22:35.4136541Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:22:35.4137234Z                            sProfile
+2025-01-21T20:22:35.4137698Z Extensions               : 
+2025-01-21T20:22:35.4138509Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:22:35.4139166Z                            ofile
+2025-01-21T20:22:35.4139620Z InstanceView             : 
+2025-01-21T20:22:35.4140446Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:22:35.4141125Z                            file
+2025-01-21T20:22:35.4141866Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:22:35.4143209Z                            ofile
+2025-01-21T20:22:35.4143661Z OsName                   : 
+2025-01-21T20:22:35.4144101Z OsVersion                : 
+2025-01-21T20:22:35.4144573Z HyperVGeneration         : 
+2025-01-21T20:22:35.4145010Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:22:35.4145416Z BillingProfile           : 
+2025-01-21T20:22:35.4145679Z Plan                     : 
+2025-01-21T20:22:35.4145929Z ProvisioningState        : 
+2025-01-21T20:22:35.4146352Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:22:35.4146717Z                            file
+2025-01-21T20:22:35.4146974Z DisplayHint              : Compact
+2025-01-21T20:22:35.4147382Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:22:35.4147727Z                            hineIdentity
+2025-01-21T20:22:35.4148003Z Zones                    : 
+2025-01-21T20:22:35.4148285Z FullyQualifiedDomainName : 
+2025-01-21T20:22:35.4148569Z AdditionalCapabilities   : 
+2025-01-21T20:22:35.4148837Z ProximityPlacementGroup  : 
+2025-01-21T20:22:35.4149094Z Host                     : 
+2025-01-21T20:22:35.4149345Z VirtualMachineScaleSet   : 
+2025-01-21T20:22:35.4149603Z EvictionPolicy           : 
+2025-01-21T20:22:35.4149853Z Priority                 : 
+2025-01-21T20:22:35.4150097Z HostGroup                : 
+2025-01-21T20:22:35.4150350Z CapacityReservation      : 
+2025-01-21T20:22:35.4150759Z UserData                 : 
+2025-01-21T20:22:35.4151021Z ApplicationProfile       : 
+2025-01-21T20:22:35.4151284Z PlatformFaultDomain      : 
+2025-01-21T20:22:35.4151544Z TimeCreated              : 
+2025-01-21T20:22:35.4151786Z Etag                     : 
+2025-01-21T20:22:35.4152025Z RequestId                : 
+2025-01-21T20:22:35.4152275Z StatusCode               : 0
+2025-01-21T20:22:35.4152423Z 
+2025-01-21T20:22:35.4163439Z 
+2025-01-21T20:22:35.4164265Z ResourceGroupName        : 
+2025-01-21T20:22:35.4165083Z Id                       : 
+2025-01-21T20:22:35.4165664Z VmId                     : 
+2025-01-21T20:22:35.4166172Z Name                     : TieredWeb1VM
+2025-01-21T20:22:35.4166661Z Type                     : 
+2025-01-21T20:22:35.4167093Z Location                 : 
+2025-01-21T20:22:35.4167536Z ExtendedLocation         : 
+2025-01-21T20:22:35.4167825Z LicenseType              : 
+2025-01-21T20:22:35.4168070Z Tags                     : 
+2025-01-21T20:22:35.4168540Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:22:35.4168950Z                            e
+2025-01-21T20:22:35.4169369Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:22:35.4169744Z                            sProfile
+2025-01-21T20:22:35.4169989Z Extensions               : 
+2025-01-21T20:22:35.4170399Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:22:35.4170755Z                            ofile
+2025-01-21T20:22:35.4170988Z InstanceView             : 
+2025-01-21T20:22:35.4171392Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:22:35.4171742Z                            file
+2025-01-21T20:22:35.4172133Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:22:35.4172478Z                            ofile
+2025-01-21T20:22:35.4172947Z OsName                   : 
+2025-01-21T20:22:35.4173396Z OsVersion                : 
+2025-01-21T20:22:35.4173650Z HyperVGeneration         : 
+2025-01-21T20:22:35.4174038Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:22:35.4174420Z BillingProfile           : 
+2025-01-21T20:22:35.4174672Z Plan                     : 
+2025-01-21T20:22:35.4174917Z ProvisioningState        : 
+2025-01-21T20:22:35.4175325Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:22:35.4175718Z                            file
+2025-01-21T20:22:35.4175977Z DisplayHint              : Compact
+2025-01-21T20:22:35.4176385Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:22:35.4177087Z                            hineIdentity
+2025-01-21T20:22:35.4177551Z Zones                    : 
+2025-01-21T20:22:35.4178028Z FullyQualifiedDomainName : 
+2025-01-21T20:22:35.4178556Z AdditionalCapabilities   : 
+2025-01-21T20:22:35.4179118Z ProximityPlacementGroup  : 
+2025-01-21T20:22:35.4179527Z Host                     : 
+2025-01-21T20:22:35.4179787Z VirtualMachineScaleSet   : 
+2025-01-21T20:22:35.4180048Z EvictionPolicy           : 
+2025-01-21T20:22:35.4180291Z Priority                 : 
+2025-01-21T20:22:35.4180535Z HostGroup                : 
+2025-01-21T20:22:35.4180789Z CapacityReservation      : 
+2025-01-21T20:22:35.4181039Z UserData                 : 
+2025-01-21T20:22:35.4181291Z ApplicationProfile       : 
+2025-01-21T20:22:35.4181550Z PlatformFaultDomain      : 
+2025-01-21T20:22:35.4181986Z TimeCreated              : 
+2025-01-21T20:22:35.4182241Z Etag                     : 
+2025-01-21T20:22:35.4182476Z RequestId                : 
+2025-01-21T20:22:35.4182998Z StatusCode               : 0
+2025-01-21T20:22:35.4183163Z 
+2025-01-21T20:22:35.4243407Z VERBOSE: Performing the operation "New" on target "TieredWeb1VM".
+2025-01-21T20:24:44.1558064Z 
+2025-01-21T20:24:44.1578970Z RequestId           : 
+2025-01-21T20:24:44.1582358Z IsSuccessStatusCode : True
+2025-01-21T20:24:44.1583182Z StatusCode          : OK
+2025-01-21T20:24:44.1583775Z ReasonPhrase        : 
+2025-01-21T20:24:44.1584213Z 
+2025-01-21T20:24:44.8931533Z VERBOSE: Performing the operation "Creating Resource" on target "TieredWeb2NI".
+2025-01-21T20:24:46.7963299Z 
+2025-01-21T20:24:46.7968847Z VirtualMachine                     : 
+2025-01-21T20:24:46.7971988Z ExtendedLocation                   : 
+2025-01-21T20:24:46.7973028Z IpConfigurations                   : {IPconfig}
+2025-01-21T20:24:46.7973740Z TapConfigurations                  : {}
+2025-01-21T20:24:46.7976069Z DnsSettings                        : Microsoft.Azure.Commands.Network.Models.PS
+2025-01-21T20:24:46.7977545Z                                      NetworkInterfaceDnsSettings
+2025-01-21T20:24:46.7978243Z MacAddress                         : 
+2025-01-21T20:24:46.7978856Z Primary                            : 
+2025-01-21T20:24:46.7979531Z EnableAcceleratedNetworking        : False
+2025-01-21T20:24:46.7980316Z EnableIPForwarding                 : False
+2025-01-21T20:24:46.7995439Z DisableTcpStateTracking            : False
+2025-01-21T20:24:46.7997283Z HostedWorkloads                    : {}
+2025-01-21T20:24:46.7997835Z NetworkSecurityGroup               : 
+2025-01-21T20:24:46.7998333Z PrivateEndpoint                    : 
+2025-01-21T20:24:46.7998981Z ProvisioningState                  : Succeeded
+2025-01-21T20:24:46.7999662Z VnetEncryptionSupported            : False
+2025-01-21T20:24:46.8000340Z DefaultOutboundConnectivityEnabled : False
+2025-01-21T20:24:46.8001452Z AuxiliaryMode                      : None
+2025-01-21T20:24:46.8002176Z AuxiliarySku                       : None
+2025-01-21T20:24:46.8002974Z VirtualMachineText                 : null
+2025-01-21T20:24:46.8003582Z IpConfigurationsText               : [
+2025-01-21T20:24:46.8004040Z                                        {
+2025-01-21T20:24:46.8004476Z                                          "Name": "IPconfig",
+2025-01-21T20:24:46.8004973Z                                          "Etag": "W/\"5d4acf59-e561-4810-a569-f
+2025-01-21T20:24:46.8005462Z                                      6d9b081a9eb\"",
+2025-01-21T20:24:46.8005919Z                                          "Id": "/subscriptions/8b77f191-3d4a-49
+2025-01-21T20:24:46.8006469Z                                      8e-8bb1-9e1fbb927ea7/resourceGroups/GitHub
+2025-01-21T20:24:46.8007011Z                                      Action24/providers/Microsoft.Network/netwo
+2025-01-21T20:24:46.8007581Z                                      rkInterfaces/TieredWeb2NI/ipConfigurations
+2025-01-21T20:24:46.8008096Z                                      /IPconfig",
+2025-01-21T20:24:46.8008571Z                                          "PrivateIpAddress": "192.168.0.21",
+2025-01-21T20:24:46.8009096Z                                          "PrivateIpAllocationMethod": "Static",
+2025-01-21T20:24:46.8009611Z                                          "Subnet": {
+2025-01-21T20:24:46.8010095Z                                            "Id": "/subscriptions/8b77f191-3d4a-
+2025-01-21T20:24:46.8010621Z                                      498e-8bb1-9e1fbb927ea7/resourceGroups/GitH
+2025-01-21T20:24:46.8011167Z                                      ubAction24/providers/Microsoft.Network/vir
+2025-01-21T20:24:46.8012045Z                                      tualNetworks/TieredVN/subnets/WebTier",
+2025-01-21T20:24:46.8012807Z                                            "IpamPoolPrefixAllocations": [],
+2025-01-21T20:24:46.8013333Z                                            "IpAllocations": []
+2025-01-21T20:24:46.8013799Z                                          },
+2025-01-21T20:24:46.8014249Z                                          "ProvisioningState": "Succeeded",
+2025-01-21T20:24:46.8014791Z                                          "PrivateIpAddressVersion": "IPv4",
+2025-01-21T20:24:46.8015337Z                                          "LoadBalancerBackendAddressPools": [],
+2025-01-21T20:24:46.8015877Z                                          "LoadBalancerInboundNatRules": [],
+2025-01-21T20:24:46.8016371Z                                          "Primary": true,
+2025-01-21T20:24:46.8016813Z                                          
+2025-01-21T20:24:46.8017325Z                                      "ApplicationGatewayBackendAddressPools": 
+2025-01-21T20:24:46.8017850Z                                      [],
+2025-01-21T20:24:46.8018326Z                                          "ApplicationSecurityGroups": [],
+2025-01-21T20:24:46.8018850Z                                          "VirtualNetworkTaps": []
+2025-01-21T20:24:46.8019304Z                                        }
+2025-01-21T20:24:46.8019702Z                                      ]
+2025-01-21T20:24:46.8020276Z TapConfigurationsText              : []
+2025-01-21T20:24:46.8020865Z DnsSettingsText                    : {
+2025-01-21T20:24:46.8021339Z                                        "DnsServers": [],
+2025-01-21T20:24:46.8021818Z                                        "AppliedDnsServers": [],
+2025-01-21T20:24:46.8022322Z                                        "InternalDomainNameSuffix": "xls3hrqogqe
+2025-01-21T20:24:46.8023147Z                                      evlsblwqnewstra.ex.internal.cloudapp.net"
+2025-01-21T20:24:46.8023649Z                                      }
+2025-01-21T20:24:46.8024245Z NetworkSecurityGroupText           : null
+2025-01-21T20:24:46.8024866Z PrivateEndpointText                : null
+2025-01-21T20:24:46.8025506Z ExtendedLocationText               : null
+2025-01-21T20:24:46.8026472Z ResourceGroupName                  : GitHubAction24
+2025-01-21T20:24:46.8027181Z Location                           : northcentralus
+2025-01-21T20:24:46.8027970Z ResourceGuid                       : b62be8e4-4bbc-4abc-a102-d7d6af997570
+2025-01-21T20:24:46.8028794Z Type                               : Microsoft.Network/networkInterfaces
+2025-01-21T20:24:46.8029470Z Tag                                : 
+2025-01-21T20:24:46.8030038Z TagsTable                          : 
+2025-01-21T20:24:46.8030642Z Name                               : TieredWeb2NI
+2025-01-21T20:24:46.8031382Z Etag                               : W/"5d4acf59-e561-4810-a569-f6d9b081a9eb"
+2025-01-21T20:24:46.8032150Z Id                                 : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1
+2025-01-21T20:24:46.8033013Z                                      fbb927ea7/resourceGroups/GitHubAction24/pr
+2025-01-21T20:24:46.8033600Z                                      oviders/Microsoft.Network/networkInterface
+2025-01-21T20:24:46.8034113Z                                      s/TieredWeb2NI
+2025-01-21T20:24:46.8034394Z 
+2025-01-21T20:24:47.1116796Z 
+2025-01-21T20:24:47.1117533Z ResourceGroupName        : 
+2025-01-21T20:24:47.1118119Z Id                       : 
+2025-01-21T20:24:47.1118645Z VmId                     : 
+2025-01-21T20:24:47.1119193Z Name                     : TieredWeb2VM
+2025-01-21T20:24:47.1119664Z Type                     : 
+2025-01-21T20:24:47.1119979Z Location                 : 
+2025-01-21T20:24:47.1120291Z ExtendedLocation         : 
+2025-01-21T20:24:47.1121155Z LicenseType              : 
+2025-01-21T20:24:47.1121621Z Tags                     : 
+2025-01-21T20:24:47.1122366Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:24:47.1123334Z                            e
+2025-01-21T20:24:47.1124038Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:24:47.1124694Z                            sProfile
+2025-01-21T20:24:47.1125169Z Extensions               : 
+2025-01-21T20:24:47.1126052Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:24:47.1126778Z                            ofile
+2025-01-21T20:24:47.1127104Z InstanceView             : 
+2025-01-21T20:24:47.1127623Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:24:47.1128063Z                            file
+2025-01-21T20:24:47.1128530Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:24:47.1128948Z                            ofile
+2025-01-21T20:24:47.1129213Z OsName                   : 
+2025-01-21T20:24:47.1129491Z OsVersion                : 
+2025-01-21T20:24:47.1129791Z HyperVGeneration         : 
+2025-01-21T20:24:47.1130246Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:24:47.1130686Z BillingProfile           : 
+2025-01-21T20:24:47.1130964Z Plan                     : 
+2025-01-21T20:24:47.1131247Z ProvisioningState        : 
+2025-01-21T20:24:47.1131726Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:24:47.1132132Z                            file
+2025-01-21T20:24:47.1132414Z DisplayHint              : Compact
+2025-01-21T20:24:47.1133186Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:24:47.1133589Z                            hineIdentity
+2025-01-21T20:24:47.1133852Z Zones                    : 
+2025-01-21T20:24:47.1134115Z FullyQualifiedDomainName : 
+2025-01-21T20:24:47.1134920Z AdditionalCapabilities   : 
+2025-01-21T20:24:47.1135214Z ProximityPlacementGroup  : 
+2025-01-21T20:24:47.1135473Z Host                     : 
+2025-01-21T20:24:47.1135725Z VirtualMachineScaleSet   : 
+2025-01-21T20:24:47.1135988Z EvictionPolicy           : 
+2025-01-21T20:24:47.1136232Z Priority                 : 
+2025-01-21T20:24:47.1136483Z HostGroup                : 
+2025-01-21T20:24:47.1136736Z CapacityReservation      : 
+2025-01-21T20:24:47.1136991Z UserData                 : 
+2025-01-21T20:24:47.1137239Z ApplicationProfile       : 
+2025-01-21T20:24:47.1137501Z PlatformFaultDomain      : 
+2025-01-21T20:24:47.1137755Z TimeCreated              : 
+2025-01-21T20:24:47.1137999Z Etag                     : 
+2025-01-21T20:24:47.1138245Z RequestId                : 
+2025-01-21T20:24:47.1138495Z StatusCode               : 0
+2025-01-21T20:24:47.1138658Z 
+2025-01-21T20:24:47.1144893Z 
+2025-01-21T20:24:47.1145214Z ResourceGroupName        : 
+2025-01-21T20:24:47.1145715Z Id                       : 
+2025-01-21T20:24:47.1146137Z VmId                     : 
+2025-01-21T20:24:47.1146638Z Name                     : TieredWeb2VM
+2025-01-21T20:24:47.1147146Z Type                     : 
+2025-01-21T20:24:47.1147573Z Location                 : 
+2025-01-21T20:24:47.1148016Z ExtendedLocation         : 
+2025-01-21T20:24:47.1148457Z LicenseType              : 
+2025-01-21T20:24:47.1148884Z Tags                     : 
+2025-01-21T20:24:47.1149686Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:24:47.1150640Z                            e
+2025-01-21T20:24:47.1151120Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:24:47.1151522Z                            sProfile
+2025-01-21T20:24:47.1151779Z Extensions               : 
+2025-01-21T20:24:47.1152507Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:24:47.1153281Z                            ofile
+2025-01-21T20:24:47.1153641Z InstanceView             : 
+2025-01-21T20:24:47.1154361Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:24:47.1154728Z                            file
+2025-01-21T20:24:47.1155119Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:24:47.1155475Z                            ofile
+2025-01-21T20:24:47.1155712Z OsName                   : 
+2025-01-21T20:24:47.1155968Z OsVersion                : 
+2025-01-21T20:24:47.1156227Z HyperVGeneration         : 
+2025-01-21T20:24:47.1156622Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:24:47.1157012Z BillingProfile           : 
+2025-01-21T20:24:47.1157260Z Plan                     : 
+2025-01-21T20:24:47.1157503Z ProvisioningState        : 
+2025-01-21T20:24:47.1157908Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:24:47.1158257Z                            file
+2025-01-21T20:24:47.1158500Z DisplayHint              : Compact
+2025-01-21T20:24:47.1158904Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:24:47.1159244Z                            hineIdentity
+2025-01-21T20:24:47.1159497Z Zones                    : 
+2025-01-21T20:24:47.1159747Z FullyQualifiedDomainName : 
+2025-01-21T20:24:47.1160016Z AdditionalCapabilities   : 
+2025-01-21T20:24:47.1160282Z ProximityPlacementGroup  : 
+2025-01-21T20:24:47.1160536Z Host                     : 
+2025-01-21T20:24:47.1160781Z VirtualMachineScaleSet   : 
+2025-01-21T20:24:47.1161247Z EvictionPolicy           : 
+2025-01-21T20:24:47.1161495Z Priority                 : 
+2025-01-21T20:24:47.1161737Z HostGroup                : 
+2025-01-21T20:24:47.1161989Z CapacityReservation      : 
+2025-01-21T20:24:47.1162240Z UserData                 : 
+2025-01-21T20:24:47.1162492Z ApplicationProfile       : 
+2025-01-21T20:24:47.1163060Z PlatformFaultDomain      : 
+2025-01-21T20:24:47.1163327Z TimeCreated              : 
+2025-01-21T20:24:47.1163568Z Etag                     : 
+2025-01-21T20:24:47.1163834Z RequestId                : 
+2025-01-21T20:24:47.1164082Z StatusCode               : 0
+2025-01-21T20:24:47.1164232Z 
+2025-01-21T20:24:47.1170978Z 
+2025-01-21T20:24:47.1172046Z ResourceGroupName        : 
+2025-01-21T20:24:47.1173341Z Id                       : 
+2025-01-21T20:24:47.1173813Z VmId                     : 
+2025-01-21T20:24:47.1174321Z Name                     : TieredWeb2VM
+2025-01-21T20:24:47.1174854Z Type                     : 
+2025-01-21T20:24:47.1175329Z Location                 : 
+2025-01-21T20:24:47.1175809Z ExtendedLocation         : 
+2025-01-21T20:24:47.1176250Z LicenseType              : 
+2025-01-21T20:24:47.1176678Z Tags                     : 
+2025-01-21T20:24:47.1177466Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:24:47.1178155Z                            e
+2025-01-21T20:24:47.1178880Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:24:47.1179285Z                            sProfile
+2025-01-21T20:24:47.1179744Z Extensions               : 
+2025-01-21T20:24:47.1180175Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:24:47.1180555Z                            ofile
+2025-01-21T20:24:47.1180985Z InstanceView             : 
+2025-01-21T20:24:47.1181715Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:24:47.1182086Z                            file
+2025-01-21T20:24:47.1182585Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:24:47.1183391Z                            ofile
+2025-01-21T20:24:47.1183664Z OsName                   : 
+2025-01-21T20:24:47.1183914Z OsVersion                : 
+2025-01-21T20:24:47.1184173Z HyperVGeneration         : 
+2025-01-21T20:24:47.1184570Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:24:47.1184958Z BillingProfile           : 
+2025-01-21T20:24:47.1185212Z Plan                     : 
+2025-01-21T20:24:47.1185465Z ProvisioningState        : 
+2025-01-21T20:24:47.1185882Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:24:47.1186240Z                            file
+2025-01-21T20:24:47.1186492Z DisplayHint              : Compact
+2025-01-21T20:24:47.1186904Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:24:47.1187268Z                            hineIdentity
+2025-01-21T20:24:47.1187524Z Zones                    : 
+2025-01-21T20:24:47.1187793Z FullyQualifiedDomainName : 
+2025-01-21T20:24:47.1188067Z AdditionalCapabilities   : 
+2025-01-21T20:24:47.1188342Z ProximityPlacementGroup  : 
+2025-01-21T20:24:47.1188595Z Host                     : 
+2025-01-21T20:24:47.1188850Z VirtualMachineScaleSet   : 
+2025-01-21T20:24:47.1189115Z EvictionPolicy           : 
+2025-01-21T20:24:47.1189369Z Priority                 : 
+2025-01-21T20:24:47.1189611Z HostGroup                : 
+2025-01-21T20:24:47.1190075Z CapacityReservation      : 
+2025-01-21T20:24:47.1190330Z UserData                 : 
+2025-01-21T20:24:47.1190583Z ApplicationProfile       : 
+2025-01-21T20:24:47.1190844Z PlatformFaultDomain      : 
+2025-01-21T20:24:47.1191103Z TimeCreated              : 
+2025-01-21T20:24:47.1191356Z Etag                     : 
+2025-01-21T20:24:47.1191598Z RequestId                : 
+2025-01-21T20:24:47.1191850Z StatusCode               : 0
+2025-01-21T20:24:47.1191999Z 
+2025-01-21T20:24:47.1196566Z VERBOSE: Performing the operation "New" on target "TieredWeb2VM".
+2025-01-21T20:26:51.3430849Z 
+2025-01-21T20:26:51.3432557Z RequestId           : 
+2025-01-21T20:26:51.3433893Z IsSuccessStatusCode : True
+2025-01-21T20:26:51.3435422Z StatusCode          : OK
+2025-01-21T20:26:51.3435894Z ReasonPhrase        : 
+2025-01-21T20:26:51.3436160Z 
+2025-01-21T20:26:52.0562899Z VERBOSE: Performing the operation "Creating Resource" on target "TieredApp1NI".
+2025-01-21T20:26:54.6775543Z 
+2025-01-21T20:26:54.6776521Z VirtualMachine                     : 
+2025-01-21T20:26:54.6777107Z ExtendedLocation                   : 
+2025-01-21T20:26:54.6777675Z IpConfigurations                   : {IPconfig}
+2025-01-21T20:26:54.6778290Z TapConfigurations                  : {}
+2025-01-21T20:26:54.6779053Z DnsSettings                        : Microsoft.Azure.Commands.Network.Models.PS
+2025-01-21T20:26:54.6779683Z                                      NetworkInterfaceDnsSettings
+2025-01-21T20:26:54.6780256Z MacAddress                         : 
+2025-01-21T20:26:54.6780760Z Primary                            : 
+2025-01-21T20:26:54.6781767Z EnableAcceleratedNetworking        : False
+2025-01-21T20:26:54.6782373Z EnableIPForwarding                 : False
+2025-01-21T20:26:54.6783192Z DisableTcpStateTracking            : False
+2025-01-21T20:26:54.6783729Z HostedWorkloads                    : {}
+2025-01-21T20:26:54.6784213Z NetworkSecurityGroup               : 
+2025-01-21T20:26:54.6784695Z PrivateEndpoint                    : 
+2025-01-21T20:26:54.6785213Z ProvisioningState                  : Succeeded
+2025-01-21T20:26:54.6785754Z VnetEncryptionSupported            : False
+2025-01-21T20:26:54.6786307Z DefaultOutboundConnectivityEnabled : False
+2025-01-21T20:26:54.6786911Z AuxiliaryMode                      : None
+2025-01-21T20:26:54.6787454Z AuxiliarySku                       : None
+2025-01-21T20:26:54.6787989Z VirtualMachineText                 : null
+2025-01-21T20:26:54.6788547Z IpConfigurationsText               : [
+2025-01-21T20:26:54.6788997Z                                        {
+2025-01-21T20:26:54.6789394Z                                          "Name": "IPconfig",
+2025-01-21T20:26:54.6789842Z                                          "Etag": "W/\"1fcfa935-b79c-487d-a2f5-c
+2025-01-21T20:26:54.6790293Z                                      ec8b6d529ce\"",
+2025-01-21T20:26:54.6811552Z                                          "Id": "/subscriptions/8b77f191-3d4a-49
+2025-01-21T20:26:54.6812002Z                                      8e-8bb1-9e1fbb927ea7/resourceGroups/GitHub
+2025-01-21T20:26:54.6812335Z                                      Action24/providers/Microsoft.Network/netwo
+2025-01-21T20:26:54.6812819Z                                      rkInterfaces/TieredApp1NI/ipConfigurations
+2025-01-21T20:26:54.6813105Z                                      /IPconfig",
+2025-01-21T20:26:54.6813360Z                                          "PrivateIpAddress": "192.168.0.12",
+2025-01-21T20:26:54.6813655Z                                          "PrivateIpAllocationMethod": "Static",
+2025-01-21T20:26:54.6813927Z                                          "Subnet": {
+2025-01-21T20:26:54.6814182Z                                            "Id": "/subscriptions/8b77f191-3d4a-
+2025-01-21T20:26:54.6814734Z                                      498e-8bb1-9e1fbb927ea7/resourceGroups/GitH
+2025-01-21T20:26:54.6815028Z                                      ubAction24/providers/Microsoft.Network/vir
+2025-01-21T20:26:54.6815339Z                                      tualNetworks/TieredVN/subnets/AppTier",
+2025-01-21T20:26:54.6815645Z                                            "IpamPoolPrefixAllocations": [],
+2025-01-21T20:26:54.6815925Z                                            "IpAllocations": []
+2025-01-21T20:26:54.6816174Z                                          },
+2025-01-21T20:26:54.6816423Z                                          "ProvisioningState": "Succeeded",
+2025-01-21T20:26:54.6816706Z                                          "PrivateIpAddressVersion": "IPv4",
+2025-01-21T20:26:54.6817003Z                                          "LoadBalancerBackendAddressPools": [],
+2025-01-21T20:26:54.6817294Z                                          "LoadBalancerInboundNatRules": [],
+2025-01-21T20:26:54.6817568Z                                          "Primary": true,
+2025-01-21T20:26:54.6817801Z                                          
+2025-01-21T20:26:54.6818067Z                                      "ApplicationGatewayBackendAddressPools": 
+2025-01-21T20:26:54.6818428Z                                      [],
+2025-01-21T20:26:54.6818849Z                                          "ApplicationSecurityGroups": [],
+2025-01-21T20:26:54.6819315Z                                          "VirtualNetworkTaps": []
+2025-01-21T20:26:54.6819646Z                                        }
+2025-01-21T20:26:54.6819863Z                                      ]
+2025-01-21T20:26:54.6820222Z TapConfigurationsText              : []
+2025-01-21T20:26:54.6820693Z DnsSettingsText                    : {
+2025-01-21T20:26:54.6820963Z                                        "DnsServers": [],
+2025-01-21T20:26:54.6821232Z                                        "AppliedDnsServers": [],
+2025-01-21T20:26:54.6821523Z                                        "InternalDomainNameSuffix": "xls3hrqogqe
+2025-01-21T20:26:54.6821830Z                                      evlsblwqnewstra.ex.internal.cloudapp.net"
+2025-01-21T20:26:54.6822106Z                                      }
+2025-01-21T20:26:54.6822409Z NetworkSecurityGroupText           : null
+2025-01-21T20:26:54.6823018Z PrivateEndpointText                : null
+2025-01-21T20:26:54.6823347Z ExtendedLocationText               : null
+2025-01-21T20:26:54.6823702Z ResourceGroupName                  : GitHubAction24
+2025-01-21T20:26:54.6824075Z Location                           : northcentralus
+2025-01-21T20:26:54.6824479Z ResourceGuid                       : ce418d70-c1a3-4714-a209-6ce549ec0244
+2025-01-21T20:26:54.6824903Z Type                               : Microsoft.Network/networkInterfaces
+2025-01-21T20:26:54.6825238Z Tag                                : 
+2025-01-21T20:26:54.6825537Z TagsTable                          : 
+2025-01-21T20:26:54.6825851Z Name                               : TieredApp1NI
+2025-01-21T20:26:54.6826229Z Etag                               : W/"1fcfa935-b79c-487d-a2f5-cec8b6d529ce"
+2025-01-21T20:26:54.6826628Z Id                                 : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1
+2025-01-21T20:26:54.6826946Z                                      fbb927ea7/resourceGroups/GitHubAction24/pr
+2025-01-21T20:26:54.6827248Z                                      oviders/Microsoft.Network/networkInterface
+2025-01-21T20:26:54.6827512Z                                      s/TieredApp1NI
+2025-01-21T20:26:54.6827678Z 
+2025-01-21T20:26:55.1084136Z 
+2025-01-21T20:26:55.1085149Z ResourceGroupName        : 
+2025-01-21T20:26:55.1090313Z Id                       : 
+2025-01-21T20:26:55.1090842Z VmId                     : 
+2025-01-21T20:26:55.1091822Z Name                     : TieredApp1VM
+2025-01-21T20:26:55.1092321Z Type                     : 
+2025-01-21T20:26:55.1093037Z Location                 : 
+2025-01-21T20:26:55.1093327Z ExtendedLocation         : 
+2025-01-21T20:26:55.1093584Z LicenseType              : 
+2025-01-21T20:26:55.1093832Z Tags                     : 
+2025-01-21T20:26:55.1094294Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:26:55.1094715Z                            e
+2025-01-21T20:26:55.1095146Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:26:55.1095531Z                            sProfile
+2025-01-21T20:26:55.1095794Z Extensions               : 
+2025-01-21T20:26:55.1096222Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:26:55.1096594Z                            ofile
+2025-01-21T20:26:55.1096851Z InstanceView             : 
+2025-01-21T20:26:55.1097269Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:26:55.1097617Z                            file
+2025-01-21T20:26:55.1098008Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:26:55.1098358Z                            ofile
+2025-01-21T20:26:55.1098596Z OsName                   : 
+2025-01-21T20:26:55.1098838Z OsVersion                : 
+2025-01-21T20:26:55.1099088Z HyperVGeneration         : 
+2025-01-21T20:26:55.1099487Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:26:55.1100059Z BillingProfile           : 
+2025-01-21T20:26:55.1100320Z Plan                     : 
+2025-01-21T20:26:55.1100571Z ProvisioningState        : 
+2025-01-21T20:26:55.1100977Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:26:55.1101327Z                            file
+2025-01-21T20:26:55.1101579Z DisplayHint              : Compact
+2025-01-21T20:26:55.1101983Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:26:55.1102320Z                            hineIdentity
+2025-01-21T20:26:55.1104692Z Zones                    : 
+2025-01-21T20:26:55.1105048Z FullyQualifiedDomainName : 
+2025-01-21T20:26:55.1105521Z AdditionalCapabilities   : 
+2025-01-21T20:26:55.1106028Z ProximityPlacementGroup  : 
+2025-01-21T20:26:55.1106483Z Host                     : 
+2025-01-21T20:26:55.1106928Z VirtualMachineScaleSet   : 
+2025-01-21T20:26:55.1107229Z EvictionPolicy           : 
+2025-01-21T20:26:55.1107474Z Priority                 : 
+2025-01-21T20:26:55.1107717Z HostGroup                : 
+2025-01-21T20:26:55.1107968Z CapacityReservation      : 
+2025-01-21T20:26:55.1108224Z UserData                 : 
+2025-01-21T20:26:55.1108469Z ApplicationProfile       : 
+2025-01-21T20:26:55.1108727Z PlatformFaultDomain      : 
+2025-01-21T20:26:55.1108977Z TimeCreated              : 
+2025-01-21T20:26:55.1109214Z Etag                     : 
+2025-01-21T20:26:55.1109610Z RequestId                : 
+2025-01-21T20:26:55.1110081Z StatusCode               : 0
+2025-01-21T20:26:55.1110303Z 
+2025-01-21T20:26:55.1110326Z 
+2025-01-21T20:26:55.1110452Z ResourceGroupName        : 
+2025-01-21T20:26:55.1110711Z Id                       : 
+2025-01-21T20:26:55.1111066Z VmId                     : 
+2025-01-21T20:26:55.1111534Z Name                     : TieredApp1VM
+2025-01-21T20:26:55.1111821Z Type                     : 
+2025-01-21T20:26:55.1112060Z Location                 : 
+2025-01-21T20:26:55.1112308Z ExtendedLocation         : 
+2025-01-21T20:26:55.1113203Z LicenseType              : 
+2025-01-21T20:26:55.1113464Z Tags                     : 
+2025-01-21T20:26:55.1113901Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:26:55.1114297Z                            e
+2025-01-21T20:26:55.1114699Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:26:55.1115081Z                            sProfile
+2025-01-21T20:26:55.1115327Z Extensions               : 
+2025-01-21T20:26:55.1115749Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:26:55.1116108Z                            ofile
+2025-01-21T20:26:55.1116351Z InstanceView             : 
+2025-01-21T20:26:55.1116758Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:26:55.1117110Z                            file
+2025-01-21T20:26:55.1117506Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:26:55.1117851Z                            ofile
+2025-01-21T20:26:55.1118081Z OsName                   : 
+2025-01-21T20:26:55.1118323Z OsVersion                : 
+2025-01-21T20:26:55.1118628Z HyperVGeneration         : 
+2025-01-21T20:26:55.1119387Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:26:55.1120119Z BillingProfile           : 
+2025-01-21T20:26:55.1120589Z Plan                     : 
+2025-01-21T20:26:55.1120854Z ProvisioningState        : 
+2025-01-21T20:26:55.1121447Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:26:55.1121814Z                            file
+2025-01-21T20:26:55.1122067Z DisplayHint              : Compact
+2025-01-21T20:26:55.1122469Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:26:55.1123016Z                            hineIdentity
+2025-01-21T20:26:55.1123274Z Zones                    : 
+2025-01-21T20:26:55.1123529Z FullyQualifiedDomainName : 
+2025-01-21T20:26:55.1123794Z AdditionalCapabilities   : 
+2025-01-21T20:26:55.1124063Z ProximityPlacementGroup  : 
+2025-01-21T20:26:55.1124316Z Host                     : 
+2025-01-21T20:26:55.1124569Z VirtualMachineScaleSet   : 
+2025-01-21T20:26:55.1124822Z EvictionPolicy           : 
+2025-01-21T20:26:55.1125069Z Priority                 : 
+2025-01-21T20:26:55.1125313Z HostGroup                : 
+2025-01-21T20:26:55.1125570Z CapacityReservation      : 
+2025-01-21T20:26:55.1125815Z UserData                 : 
+2025-01-21T20:26:55.1126063Z ApplicationProfile       : 
+2025-01-21T20:26:55.1126323Z PlatformFaultDomain      : 
+2025-01-21T20:26:55.1126576Z TimeCreated              : 
+2025-01-21T20:26:55.1126818Z Etag                     : 
+2025-01-21T20:26:55.1127056Z RequestId                : 
+2025-01-21T20:26:55.1127301Z StatusCode               : 0
+2025-01-21T20:26:55.1127449Z 
+2025-01-21T20:26:55.1127692Z VERBOSE: Performing the operation "New" on target "TieredApp1VM".
+2025-01-21T20:28:58.9027956Z 
+2025-01-21T20:28:58.9028731Z RequestId           : 
+2025-01-21T20:28:58.9029372Z IsSuccessStatusCode : True
+2025-01-21T20:28:58.9029982Z StatusCode          : OK
+2025-01-21T20:28:58.9030509Z ReasonPhrase        : 
+2025-01-21T20:28:58.9030809Z 
+2025-01-21T20:28:59.6777500Z VERBOSE: Performing the operation "Creating Resource" on target "TieredApp2NI".
+2025-01-21T20:29:01.6057841Z 
+2025-01-21T20:29:01.6059092Z VirtualMachine                     : 
+2025-01-21T20:29:01.6060048Z ExtendedLocation                   : 
+2025-01-21T20:29:01.6062155Z IpConfigurations                   : {IPconfig}
+2025-01-21T20:29:01.6063114Z TapConfigurations                  : {}
+2025-01-21T20:29:01.6063902Z DnsSettings                        : Microsoft.Azure.Commands.Network.Models.PS
+2025-01-21T20:29:01.6064501Z                                      NetworkInterfaceDnsSettings
+2025-01-21T20:29:01.6065045Z MacAddress                         : 
+2025-01-21T20:29:01.6065533Z Primary                            : 
+2025-01-21T20:29:01.6066045Z EnableAcceleratedNetworking        : False
+2025-01-21T20:29:01.6066587Z EnableIPForwarding                 : False
+2025-01-21T20:29:01.6067124Z DisableTcpStateTracking            : False
+2025-01-21T20:29:01.6067708Z HostedWorkloads                    : {}
+2025-01-21T20:29:01.6068237Z NetworkSecurityGroup               : 
+2025-01-21T20:29:01.6068741Z PrivateEndpoint                    : 
+2025-01-21T20:29:01.6069335Z ProvisioningState                  : Succeeded
+2025-01-21T20:29:01.6069943Z VnetEncryptionSupported            : False
+2025-01-21T20:29:01.6070550Z DefaultOutboundConnectivityEnabled : False
+2025-01-21T20:29:01.6071127Z AuxiliaryMode                      : None
+2025-01-21T20:29:01.6071659Z AuxiliarySku                       : None
+2025-01-21T20:29:01.6072210Z VirtualMachineText                 : null
+2025-01-21T20:29:01.6074227Z IpConfigurationsText               : [
+2025-01-21T20:29:01.6074691Z                                        {
+2025-01-21T20:29:01.6075096Z                                          "Name": "IPconfig",
+2025-01-21T20:29:01.6075821Z                                          "Etag": "W/\"36e80cdd-3437-492f-ac15-8
+2025-01-21T20:29:01.6076245Z                                      0a08939ff5e\"",
+2025-01-21T20:29:01.6076649Z                                          "Id": "/subscriptions/8b77f191-3d4a-49
+2025-01-21T20:29:01.6077792Z                                      8e-8bb1-9e1fbb927ea7/resourceGroups/GitHub
+2025-01-21T20:29:01.6078323Z                                      Action24/providers/Microsoft.Network/netwo
+2025-01-21T20:29:01.6078870Z                                      rkInterfaces/TieredApp2NI/ipConfigurations
+2025-01-21T20:29:01.6079322Z                                      /IPconfig",
+2025-01-21T20:29:01.6079733Z                                          "PrivateIpAddress": "192.168.0.13",
+2025-01-21T20:29:01.6080172Z                                          "PrivateIpAllocationMethod": "Static",
+2025-01-21T20:29:01.6080612Z                                          "Subnet": {
+2025-01-21T20:29:01.6081052Z                                            "Id": "/subscriptions/8b77f191-3d4a-
+2025-01-21T20:29:01.6081537Z                                      498e-8bb1-9e1fbb927ea7/resourceGroups/GitH
+2025-01-21T20:29:01.6081984Z                                      ubAction24/providers/Microsoft.Network/vir
+2025-01-21T20:29:01.6082469Z                                      tualNetworks/TieredVN/subnets/AppTier",
+2025-01-21T20:29:01.6083164Z                                            "IpamPoolPrefixAllocations": [],
+2025-01-21T20:29:01.6083638Z                                            "IpAllocations": []
+2025-01-21T20:29:01.6084036Z                                          },
+2025-01-21T20:29:01.6084458Z                                          "ProvisioningState": "Succeeded",
+2025-01-21T20:29:01.6084953Z                                          "PrivateIpAddressVersion": "IPv4",
+2025-01-21T20:29:01.6085416Z                                          "LoadBalancerBackendAddressPools": [],
+2025-01-21T20:29:01.6085877Z                                          "LoadBalancerInboundNatRules": [],
+2025-01-21T20:29:01.6086312Z                                          "Primary": true,
+2025-01-21T20:29:01.6086678Z                                          
+2025-01-21T20:29:01.6087082Z                                      "ApplicationGatewayBackendAddressPools": 
+2025-01-21T20:29:01.6087887Z                                      [],
+2025-01-21T20:29:01.6088312Z                                          "ApplicationSecurityGroups": [],
+2025-01-21T20:29:01.6088758Z                                          "VirtualNetworkTaps": []
+2025-01-21T20:29:01.6089165Z                                        }
+2025-01-21T20:29:01.6089503Z                                      ]
+2025-01-21T20:29:01.6090028Z TapConfigurationsText              : []
+2025-01-21T20:29:01.6090656Z DnsSettingsText                    : {
+2025-01-21T20:29:01.6091084Z                                        "DnsServers": [],
+2025-01-21T20:29:01.6091498Z                                        "AppliedDnsServers": [],
+2025-01-21T20:29:01.6091907Z                                        "InternalDomainNameSuffix": "xls3hrqogqe
+2025-01-21T20:29:01.6092220Z                                      evlsblwqnewstra.ex.internal.cloudapp.net"
+2025-01-21T20:29:01.6092506Z                                      }
+2025-01-21T20:29:01.6093108Z NetworkSecurityGroupText           : null
+2025-01-21T20:29:01.6093441Z PrivateEndpointText                : null
+2025-01-21T20:29:01.6093765Z ExtendedLocationText               : null
+2025-01-21T20:29:01.6094123Z ResourceGroupName                  : GitHubAction24
+2025-01-21T20:29:01.6094496Z Location                           : northcentralus
+2025-01-21T20:29:01.6094898Z ResourceGuid                       : b9f07e8f-d8e6-4e44-9cb8-9e82f31e3a8a
+2025-01-21T20:29:01.6095326Z Type                               : Microsoft.Network/networkInterfaces
+2025-01-21T20:29:01.6095661Z Tag                                : 
+2025-01-21T20:29:01.6096164Z TagsTable                          : 
+2025-01-21T20:29:01.6096521Z Name                               : TieredApp2NI
+2025-01-21T20:29:01.6096897Z Etag                               : W/"36e80cdd-3437-492f-ac15-80a08939ff5e"
+2025-01-21T20:29:01.6097303Z Id                                 : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1
+2025-01-21T20:29:01.6097622Z                                      fbb927ea7/resourceGroups/GitHubAction24/pr
+2025-01-21T20:29:01.6097919Z                                      oviders/Microsoft.Network/networkInterface
+2025-01-21T20:29:01.6098198Z                                      s/TieredApp2NI
+2025-01-21T20:29:01.6098374Z 
+2025-01-21T20:29:02.0260924Z 
+2025-01-21T20:29:02.0261621Z ResourceGroupName        : 
+2025-01-21T20:29:02.0262189Z Id                       : 
+2025-01-21T20:29:02.0262997Z VmId                     : 
+2025-01-21T20:29:02.0263557Z Name                     : TieredApp2VM
+2025-01-21T20:29:02.0264079Z Type                     : 
+2025-01-21T20:29:02.0264543Z Location                 : 
+2025-01-21T20:29:02.0265019Z ExtendedLocation         : 
+2025-01-21T20:29:02.0265518Z LicenseType              : 
+2025-01-21T20:29:02.0265972Z Tags                     : 
+2025-01-21T20:29:02.0266797Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:29:02.0267534Z                            e
+2025-01-21T20:29:02.0268305Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:29:02.0268996Z                            sProfile
+2025-01-21T20:29:02.0269455Z Extensions               : 
+2025-01-21T20:29:02.0270317Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:29:02.0271034Z                            ofile
+2025-01-21T20:29:02.0271479Z InstanceView             : 
+2025-01-21T20:29:02.0272256Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:29:02.0273161Z                            file
+2025-01-21T20:29:02.0273919Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:29:02.0275048Z                            ofile
+2025-01-21T20:29:02.0275484Z OsName                   : 
+2025-01-21T20:29:02.0275948Z OsVersion                : 
+2025-01-21T20:29:02.0276268Z HyperVGeneration         : 
+2025-01-21T20:29:02.0276747Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:29:02.0277685Z BillingProfile           : 
+2025-01-21T20:29:02.0278243Z Plan                     : 
+2025-01-21T20:29:02.0278695Z ProvisioningState        : 
+2025-01-21T20:29:02.0279476Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:29:02.0280127Z                            file
+2025-01-21T20:29:02.0280572Z DisplayHint              : Compact
+2025-01-21T20:29:02.0281056Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:29:02.0281419Z                            hineIdentity
+2025-01-21T20:29:02.0281670Z Zones                    : 
+2025-01-21T20:29:02.0281922Z FullyQualifiedDomainName : 
+2025-01-21T20:29:02.0282189Z AdditionalCapabilities   : 
+2025-01-21T20:29:02.0282458Z ProximityPlacementGroup  : 
+2025-01-21T20:29:02.0282937Z Host                     : 
+2025-01-21T20:29:02.0283186Z VirtualMachineScaleSet   : 
+2025-01-21T20:29:02.0283444Z EvictionPolicy           : 
+2025-01-21T20:29:02.0283693Z Priority                 : 
+2025-01-21T20:29:02.0283938Z HostGroup                : 
+2025-01-21T20:29:02.0284183Z CapacityReservation      : 
+2025-01-21T20:29:02.0284640Z UserData                 : 
+2025-01-21T20:29:02.0284901Z ApplicationProfile       : 
+2025-01-21T20:29:02.0285171Z PlatformFaultDomain      : 
+2025-01-21T20:29:02.0285436Z TimeCreated              : 
+2025-01-21T20:29:02.0285688Z Etag                     : 
+2025-01-21T20:29:02.0285928Z RequestId                : 
+2025-01-21T20:29:02.0286178Z StatusCode               : 0
+2025-01-21T20:29:02.0286342Z 
+2025-01-21T20:29:02.0286373Z 
+2025-01-21T20:29:02.0286487Z ResourceGroupName        : 
+2025-01-21T20:29:02.0286739Z Id                       : 
+2025-01-21T20:29:02.0286976Z VmId                     : 
+2025-01-21T20:29:02.0287240Z Name                     : TieredApp2VM
+2025-01-21T20:29:02.0287513Z Type                     : 
+2025-01-21T20:29:02.0287755Z Location                 : 
+2025-01-21T20:29:02.0288002Z ExtendedLocation         : 
+2025-01-21T20:29:02.0288250Z LicenseType              : 
+2025-01-21T20:29:02.0288493Z Tags                     : 
+2025-01-21T20:29:02.0288940Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:29:02.0289342Z                            e
+2025-01-21T20:29:02.0289741Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:29:02.0290118Z                            sProfile
+2025-01-21T20:29:02.0290365Z Extensions               : 
+2025-01-21T20:29:02.0290770Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:29:02.0291193Z                            ofile
+2025-01-21T20:29:02.0291643Z InstanceView             : 
+2025-01-21T20:29:02.0292354Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:29:02.0293122Z                            file
+2025-01-21T20:29:02.0293593Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:29:02.0293951Z                            ofile
+2025-01-21T20:29:02.0294186Z OsName                   : 
+2025-01-21T20:29:02.0294625Z OsVersion                : 
+2025-01-21T20:29:02.0294877Z HyperVGeneration         : 
+2025-01-21T20:29:02.0295271Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:29:02.0295650Z BillingProfile           : 
+2025-01-21T20:29:02.0295892Z Plan                     : 
+2025-01-21T20:29:02.0296141Z ProvisioningState        : 
+2025-01-21T20:29:02.0296549Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:29:02.0296898Z                            file
+2025-01-21T20:29:02.0297151Z DisplayHint              : Compact
+2025-01-21T20:29:02.0297561Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:29:02.0297901Z                            hineIdentity
+2025-01-21T20:29:02.0298145Z Zones                    : 
+2025-01-21T20:29:02.0298399Z FullyQualifiedDomainName : 
+2025-01-21T20:29:02.0298675Z AdditionalCapabilities   : 
+2025-01-21T20:29:02.0298943Z ProximityPlacementGroup  : 
+2025-01-21T20:29:02.0299192Z Host                     : 
+2025-01-21T20:29:02.0299445Z VirtualMachineScaleSet   : 
+2025-01-21T20:29:02.0299702Z EvictionPolicy           : 
+2025-01-21T20:29:02.0299941Z Priority                 : 
+2025-01-21T20:29:02.0300187Z HostGroup                : 
+2025-01-21T20:29:02.0300448Z CapacityReservation      : 
+2025-01-21T20:29:02.0300702Z UserData                 : 
+2025-01-21T20:29:02.0300952Z ApplicationProfile       : 
+2025-01-21T20:29:02.0301212Z PlatformFaultDomain      : 
+2025-01-21T20:29:02.0301638Z TimeCreated              : 
+2025-01-21T20:29:02.0301891Z Etag                     : 
+2025-01-21T20:29:02.0302127Z RequestId                : 
+2025-01-21T20:29:02.0302376Z StatusCode               : 0
+2025-01-21T20:29:02.0302528Z 
+2025-01-21T20:29:02.0303006Z VERBOSE: Performing the operation "New" on target "TieredApp2VM".
+2025-01-21T20:31:14.5504902Z 
+2025-01-21T20:31:14.5505571Z RequestId           : 
+2025-01-21T20:31:14.5506083Z IsSuccessStatusCode : True
+2025-01-21T20:31:14.5506547Z StatusCode          : OK
+2025-01-21T20:31:14.5506994Z ReasonPhrase        : 
+2025-01-21T20:31:14.5507239Z 
+2025-01-21T20:31:15.4346900Z VERBOSE: Performing the operation "Creating Resource" on target "TieredSQL1NI".
+2025-01-21T20:31:17.4134168Z 
+2025-01-21T20:31:17.4134958Z VirtualMachine                     : 
+2025-01-21T20:31:17.4135637Z ExtendedLocation                   : 
+2025-01-21T20:31:17.4136247Z IpConfigurations                   : {IPconfig}
+2025-01-21T20:31:17.4136839Z TapConfigurations                  : {}
+2025-01-21T20:31:17.4137575Z DnsSettings                        : Microsoft.Azure.Commands.Network.Models.PS
+2025-01-21T20:31:17.4138220Z                                      NetworkInterfaceDnsSettings
+2025-01-21T20:31:17.4138773Z MacAddress                         : 
+2025-01-21T20:31:17.4139296Z Primary                            : 
+2025-01-21T20:31:17.4139833Z EnableAcceleratedNetworking        : False
+2025-01-21T20:31:17.4140382Z EnableIPForwarding                 : False
+2025-01-21T20:31:17.4140927Z DisableTcpStateTracking            : False
+2025-01-21T20:31:17.4141468Z HostedWorkloads                    : {}
+2025-01-21T20:31:17.4141985Z NetworkSecurityGroup               : 
+2025-01-21T20:31:17.4142489Z PrivateEndpoint                    : 
+2025-01-21T20:31:17.4143302Z ProvisioningState                  : Succeeded
+2025-01-21T20:31:17.4143915Z VnetEncryptionSupported            : False
+2025-01-21T20:31:17.4144534Z DefaultOutboundConnectivityEnabled : False
+2025-01-21T20:31:17.4146916Z AuxiliaryMode                      : None
+2025-01-21T20:31:17.4147558Z AuxiliarySku                       : None
+2025-01-21T20:31:17.4148091Z VirtualMachineText                 : null
+2025-01-21T20:31:17.4148611Z IpConfigurationsText               : [
+2025-01-21T20:31:17.4149039Z                                        {
+2025-01-21T20:31:17.4149451Z                                          "Name": "IPconfig",
+2025-01-21T20:31:17.4149892Z                                          "Etag": "W/\"dfa255f7-2749-4230-80de-9
+2025-01-21T20:31:17.4150333Z                                      48c1d32bfe7\"",
+2025-01-21T20:31:17.4150750Z                                          "Id": "/subscriptions/8b77f191-3d4a-49
+2025-01-21T20:31:17.4151239Z                                      8e-8bb1-9e1fbb927ea7/resourceGroups/GitHub
+2025-01-21T20:31:17.4151745Z                                      Action24/providers/Microsoft.Network/netwo
+2025-01-21T20:31:17.4152264Z                                      rkInterfaces/TieredSQL1NI/ipConfigurations
+2025-01-21T20:31:17.4152938Z                                      /IPconfig",
+2025-01-21T20:31:17.4153345Z                                          "PrivateIpAddress": "192.168.0.4",
+2025-01-21T20:31:17.4153796Z                                          "PrivateIpAllocationMethod": "Static",
+2025-01-21T20:31:17.4154235Z                                          "Subnet": {
+2025-01-21T20:31:17.4154627Z                                            "Id": "/subscriptions/8b77f191-3d4a-
+2025-01-21T20:31:17.4155098Z                                      498e-8bb1-9e1fbb927ea7/resourceGroups/GitH
+2025-01-21T20:31:17.4155569Z                                      ubAction24/providers/Microsoft.Network/vir
+2025-01-21T20:31:17.4156330Z                                      tualNetworks/TieredVN/subnets/DataTier",
+2025-01-21T20:31:17.4156819Z                                            "IpamPoolPrefixAllocations": [],
+2025-01-21T20:31:17.4157285Z                                            "IpAllocations": []
+2025-01-21T20:31:17.4157750Z                                          },
+2025-01-21T20:31:17.4158148Z                                          "ProvisioningState": "Succeeded",
+2025-01-21T20:31:17.4158621Z                                          "PrivateIpAddressVersion": "IPv4",
+2025-01-21T20:31:17.4158927Z                                          "LoadBalancerBackendAddressPools": [],
+2025-01-21T20:31:17.4159224Z                                          "LoadBalancerInboundNatRules": [],
+2025-01-21T20:31:17.4159493Z                                          "Primary": true,
+2025-01-21T20:31:17.4159734Z                                          
+2025-01-21T20:31:17.4160003Z                                      "ApplicationGatewayBackendAddressPools": 
+2025-01-21T20:31:17.4160276Z                                      [],
+2025-01-21T20:31:17.4160514Z                                          "ApplicationSecurityGroups": [],
+2025-01-21T20:31:17.4160794Z                                          "VirtualNetworkTaps": []
+2025-01-21T20:31:17.4161034Z                                        }
+2025-01-21T20:31:17.4161244Z                                      ]
+2025-01-21T20:31:17.4161581Z TapConfigurationsText              : []
+2025-01-21T20:31:17.4161895Z DnsSettingsText                    : {
+2025-01-21T20:31:17.4162152Z                                        "DnsServers": [],
+2025-01-21T20:31:17.4162409Z                                        "AppliedDnsServers": [],
+2025-01-21T20:31:17.4162975Z                                        "InternalDomainNameSuffix": "xls3hrqogqe
+2025-01-21T20:31:17.4163292Z                                      evlsblwqnewstra.ex.internal.cloudapp.net"
+2025-01-21T20:31:17.4163565Z                                      }
+2025-01-21T20:31:17.4163866Z NetworkSecurityGroupText           : null
+2025-01-21T20:31:17.4164186Z PrivateEndpointText                : null
+2025-01-21T20:31:17.4164495Z ExtendedLocationText               : null
+2025-01-21T20:31:17.4165037Z ResourceGroupName                  : GitHubAction24
+2025-01-21T20:31:17.4165413Z Location                           : northcentralus
+2025-01-21T20:31:17.4165810Z ResourceGuid                       : 502a490d-4466-4312-b790-3301187026c8
+2025-01-21T20:31:17.4166217Z Type                               : Microsoft.Network/networkInterfaces
+2025-01-21T20:31:17.4166549Z Tag                                : 
+2025-01-21T20:31:17.4166822Z TagsTable                          : 
+2025-01-21T20:31:17.4167127Z Name                               : TieredSQL1NI
+2025-01-21T20:31:17.4167495Z Etag                               : W/"dfa255f7-2749-4230-80de-948c1d32bfe7"
+2025-01-21T20:31:17.4167891Z Id                                 : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1
+2025-01-21T20:31:17.4168202Z                                      fbb927ea7/resourceGroups/GitHubAction24/pr
+2025-01-21T20:31:17.4168505Z                                      oviders/Microsoft.Network/networkInterface
+2025-01-21T20:31:17.4168771Z                                      s/TieredSQL1NI
+2025-01-21T20:31:17.4168929Z 
+2025-01-21T20:31:17.7718109Z 
+2025-01-21T20:31:17.7719288Z ResourceGroupName        : 
+2025-01-21T20:31:17.7719891Z Id                       : 
+2025-01-21T20:31:17.7723289Z VmId                     : 
+2025-01-21T20:31:17.7724893Z Name                     : TieredSQL1VM
+2025-01-21T20:31:17.7725496Z Type                     : 
+2025-01-21T20:31:17.7725988Z Location                 : 
+2025-01-21T20:31:17.7726492Z ExtendedLocation         : 
+2025-01-21T20:31:17.7727336Z LicenseType              : 
+2025-01-21T20:31:17.7727849Z Tags                     : 
+2025-01-21T20:31:17.7728696Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:31:17.7729443Z                            e
+2025-01-21T20:31:17.7730217Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:31:17.7730939Z                            sProfile
+2025-01-21T20:31:17.7731412Z Extensions               : 
+2025-01-21T20:31:17.7732216Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:31:17.7736775Z                            ofile
+2025-01-21T20:31:17.7737290Z InstanceView             : 
+2025-01-21T20:31:17.7738102Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:31:17.7738773Z                            file
+2025-01-21T20:31:17.7739589Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:31:17.7740266Z                            ofile
+2025-01-21T20:31:17.7740702Z OsName                   : 
+2025-01-21T20:31:17.7741179Z OsVersion                : 
+2025-01-21T20:31:17.7741682Z HyperVGeneration         : 
+2025-01-21T20:31:17.7742443Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:31:17.7743368Z BillingProfile           : 
+2025-01-21T20:31:17.7743861Z Plan                     : 
+2025-01-21T20:31:17.7744369Z ProvisioningState        : 
+2025-01-21T20:31:17.7745169Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:31:17.7745846Z                            file
+2025-01-21T20:31:17.7746354Z DisplayHint              : Compact
+2025-01-21T20:31:17.7747148Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:31:17.7747837Z                            hineIdentity
+2025-01-21T20:31:17.7748338Z Zones                    : 
+2025-01-21T20:31:17.7748860Z FullyQualifiedDomainName : 
+2025-01-21T20:31:17.7752475Z AdditionalCapabilities   : 
+2025-01-21T20:31:17.7753201Z ProximityPlacementGroup  : 
+2025-01-21T20:31:17.7753695Z Host                     : 
+2025-01-21T20:31:17.7754177Z VirtualMachineScaleSet   : 
+2025-01-21T20:31:17.7754663Z EvictionPolicy           : 
+2025-01-21T20:31:17.7755124Z Priority                 : 
+2025-01-21T20:31:17.7755596Z HostGroup                : 
+2025-01-21T20:31:17.7756056Z CapacityReservation      : 
+2025-01-21T20:31:17.7756549Z UserData                 : 
+2025-01-21T20:31:17.7757034Z ApplicationProfile       : 
+2025-01-21T20:31:17.7757527Z PlatformFaultDomain      : 
+2025-01-21T20:31:17.7758033Z TimeCreated              : 
+2025-01-21T20:31:17.7758524Z Etag                     : 
+2025-01-21T20:31:17.7759014Z RequestId                : 
+2025-01-21T20:31:17.7759512Z StatusCode               : 0
+2025-01-21T20:31:17.7759795Z 
+2025-01-21T20:31:17.7759814Z 
+2025-01-21T20:31:17.7760056Z ResourceGroupName        : 
+2025-01-21T20:31:17.7760532Z Id                       : 
+2025-01-21T20:31:17.7761002Z VmId                     : 
+2025-01-21T20:31:17.7761520Z Name                     : TieredSQL1VM
+2025-01-21T20:31:17.7762017Z Type                     : 
+2025-01-21T20:31:17.7762495Z Location                 : 
+2025-01-21T20:31:17.7763189Z ExtendedLocation         : 
+2025-01-21T20:31:17.7763911Z LicenseType              : 
+2025-01-21T20:31:17.7765151Z Tags                     : 
+2025-01-21T20:31:17.7766427Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:31:17.7767454Z                            e
+2025-01-21T20:31:17.7768299Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:31:17.7769011Z                            sProfile
+2025-01-21T20:31:17.7769507Z Extensions               : 
+2025-01-21T20:31:17.7770304Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:31:17.7770992Z                            ofile
+2025-01-21T20:31:17.7771443Z InstanceView             : 
+2025-01-21T20:31:17.7772223Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:31:17.7773070Z                            file
+2025-01-21T20:31:17.7773802Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:31:17.7774473Z                            ofile
+2025-01-21T20:31:17.7774923Z OsName                   : 
+2025-01-21T20:31:17.7775409Z OsVersion                : 
+2025-01-21T20:31:17.7775889Z HyperVGeneration         : 
+2025-01-21T20:31:17.7776642Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:31:17.7777350Z BillingProfile           : 
+2025-01-21T20:31:17.7777805Z Plan                     : 
+2025-01-21T20:31:17.7778272Z ProvisioningState        : 
+2025-01-21T20:31:17.7779051Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:31:17.7779718Z                            file
+2025-01-21T20:31:17.7780180Z DisplayHint              : Compact
+2025-01-21T20:31:17.7780951Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:31:17.7781591Z                            hineIdentity
+2025-01-21T20:31:17.7782061Z Zones                    : 
+2025-01-21T20:31:17.7782535Z FullyQualifiedDomainName : 
+2025-01-21T20:31:17.7783245Z AdditionalCapabilities   : 
+2025-01-21T20:31:17.7783763Z ProximityPlacementGroup  : 
+2025-01-21T20:31:17.7784293Z Host                     : 
+2025-01-21T20:31:17.7784754Z VirtualMachineScaleSet   : 
+2025-01-21T20:31:17.7785485Z EvictionPolicy           : 
+2025-01-21T20:31:17.7785969Z Priority                 : 
+2025-01-21T20:31:17.7786438Z HostGroup                : 
+2025-01-21T20:31:17.7786929Z CapacityReservation      : 
+2025-01-21T20:31:17.7787400Z UserData                 : 
+2025-01-21T20:31:17.7787868Z ApplicationProfile       : 
+2025-01-21T20:31:17.7788557Z PlatformFaultDomain      : 
+2025-01-21T20:31:17.7789357Z TimeCreated              : 
+2025-01-21T20:31:17.7790074Z Etag                     : 
+2025-01-21T20:31:17.7790845Z RequestId                : 
+2025-01-21T20:31:17.7791523Z StatusCode               : 0
+2025-01-21T20:31:17.7791966Z 
+2025-01-21T20:31:17.7791984Z 
+2025-01-21T20:31:17.7792302Z ResourceGroupName        : 
+2025-01-21T20:31:17.7793338Z Id                       : 
+2025-01-21T20:31:17.7794038Z VmId                     : 
+2025-01-21T20:31:17.7794685Z Name                     : TieredSQL1VM
+2025-01-21T20:31:17.7795443Z Type                     : 
+2025-01-21T20:31:17.7796149Z Location                 : 
+2025-01-21T20:31:17.7796806Z ExtendedLocation         : 
+2025-01-21T20:31:17.7875888Z LicenseType              : 
+2025-01-21T20:31:17.7876581Z Tags                     : 
+2025-01-21T20:31:17.7877507Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:31:17.7878285Z                            e
+2025-01-21T20:31:17.7879107Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:31:17.7879797Z                            sProfile
+2025-01-21T20:31:17.7880584Z Extensions               : 
+2025-01-21T20:31:17.7881423Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:31:17.7882103Z                            ofile
+2025-01-21T20:31:17.7882598Z InstanceView             : 
+2025-01-21T20:31:17.7883640Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:31:17.7884344Z                            file
+2025-01-21T20:31:17.7885142Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:31:17.7885857Z                            ofile
+2025-01-21T20:31:17.7886336Z OsName                   : 
+2025-01-21T20:31:17.7886829Z OsVersion                : 
+2025-01-21T20:31:17.7887336Z HyperVGeneration         : 
+2025-01-21T20:31:17.7888104Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:31:17.7888878Z BillingProfile           : 
+2025-01-21T20:31:17.7889387Z Plan                     : 
+2025-01-21T20:31:17.7889869Z ProvisioningState        : 
+2025-01-21T20:31:17.7890680Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:31:17.7891388Z                            file
+2025-01-21T20:31:17.7891882Z DisplayHint              : Compact
+2025-01-21T20:31:17.7892887Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:31:17.7893535Z                            hineIdentity
+2025-01-21T20:31:17.7894026Z Zones                    : 
+2025-01-21T20:31:17.7894535Z FullyQualifiedDomainName : 
+2025-01-21T20:31:17.7895070Z AdditionalCapabilities   : 
+2025-01-21T20:31:17.7895593Z ProximityPlacementGroup  : 
+2025-01-21T20:31:17.7896092Z Host                     : 
+2025-01-21T20:31:17.7897208Z VirtualMachineScaleSet   : 
+2025-01-21T20:31:17.7897756Z EvictionPolicy           : 
+2025-01-21T20:31:17.7898245Z Priority                 : 
+2025-01-21T20:31:17.7898718Z HostGroup                : 
+2025-01-21T20:31:17.7899220Z CapacityReservation      : 
+2025-01-21T20:31:17.7899976Z UserData                 : 
+2025-01-21T20:31:17.7900458Z ApplicationProfile       : 
+2025-01-21T20:31:17.7900954Z PlatformFaultDomain      : 
+2025-01-21T20:31:17.7901441Z TimeCreated              : 
+2025-01-21T20:31:17.7901910Z Etag                     : 
+2025-01-21T20:31:17.7902375Z RequestId                : 
+2025-01-21T20:31:17.7903256Z StatusCode               : 0
+2025-01-21T20:31:17.7903559Z 
+2025-01-21T20:31:17.7904034Z VERBOSE: Performing the operation "New" on target "TieredSQL1VM".
+2025-01-21T20:33:22.0376889Z 
+2025-01-21T20:33:22.0378049Z RequestId           : 
+2025-01-21T20:33:22.0378948Z IsSuccessStatusCode : True
+2025-01-21T20:33:22.0381522Z StatusCode          : OK
+2025-01-21T20:33:22.0382029Z ReasonPhrase        : 
+2025-01-21T20:33:22.0382300Z 
+2025-01-21T20:33:22.8848108Z VERBOSE: Performing the operation "Creating Resource" on target "TieredSQL2NI".
+2025-01-21T20:33:24.9333578Z 
+2025-01-21T20:33:24.9334614Z VirtualMachine                     : 
+2025-01-21T20:33:24.9335522Z ExtendedLocation                   : 
+2025-01-21T20:33:24.9336084Z IpConfigurations                   : {IPconfig}
+2025-01-21T20:33:24.9336485Z TapConfigurations                  : {}
+2025-01-21T20:33:24.9337182Z DnsSettings                        : Microsoft.Azure.Commands.Network.Models.PS
+2025-01-21T20:33:24.9337800Z                                      NetworkInterfaceDnsSettings
+2025-01-21T20:33:24.9338394Z MacAddress                         : 
+2025-01-21T20:33:24.9338935Z Primary                            : 
+2025-01-21T20:33:24.9339941Z EnableAcceleratedNetworking        : False
+2025-01-21T20:33:24.9341779Z EnableIPForwarding                 : False
+2025-01-21T20:33:24.9342418Z DisableTcpStateTracking            : False
+2025-01-21T20:33:24.9343198Z HostedWorkloads                    : {}
+2025-01-21T20:33:24.9343727Z NetworkSecurityGroup               : 
+2025-01-21T20:33:24.9344047Z PrivateEndpoint                    : 
+2025-01-21T20:33:24.9344389Z ProvisioningState                  : Succeeded
+2025-01-21T20:33:24.9344747Z VnetEncryptionSupported            : False
+2025-01-21T20:33:24.9345090Z DefaultOutboundConnectivityEnabled : False
+2025-01-21T20:33:24.9345433Z AuxiliaryMode                      : None
+2025-01-21T20:33:24.9345743Z AuxiliarySku                       : None
+2025-01-21T20:33:24.9346046Z VirtualMachineText                 : null
+2025-01-21T20:33:24.9346377Z IpConfigurationsText               : [
+2025-01-21T20:33:24.9346629Z                                        {
+2025-01-21T20:33:24.9346873Z                                          "Name": "IPconfig",
+2025-01-21T20:33:24.9347145Z                                          "Etag": "W/\"05f8b53f-08b2-40cd-8d66-3
+2025-01-21T20:33:24.9347405Z                                      2449d790163\"",
+2025-01-21T20:33:24.9347662Z                                          "Id": "/subscriptions/8b77f191-3d4a-49
+2025-01-21T20:33:24.9347952Z                                      8e-8bb1-9e1fbb927ea7/resourceGroups/GitHub
+2025-01-21T20:33:24.9348249Z                                      Action24/providers/Microsoft.Network/netwo
+2025-01-21T20:33:24.9348540Z                                      rkInterfaces/TieredSQL2NI/ipConfigurations
+2025-01-21T20:33:24.9348817Z                                      /IPconfig",
+2025-01-21T20:33:24.9349072Z                                          "PrivateIpAddress": "192.168.0.5",
+2025-01-21T20:33:24.9349362Z                                          "PrivateIpAllocationMethod": "Static",
+2025-01-21T20:33:24.9349620Z                                          "Subnet": {
+2025-01-21T20:33:24.9349871Z                                            "Id": "/subscriptions/8b77f191-3d4a-
+2025-01-21T20:33:24.9350392Z                                      498e-8bb1-9e1fbb927ea7/resourceGroups/GitH
+2025-01-21T20:33:24.9350679Z                                      ubAction24/providers/Microsoft.Network/vir
+2025-01-21T20:33:24.9350964Z                                      tualNetworks/TieredVN/subnets/DataTier",
+2025-01-21T20:33:24.9351258Z                                            "IpamPoolPrefixAllocations": [],
+2025-01-21T20:33:24.9351534Z                                            "IpAllocations": []
+2025-01-21T20:33:24.9351778Z                                          },
+2025-01-21T20:33:24.9352017Z                                          "ProvisioningState": "Succeeded",
+2025-01-21T20:33:24.9352307Z                                          "PrivateIpAddressVersion": "IPv4",
+2025-01-21T20:33:24.9352594Z                                          "LoadBalancerBackendAddressPools": [],
+2025-01-21T20:33:24.9353141Z                                          "LoadBalancerInboundNatRules": [],
+2025-01-21T20:33:24.9353419Z                                          "Primary": true,
+2025-01-21T20:33:24.9353654Z                                          
+2025-01-21T20:33:24.9353922Z                                      "ApplicationGatewayBackendAddressPools": 
+2025-01-21T20:33:24.9354194Z                                      [],
+2025-01-21T20:33:24.9354434Z                                          "ApplicationSecurityGroups": [],
+2025-01-21T20:33:24.9354716Z                                          "VirtualNetworkTaps": []
+2025-01-21T20:33:24.9354960Z                                        }
+2025-01-21T20:33:24.9355171Z                                      ]
+2025-01-21T20:33:24.9355468Z TapConfigurationsText              : []
+2025-01-21T20:33:24.9355917Z DnsSettingsText                    : {
+2025-01-21T20:33:24.9356179Z                                        "DnsServers": [],
+2025-01-21T20:33:24.9356430Z                                        "AppliedDnsServers": [],
+2025-01-21T20:33:24.9356714Z                                        "InternalDomainNameSuffix": "xls3hrqogqe
+2025-01-21T20:33:24.9357027Z                                      evlsblwqnewstra.ex.internal.cloudapp.net"
+2025-01-21T20:33:24.9357297Z                                      }
+2025-01-21T20:33:24.9357587Z NetworkSecurityGroupText           : null
+2025-01-21T20:33:24.9357912Z PrivateEndpointText                : null
+2025-01-21T20:33:24.9358228Z ExtendedLocationText               : null
+2025-01-21T20:33:24.9358589Z ResourceGroupName                  : GitHubAction24
+2025-01-21T20:33:24.9358955Z Location                           : northcentralus
+2025-01-21T20:33:24.9359361Z ResourceGuid                       : 1d49268d-959c-4b90-bb65-4df018f917d6
+2025-01-21T20:33:24.9359777Z Type                               : Microsoft.Network/networkInterfaces
+2025-01-21T20:33:24.9360110Z Tag                                : 
+2025-01-21T20:33:24.9360391Z TagsTable                          : 
+2025-01-21T20:33:24.9360699Z Name                               : TieredSQL2NI
+2025-01-21T20:33:24.9361073Z Etag                               : W/"05f8b53f-08b2-40cd-8d66-32449d790163"
+2025-01-21T20:33:24.9361473Z Id                                 : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1
+2025-01-21T20:33:24.9361788Z                                      fbb927ea7/resourceGroups/GitHubAction24/pr
+2025-01-21T20:33:24.9362097Z                                      oviders/Microsoft.Network/networkInterface
+2025-01-21T20:33:24.9362366Z                                      s/TieredSQL2NI
+2025-01-21T20:33:24.9362529Z 
+2025-01-21T20:33:25.3100439Z 
+2025-01-21T20:33:25.3101189Z ResourceGroupName        : 
+2025-01-21T20:33:25.3101775Z Id                       : 
+2025-01-21T20:33:25.3102256Z VmId                     : 
+2025-01-21T20:33:25.3103874Z Name                     : TieredSQL2VM
+2025-01-21T20:33:25.3104412Z Type                     : 
+2025-01-21T20:33:25.3104892Z Location                 : 
+2025-01-21T20:33:25.3105382Z ExtendedLocation         : 
+2025-01-21T20:33:25.3105871Z LicenseType              : 
+2025-01-21T20:33:25.3106356Z Tags                     : 
+2025-01-21T20:33:25.3107238Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:33:25.3108002Z                            e
+2025-01-21T20:33:25.3108782Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:33:25.3109505Z                            sProfile
+2025-01-21T20:33:25.3109974Z Extensions               : 
+2025-01-21T20:33:25.3110443Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:33:25.3110818Z                            ofile
+2025-01-21T20:33:25.3111065Z InstanceView             : 
+2025-01-21T20:33:25.3111484Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:33:25.3111845Z                            file
+2025-01-21T20:33:25.3112229Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:33:25.3112581Z                            ofile
+2025-01-21T20:33:25.3113119Z OsName                   : 
+2025-01-21T20:33:25.3113372Z OsVersion                : 
+2025-01-21T20:33:25.3113618Z HyperVGeneration         : 
+2025-01-21T20:33:25.3114009Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:33:25.3114575Z BillingProfile           : 
+2025-01-21T20:33:25.3114831Z Plan                     : 
+2025-01-21T20:33:25.3115074Z ProvisioningState        : 
+2025-01-21T20:33:25.3115481Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:33:25.3115835Z                            file
+2025-01-21T20:33:25.3116084Z DisplayHint              : Compact
+2025-01-21T20:33:25.3116482Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:33:25.3116820Z                            hineIdentity
+2025-01-21T20:33:25.3117068Z Zones                    : 
+2025-01-21T20:33:25.3117323Z FullyQualifiedDomainName : 
+2025-01-21T20:33:25.3117585Z AdditionalCapabilities   : 
+2025-01-21T20:33:25.3117849Z ProximityPlacementGroup  : 
+2025-01-21T20:33:25.3118101Z Host                     : 
+2025-01-21T20:33:25.3118345Z VirtualMachineScaleSet   : 
+2025-01-21T20:33:25.3118606Z EvictionPolicy           : 
+2025-01-21T20:33:25.3118861Z Priority                 : 
+2025-01-21T20:33:25.3119103Z HostGroup                : 
+2025-01-21T20:33:25.3119347Z CapacityReservation      : 
+2025-01-21T20:33:25.3119601Z UserData                 : 
+2025-01-21T20:33:25.3119849Z ApplicationProfile       : 
+2025-01-21T20:33:25.3120100Z PlatformFaultDomain      : 
+2025-01-21T20:33:25.3120350Z TimeCreated              : 
+2025-01-21T20:33:25.3120591Z Etag                     : 
+2025-01-21T20:33:25.3120827Z RequestId                : 
+2025-01-21T20:33:25.3121066Z StatusCode               : 0
+2025-01-21T20:33:25.3121218Z 
+2025-01-21T20:33:25.3123695Z 
+2025-01-21T20:33:25.3124419Z ResourceGroupName        : 
+2025-01-21T20:33:25.3125875Z Id                       : 
+2025-01-21T20:33:25.3126339Z VmId                     : 
+2025-01-21T20:33:25.3127110Z Name                     : TieredSQL2VM
+2025-01-21T20:33:25.3127757Z Type                     : 
+2025-01-21T20:33:25.3128194Z Location                 : 
+2025-01-21T20:33:25.3128633Z ExtendedLocation         : 
+2025-01-21T20:33:25.3129332Z LicenseType              : 
+2025-01-21T20:33:25.3129760Z Tags                     : 
+2025-01-21T20:33:25.3130545Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:33:25.3131235Z                            e
+2025-01-21T20:33:25.3131949Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:33:25.3132596Z                            sProfile
+2025-01-21T20:33:25.3133196Z Extensions               : 
+2025-01-21T20:33:25.3133916Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:33:25.3134531Z                            ofile
+2025-01-21T20:33:25.3134953Z InstanceView             : 
+2025-01-21T20:33:25.3135672Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:33:25.3136284Z                            file
+2025-01-21T20:33:25.3136974Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:33:25.3137592Z                            ofile
+2025-01-21T20:33:25.3137988Z OsName                   : 
+2025-01-21T20:33:25.3138411Z OsVersion                : 
+2025-01-21T20:33:25.3138883Z HyperVGeneration         : 
+2025-01-21T20:33:25.3139569Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:33:25.3140239Z BillingProfile           : 
+2025-01-21T20:33:25.3140672Z Plan                     : 
+2025-01-21T20:33:25.3141107Z ProvisioningState        : 
+2025-01-21T20:33:25.3150278Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:33:25.3151004Z                            file
+2025-01-21T20:33:25.3151442Z DisplayHint              : Compact
+2025-01-21T20:33:25.3152092Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:33:25.3152869Z                            hineIdentity
+2025-01-21T20:33:25.3153343Z Zones                    : 
+2025-01-21T20:33:25.3153855Z FullyQualifiedDomainName : 
+2025-01-21T20:33:25.3154331Z AdditionalCapabilities   : 
+2025-01-21T20:33:25.3154797Z ProximityPlacementGroup  : 
+2025-01-21T20:33:25.3155248Z Host                     : 
+2025-01-21T20:33:25.3155669Z VirtualMachineScaleSet   : 
+2025-01-21T20:33:25.3156135Z EvictionPolicy           : 
+2025-01-21T20:33:25.3156571Z Priority                 : 
+2025-01-21T20:33:25.3157007Z HostGroup                : 
+2025-01-21T20:33:25.3157469Z CapacityReservation      : 
+2025-01-21T20:33:25.3157920Z UserData                 : 
+2025-01-21T20:33:25.3158355Z ApplicationProfile       : 
+2025-01-21T20:33:25.3158819Z PlatformFaultDomain      : 
+2025-01-21T20:33:25.3159259Z TimeCreated              : 
+2025-01-21T20:33:25.3159663Z Etag                     : 
+2025-01-21T20:33:25.3160073Z RequestId                : 
+2025-01-21T20:33:25.3160479Z StatusCode               : 0
+2025-01-21T20:33:25.3160634Z 
+2025-01-21T20:33:25.3166554Z 
+2025-01-21T20:33:25.3166869Z ResourceGroupName        : 
+2025-01-21T20:33:25.3167491Z Id                       : 
+2025-01-21T20:33:25.3167966Z VmId                     : 
+2025-01-21T20:33:25.3168455Z Name                     : TieredSQL2VM
+2025-01-21T20:33:25.3168953Z Type                     : 
+2025-01-21T20:33:25.3169384Z Location                 : 
+2025-01-21T20:33:25.3169842Z ExtendedLocation         : 
+2025-01-21T20:33:25.3170301Z LicenseType              : 
+2025-01-21T20:33:25.3170744Z Tags                     : 
+2025-01-21T20:33:25.3171545Z AvailabilitySetReference : Microsoft.Azure.Management.Compute.Models.SubResourc
+2025-01-21T20:33:25.3172524Z                            e
+2025-01-21T20:33:25.3173610Z DiagnosticsProfile       : Microsoft.Azure.Management.Compute.Models.Diagnostic
+2025-01-21T20:33:25.3175899Z                            sProfile
+2025-01-21T20:33:25.3177947Z Extensions               : 
+2025-01-21T20:33:25.3178733Z HardwareProfile          : Microsoft.Azure.Management.Compute.Models.HardwarePr
+2025-01-21T20:33:25.3179411Z                            ofile
+2025-01-21T20:33:25.3179892Z InstanceView             : 
+2025-01-21T20:33:25.3180878Z NetworkProfile           : Microsoft.Azure.Management.Compute.Models.NetworkPro
+2025-01-21T20:33:25.3181529Z                            file
+2025-01-21T20:33:25.3182257Z SecurityProfile          : Microsoft.Azure.Management.Compute.Models.SecurityPr
+2025-01-21T20:33:25.3183064Z                            ofile
+2025-01-21T20:33:25.3186802Z OsName                   : 
+2025-01-21T20:33:25.3187280Z OsVersion                : 
+2025-01-21T20:33:25.3187724Z HyperVGeneration         : 
+2025-01-21T20:33:25.3188410Z OSProfile                : Microsoft.Azure.Management.Compute.Models.OSProfile
+2025-01-21T20:33:25.3190374Z BillingProfile           : 
+2025-01-21T20:33:25.3190863Z Plan                     : 
+2025-01-21T20:33:25.3191306Z ProvisioningState        : 
+2025-01-21T20:33:25.3192054Z StorageProfile           : Microsoft.Azure.Management.Compute.Models.StoragePro
+2025-01-21T20:33:25.3193970Z                            file
+2025-01-21T20:33:25.3204132Z DisplayHint              : Compact
+2025-01-21T20:33:25.3205278Z Identity                 : Microsoft.Azure.Management.Compute.Models.VirtualMac
+2025-01-21T20:33:25.3205901Z                            hineIdentity
+2025-01-21T20:33:25.3206354Z Zones                    : 
+2025-01-21T20:33:25.3206820Z FullyQualifiedDomainName : 
+2025-01-21T20:33:25.3207314Z AdditionalCapabilities   : 
+2025-01-21T20:33:25.3207798Z ProximityPlacementGroup  : 
+2025-01-21T20:33:25.3208201Z Host                     : 
+2025-01-21T20:33:25.3208460Z VirtualMachineScaleSet   : 
+2025-01-21T20:33:25.3208716Z EvictionPolicy           : 
+2025-01-21T20:33:25.3208957Z Priority                 : 
+2025-01-21T20:33:25.3209198Z HostGroup                : 
+2025-01-21T20:33:25.3209445Z CapacityReservation      : 
+2025-01-21T20:33:25.3209687Z UserData                 : 
+2025-01-21T20:33:25.3209936Z ApplicationProfile       : 
+2025-01-21T20:33:25.3210193Z PlatformFaultDomain      : 
+2025-01-21T20:33:25.3210450Z TimeCreated              : 
+2025-01-21T20:33:25.3210688Z Etag                     : 
+2025-01-21T20:33:25.3210928Z RequestId                : 
+2025-01-21T20:33:25.3211177Z StatusCode               : 0
+2025-01-21T20:33:25.3211339Z 
+2025-01-21T20:33:25.3216411Z VERBOSE: Performing the operation "New" on target "TieredSQL2VM".
+2025-01-21T20:35:31.0780557Z 
+2025-01-21T20:35:31.0781590Z RequestId           : 
+2025-01-21T20:35:31.0782159Z IsSuccessStatusCode : True
+2025-01-21T20:35:31.0782870Z StatusCode          : OK
+2025-01-21T20:35:31.0783389Z ReasonPhrase        : 
+2025-01-21T20:35:31.0783660Z 
+2025-01-21T20:35:31.0800230Z 
+2025-01-21T20:35:31.1617993Z Post job cleanup.
+2025-01-21T20:35:31.1621869Z ##[command]/usr/bin/docker exec  740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500 sh -c "cat /etc/*release | grep ^ID"
+2025-01-21T20:35:31.3629539Z Stop and remove container: 6411d1096743438d8c1c1a6bd52fd0dc_mcrmicrosoftcomazurepowershelllatest_176c69
+2025-01-21T20:35:31.3634631Z ##[command]/usr/bin/docker rm --force 740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500
+2025-01-21T20:35:31.4621010Z 740b1ab95e8c56429f310f83039365be3533b2fc9ca7d26e1727cca661423500
+2025-01-21T20:35:31.4649011Z Remove container network: github_network_5f26895ea74b47109c9fc31c8a04d733
+2025-01-21T20:35:31.4653878Z ##[command]/usr/bin/docker network rm github_network_5f26895ea74b47109c9fc31c8a04d733
+2025-01-21T20:35:31.5940535Z github_network_5f26895ea74b47109c9fc31c8a04d733
+2025-01-21T20:35:31.6003551Z Cleaning up orphan processes

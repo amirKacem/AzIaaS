@@ -1,0 +1,233 @@
+2025-01-21T20:15:10.4470805Z Current runner version: '2.321.0'
+2025-01-21T20:15:10.4497336Z ##[group]Operating System
+2025-01-21T20:15:10.4498308Z Ubuntu
+2025-01-21T20:15:10.4498844Z 24.04.1
+2025-01-21T20:15:10.4499446Z LTS
+2025-01-21T20:15:10.4499955Z ##[endgroup]
+2025-01-21T20:15:10.4500510Z ##[group]Runner Image
+2025-01-21T20:15:10.4501120Z Image: ubuntu-24.04
+2025-01-21T20:15:10.4501644Z Version: 20250105.1.0
+2025-01-21T20:15:10.4502661Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250105.1/images/ubuntu/Ubuntu2404-Readme.md
+2025-01-21T20:15:10.4504127Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250105.1
+2025-01-21T20:15:10.4505086Z ##[endgroup]
+2025-01-21T20:15:10.4505606Z ##[group]Runner Image Provisioner
+2025-01-21T20:15:10.4506225Z 2.0.417.1
+2025-01-21T20:15:10.4506715Z ##[endgroup]
+2025-01-21T20:15:10.4509161Z ##[group]GITHUB_TOKEN Permissions
+2025-01-21T20:15:10.4511059Z Actions: write
+2025-01-21T20:15:10.4511911Z Attestations: write
+2025-01-21T20:15:10.4512533Z Checks: write
+2025-01-21T20:15:10.4513017Z Contents: write
+2025-01-21T20:15:10.4513633Z Deployments: write
+2025-01-21T20:15:10.4514213Z Discussions: write
+2025-01-21T20:15:10.4514722Z Issues: write
+2025-01-21T20:15:10.4515320Z Metadata: read
+2025-01-21T20:15:10.4515874Z Packages: write
+2025-01-21T20:15:10.4516324Z Pages: write
+2025-01-21T20:15:10.4516899Z PullRequests: write
+2025-01-21T20:15:10.4517576Z RepositoryProjects: write
+2025-01-21T20:15:10.4518206Z SecurityEvents: write
+2025-01-21T20:15:10.4518748Z Statuses: write
+2025-01-21T20:15:10.4519260Z ##[endgroup]
+2025-01-21T20:15:10.4521339Z Secret source: Actions
+2025-01-21T20:15:10.4522043Z Prepare workflow directory
+2025-01-21T20:15:10.4889997Z Prepare all required actions
+2025-01-21T20:15:10.4925545Z Getting action download info
+2025-01-21T20:15:10.6730229Z Download action repository 'actions/checkout@v4' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+2025-01-21T20:15:10.8392596Z Complete job name: GovernanceResourcesJob
+2025-01-21T20:15:10.8888005Z ##[group]Checking docker version
+2025-01-21T20:15:10.8900929Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2025-01-21T20:15:11.0341818Z '1.45'
+2025-01-21T20:15:11.0352697Z Docker daemon API version: '1.45'
+2025-01-21T20:15:11.0353463Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2025-01-21T20:15:11.0501504Z '1.45'
+2025-01-21T20:15:11.0518627Z Docker client API version: '1.45'
+2025-01-21T20:15:11.0523194Z ##[endgroup]
+2025-01-21T20:15:11.0526510Z ##[group]Clean up resources from previous jobs
+2025-01-21T20:15:11.0531740Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=d37b2f"
+2025-01-21T20:15:11.0691845Z ##[command]/usr/bin/docker network prune --force --filter "label=d37b2f"
+2025-01-21T20:15:11.0816546Z ##[endgroup]
+2025-01-21T20:15:11.0817018Z ##[group]Create local container network
+2025-01-21T20:15:11.0826558Z ##[command]/usr/bin/docker network create --label d37b2f github_network_a8c14d91aad741f99cdd3f0d4124adc3
+2025-01-21T20:15:11.1578189Z 3e7398ac6d4f5e56e17c0227e9088a026f5fde5c7ace6fb2392990ab3058247e
+2025-01-21T20:15:11.1595373Z ##[endgroup]
+2025-01-21T20:15:11.1618655Z ##[group]Starting job container
+2025-01-21T20:15:11.1638627Z ##[command]/usr/bin/docker pull mcr.microsoft.com/azure-powershell:latest
+2025-01-21T20:15:11.4242015Z latest: Pulling from azure-powershell
+2025-01-21T20:15:11.4255863Z 86e5016c2693: Pulling fs layer
+2025-01-21T20:15:11.4256942Z 789200447129: Pulling fs layer
+2025-01-21T20:15:11.4258315Z 79df21fd5a2e: Pulling fs layer
+2025-01-21T20:15:11.4259021Z 8a5727a1663d: Pulling fs layer
+2025-01-21T20:15:11.4259680Z 4f4fb700ef54: Pulling fs layer
+2025-01-21T20:15:11.4260220Z 5b2a8b8d477d: Pulling fs layer
+2025-01-21T20:15:11.4260753Z 47d9d8696f7e: Pulling fs layer
+2025-01-21T20:15:11.4261257Z 8a5727a1663d: Waiting
+2025-01-21T20:15:11.4261710Z 4f4fb700ef54: Waiting
+2025-01-21T20:15:11.4262165Z 5b2a8b8d477d: Waiting
+2025-01-21T20:15:11.4262620Z 47d9d8696f7e: Waiting
+2025-01-21T20:15:11.7589165Z 86e5016c2693: Verifying Checksum
+2025-01-21T20:15:11.7590618Z 86e5016c2693: Download complete
+2025-01-21T20:15:12.0250130Z 8a5727a1663d: Verifying Checksum
+2025-01-21T20:15:12.1367634Z 8a5727a1663d: Download complete
+2025-01-21T20:15:12.1369581Z 4f4fb700ef54: Verifying Checksum
+2025-01-21T20:15:12.1370573Z 4f4fb700ef54: Download complete
+2025-01-21T20:15:12.7421307Z 86e5016c2693: Pull complete
+2025-01-21T20:15:12.8467678Z 5b2a8b8d477d: Verifying Checksum
+2025-01-21T20:15:12.9866156Z 5b2a8b8d477d: Download complete
+2025-01-21T20:15:12.9866725Z 47d9d8696f7e: Download complete
+2025-01-21T20:15:15.6472370Z 789200447129: Verifying Checksum
+2025-01-21T20:15:15.9271442Z 789200447129: Download complete
+2025-01-21T20:15:15.9272476Z 79df21fd5a2e: Download complete
+2025-01-21T20:15:17.2634109Z 789200447129: Pull complete
+2025-01-21T20:15:18.2433106Z 79df21fd5a2e: Pull complete
+2025-01-21T20:15:18.2611663Z 8a5727a1663d: Pull complete
+2025-01-21T20:15:18.2740505Z 4f4fb700ef54: Pull complete
+2025-01-21T20:15:21.7684203Z 5b2a8b8d477d: Pull complete
+2025-01-21T20:15:21.7831171Z 47d9d8696f7e: Pull complete
+2025-01-21T20:15:21.7881344Z Digest: sha256:13b5d958192256c260963e6e36f88cf017a77a1697035120488c6c5fe9de8f38
+2025-01-21T20:15:21.7893400Z Status: Downloaded newer image for mcr.microsoft.com/azure-powershell:latest
+2025-01-21T20:15:21.7904593Z mcr.microsoft.com/azure-powershell:latest
+2025-01-21T20:15:21.7983095Z ##[command]/usr/bin/docker create --name d306eaedc08f4bf9af47450ffe769d78_mcrmicrosoftcomazurepowershelllatest_750a57 --label d37b2f --workdir /__w/AzIaaS/AzIaaS --network github_network_a8c14d91aad741f99cdd3f0d4124adc3  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/runners/2.321.0/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" mcr.microsoft.com/azure-powershell:latest "-f" "/dev/null"
+2025-01-21T20:15:21.8276317Z 0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3
+2025-01-21T20:15:21.8296368Z ##[command]/usr/bin/docker start 0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3
+2025-01-21T20:15:22.0593578Z 0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3
+2025-01-21T20:15:22.0611776Z ##[command]/usr/bin/docker ps --all --filter id=0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2025-01-21T20:15:22.0737842Z 0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3 Up Less than a second
+2025-01-21T20:15:22.0756438Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3
+2025-01-21T20:15:22.0872894Z GITHUB_ACTIONS=true
+2025-01-21T20:15:22.0873339Z CI=true
+2025-01-21T20:15:22.0873539Z HOME=/github/home
+2025-01-21T20:15:22.0873857Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2025-01-21T20:15:22.0874484Z PS_INSTALL_FOLDER=/opt/microsoft/powershell/7
+2025-01-21T20:15:22.0874928Z DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+2025-01-21T20:15:22.0875392Z LC_ALL=en_US.UTF-8
+2025-01-21T20:15:22.0875584Z LANG=en_US.UTF-8
+2025-01-21T20:15:22.0876231Z PSModuleAnalysisCachePath=/var/cache/microsoft/powershell/PSModuleAnalysisCache/ModuleAnalysisCache
+2025-01-21T20:15:22.0876992Z POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-Ubuntu-20.04
+2025-01-21T20:15:22.0877354Z AZUREPS_HOST_ENVIRONMENT=dockerImage/13.1.0-ubuntu-20.04
+2025-01-21T20:15:22.0892764Z ##[endgroup]
+2025-01-21T20:15:22.0901800Z ##[group]Waiting for all services to be ready
+2025-01-21T20:15:22.0903434Z ##[endgroup]
+2025-01-21T20:15:22.1150464Z ##[group]Run actions/checkout@v4
+2025-01-21T20:15:22.1151021Z with:
+2025-01-21T20:15:22.1151217Z   sparse-checkout-cone-mode: false
+2025-01-21T20:15:22.1151473Z   sparse-checkout: 3TierApp/
+2025-01-21T20:15:22.1151937Z   repository: Ayanmullick/AzIaaS
+2025-01-21T20:15:22.1152342Z   token: ***
+2025-01-21T20:15:22.1152518Z   ssh-strict: true
+2025-01-21T20:15:22.1152700Z   ssh-user: git
+2025-01-21T20:15:22.1152891Z   persist-credentials: true
+2025-01-21T20:15:22.1153102Z   clean: true
+2025-01-21T20:15:22.1153262Z   fetch-depth: 1
+2025-01-21T20:15:22.1153435Z   fetch-tags: false
+2025-01-21T20:15:22.1153619Z   show-progress: true
+2025-01-21T20:15:22.1153794Z   lfs: false
+2025-01-21T20:15:22.1153956Z   submodules: false
+2025-01-21T20:15:22.1154139Z   set-safe-directory: true
+2025-01-21T20:15:22.1154575Z ##[endgroup]
+2025-01-21T20:15:22.1208436Z ##[command]/usr/bin/docker exec  0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3 sh -c "cat /etc/*release | grep ^ID"
+2025-01-21T20:15:22.4228792Z Syncing repository: Ayanmullick/AzIaaS
+2025-01-21T20:15:22.4229999Z ##[group]Getting Git version info
+2025-01-21T20:15:22.4230311Z Working directory is '/__w/AzIaaS/AzIaaS'
+2025-01-21T20:15:22.4230788Z ##[endgroup]
+2025-01-21T20:15:22.4230996Z Deleting the contents of '/__w/AzIaaS/AzIaaS'
+2025-01-21T20:15:22.4231331Z The repository will be downloaded using the GitHub REST API
+2025-01-21T20:15:22.4231753Z To create a local Git repository instead, add Git 2.18 or higher to the PATH
+2025-01-21T20:15:22.4232100Z Downloading the archive
+2025-01-21T20:15:23.1139200Z Writing archive to disk
+2025-01-21T20:15:23.1156534Z Extracting the archive
+2025-01-21T20:15:23.1235018Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /__w/AzIaaS/AzIaaS/cfc471bd-b21d-4f61-9f54-a1747cac9b65 -f /__w/AzIaaS/AzIaaS/cfc471bd-b21d-4f61-9f54-a1747cac9b65.tar.gz
+2025-01-21T20:15:23.1302529Z Resolved version Ayanmullick-AzIaaS-374c23b
+2025-01-21T20:15:23.1610264Z ##[group]Run . ./3TierApp/HelperFunctions.ps1 
+2025-01-21T20:15:23.1610657Z . ./3TierApp/HelperFunctions.ps1 
+2025-01-21T20:15:23.1611607Z Connect-MySubscription 1054d918-a880-46d0-aa19-2dd47c7588d3 8b77f191-3d4a-498e-8bb1-9e1fbb927ea7 11d272b6-4221-44d7-9f18-d1830ca541ea ***
+2025-01-21T20:15:23.1612227Z ./3TierApp/GovResource.ps1
+2025-01-21T20:15:23.1612573Z Write-Output "Using resource group: $($EnvVars.RG_NAME)"           
+2025-01-21T20:15:23.1616646Z shell: pwsh -command ". '{0}'"
+2025-01-21T20:15:23.1616902Z ##[endgroup]
+2025-01-21T20:15:24.0842649Z WARNING: The provided service principal secret or certifcate password will be included in the 'keystore.cache' file found in the user profile ( /github/home/.Azure ). Please ensure that this directory has appropriate protections.
+2025-01-21T20:15:24.0844720Z VERBOSE: Performing the operation "log in" on target "ServicePrincipal account in environment 'AzureCloud'".
+2025-01-21T20:15:25.0620541Z 
+2025-01-21T20:15:48.1332901Z VERBOSE: Performing the operation "New-AzUserAssignedIdentity_CreateExpanded" on target "Call remote 'UserAssignedIdentitiesCreateOrUpdate' operation".
+2025-01-21T20:15:49.9117143Z VERBOSE: Performing the operation "Creating workspace 'TieredLAW' in resource group 'GitHubAction24'." on target "TieredLAW".
+2025-01-21T20:15:53.3893335Z Subscription name                         Tenant
+2025-01-21T20:15:53.3894276Z -----------------                         ------
+2025-01-21T20:15:53.3894951Z FTE Visual Studio Enterprise Subscription 1054d918-a880-46d0-aa19-2dd47c7588d3
+2025-01-21T20:15:53.3895430Z 
+2025-01-21T20:15:53.3895791Z ResourceGroupName             : GitHubAction24
+2025-01-21T20:15:53.3896538Z Id                            : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1fbb92
+2025-01-21T20:15:53.3898567Z                                 7ea7/resourceGroups/GitHubAction24/providers/Mi
+2025-01-21T20:15:53.3899177Z                                 crosoft.Compute/availabilitySets/WebTier
+2025-01-21T20:15:53.3899926Z Name                          : WebTier
+2025-01-21T20:15:53.3900548Z Type                          : Microsoft.Compute/availabilitySets
+2025-01-21T20:15:53.3901639Z Location                      : northcentralus
+2025-01-21T20:15:53.3902184Z Tags                          : {}
+2025-01-21T20:15:53.3902690Z TagsText                      : {}
+2025-01-21T20:15:53.3903192Z PlatformFaultDomainCount      : 2
+2025-01-21T20:15:53.3903714Z PlatformUpdateDomainCount     : 5
+2025-01-21T20:15:53.3904190Z Statuses                      : {}
+2025-01-21T20:15:53.3904648Z StatusesText                  : []
+2025-01-21T20:15:53.3905144Z VirtualMachinesReferences     : {}
+2025-01-21T20:15:53.3905665Z VirtualMachinesReferencesText : []
+2025-01-21T20:15:53.3906237Z Sku                           : Aligned
+2025-01-21T20:15:53.3906776Z ProximityPlacementGroup       : 
+2025-01-21T20:15:53.3907625Z RequestId                     : d90f1294-508c-4cc7-9898-3c22f54b7546
+2025-01-21T20:15:53.3908252Z StatusCode                    : OK
+2025-01-21T20:15:53.3908560Z 
+2025-01-21T20:15:54.6529903Z 
+2025-01-21T20:15:54.6534467Z ResourceGroupName             : GitHubAction24
+2025-01-21T20:15:54.6535250Z Id                            : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1fbb92
+2025-01-21T20:15:54.6535837Z                                 7ea7/resourceGroups/GitHubAction24/providers/Mi
+2025-01-21T20:15:54.6536382Z                                 crosoft.Compute/availabilitySets/AppTier
+2025-01-21T20:15:54.6536962Z Name                          : AppTier
+2025-01-21T20:15:54.6540102Z Type                          : Microsoft.Compute/availabilitySets
+2025-01-21T20:15:54.6541343Z Location                      : northcentralus
+2025-01-21T20:15:54.6541937Z Tags                          : {}
+2025-01-21T20:15:54.6542396Z TagsText                      : {}
+2025-01-21T20:15:54.6542916Z PlatformFaultDomainCount      : 2
+2025-01-21T20:15:54.6543452Z PlatformUpdateDomainCount     : 5
+2025-01-21T20:15:54.6543945Z Statuses                      : {}
+2025-01-21T20:15:54.6544432Z StatusesText                  : []
+2025-01-21T20:15:54.6545030Z VirtualMachinesReferences     : {}
+2025-01-21T20:15:54.6545605Z VirtualMachinesReferencesText : []
+2025-01-21T20:15:54.6546144Z Sku                           : Aligned
+2025-01-21T20:15:54.6546684Z ProximityPlacementGroup       : 
+2025-01-21T20:15:54.6547334Z RequestId                     : ea3d8fc7-519d-4b0e-8e79-f8e64fd8b239
+2025-01-21T20:15:54.6548198Z StatusCode                    : OK
+2025-01-21T20:15:54.6548498Z 
+2025-01-21T20:15:56.0506444Z 
+2025-01-21T20:15:56.0507243Z ResourceGroupName             : GitHubAction24
+2025-01-21T20:15:56.0508276Z Id                            : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1fbb92
+2025-01-21T20:15:56.0508901Z                                 7ea7/resourceGroups/GitHubAction24/providers/Mi
+2025-01-21T20:15:56.0509499Z                                 crosoft.Compute/availabilitySets/DataTier
+2025-01-21T20:15:56.0510132Z Name                          : DataTier
+2025-01-21T20:15:56.0510803Z Type                          : Microsoft.Compute/availabilitySets
+2025-01-21T20:15:56.0511527Z Location                      : northcentralus
+2025-01-21T20:15:56.0512334Z Tags                          : {}
+2025-01-21T20:15:56.0512903Z TagsText                      : {}
+2025-01-21T20:15:56.0513476Z PlatformFaultDomainCount      : 2
+2025-01-21T20:15:56.0514067Z PlatformUpdateDomainCount     : 5
+2025-01-21T20:15:56.0514656Z Statuses                      : {}
+2025-01-21T20:15:56.0515222Z StatusesText                  : []
+2025-01-21T20:15:56.0515786Z VirtualMachinesReferences     : {}
+2025-01-21T20:15:56.0516371Z VirtualMachinesReferencesText : []
+2025-01-21T20:15:56.0517405Z Sku                           : Aligned
+2025-01-21T20:15:56.0518244Z ProximityPlacementGroup       : 
+2025-01-21T20:15:56.0518894Z RequestId                     : 72c34c55-b252-412e-ab65-ce9a0574f129
+2025-01-21T20:15:56.0519476Z StatusCode                    : OK
+2025-01-21T20:15:56.0519742Z 
+2025-01-21T20:15:56.8448932Z VERBOSE: Performing the operation "Creating Resource" on target "TieredNSG".
+2025-01-21T20:16:01.1019617Z VERBOSE: Performing the operation "Creating Resource" on target "TieredVN".
+2025-01-21T20:16:06.1236599Z Using resource group: 
+2025-01-21T20:16:06.1241419Z 
+2025-01-21T20:16:06.2183669Z Post job cleanup.
+2025-01-21T20:16:06.2188048Z ##[command]/usr/bin/docker exec  0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3 sh -c "cat /etc/*release | grep ^ID"
+2025-01-21T20:16:06.4215221Z Stop and remove container: d306eaedc08f4bf9af47450ffe769d78_mcrmicrosoftcomazurepowershelllatest_750a57
+2025-01-21T20:16:06.4221467Z ##[command]/usr/bin/docker rm --force 0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3
+2025-01-21T20:16:06.5256273Z 0ea939eb4e25504b9af68430e47ab07acfbf9d9e24541b57e1d23c505f12cda3
+2025-01-21T20:16:06.5283899Z Remove container network: github_network_a8c14d91aad741f99cdd3f0d4124adc3
+2025-01-21T20:16:06.5288386Z ##[command]/usr/bin/docker network rm github_network_a8c14d91aad741f99cdd3f0d4124adc3
+2025-01-21T20:16:06.6550895Z github_network_a8c14d91aad741f99cdd3f0d4124adc3
+2025-01-21T20:16:06.6612977Z Evaluate and set job outputs
+2025-01-21T20:16:06.6619549Z Set output 'env_vars'
+2025-01-21T20:16:06.6621865Z Cleaning up orphan processes

@@ -5,6 +5,8 @@ jobs:
   GovernanceResourcesJob:
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/azure-powershell:latest   #Execution in the container is quicker than azure/powershell@v2
+    outputs:
+      env_vars: ${{ steps.GovResources.outputs.Env_Vars }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -12,14 +14,14 @@ jobs:
           sparse-checkout: 3TierApp/                          
             
       - name: Deploy Governance resources
+        id: GovResources
         shell: pwsh
         run: |
             . ./3TierApp/HelperFunctions.ps1 
             Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }}
             ./3TierApp/GovResource.ps1
-            $RG = Get-AzResourceGroup -Name GitHubAction24 -Verbose
-            $rgName = $RG.ResourceGroupName
-            Write-Output "rg_name=$rgName" >> $Env:GITHUB_OUTPUT
+            Write-Output "Using resource group: $($EnvVars.RG_NAME)"           
+            
   DeployVirtualMachines:
     needs: GovernanceResourcesJob
     runs-on: ubuntu-latest
@@ -35,8 +37,8 @@ jobs:
       - name: Deploy Virtual machines
         shell: pwsh
         run: |
+            $EnvVars      = ConvertFrom-Json '${{ needs.GovernanceResourcesJob.outputs.Env_Vars }}'                          #Needs to be in the Workflow. Fails in the script.
+            Write-Output "Using resource group: $($EnvVars.RG_NAME)"
              . ./3TierApp/HelperFunctions.ps1 
              Connect-MySubscription ${{ vars.MULLICKTENANTID }} ${{ vars.FTESUBID }} ${{ vars.PSGHACTIONSCLIENTID }} ${{ secrets.PSGHACTIONSSECRET }} 
-             ./GHActionTest/GetRG.ps1
-             $rgName = "${{ needs.set_resource_group.outputs.rg_name }}"
-             Write-Host "Using Resource Group Name: $rgName"
+             ./3TierApp/VMs.ps1
