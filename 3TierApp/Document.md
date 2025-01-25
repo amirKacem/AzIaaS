@@ -12,8 +12,9 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 </details>
 
 
-
-
+<div style="float: right">
+[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %)
+</div>
 
 Currently the 'Sparse checkout' feature is blocked by bug.
 [sparse-checkout not working when running in a container. · Issue #1602 · actions/checkout][4] 
@@ -36,11 +37,11 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
 
 
-[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %) 
 
 
+<div style="width: 80%">
 [Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
-
+</div>
 
 
 
@@ -85,7 +86,7 @@ Here is a link to the [Governance resources deployment execution][2]
 This deploys the required virtual machines in the same resource group using the previously prestaged governance resources.
 
 <details open>
-<summary><u id="VirtualMachineCreation"></u></summary> <pre class="powershell" id="code3"></pre>
+<summary><u id="VirtualMachineCreation"></u></summary> <pre class="powershell" id="code4"></pre>
 </details>
 
 
