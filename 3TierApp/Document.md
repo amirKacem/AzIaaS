@@ -15,7 +15,7 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 
 <div style="float: right">
-[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %)
+[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %) [open]
 </div>
 
 Currently the 'Sparse checkout' feature is blocked by bug.
@@ -45,7 +45,7 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
 
 <div style="width: 80%">
-[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) [open]
+[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
 </div>
 
 <figure style="float:right; margin:0; max-width: 20%;">
