@@ -71,14 +71,14 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 This prestages the governance resources in Azure for the VMs' Deployment job.
 
 
-<details close>
+<details>
 <summary><u id="GovernanceResources"></u></summary> <pre class="powershell" id="code0"></pre>
 </details>
 
 This prestages the Network resources in Azure for the VMs' Deployment job.
 
 
-<details close>
+<details>
 <summary><u id="NetworkResources"></u></summary> <pre class="powershell" id="code1"></pre>
 </details>
 
