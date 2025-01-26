@@ -61,14 +61,14 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 This prestages the governance resources in Azure for the VMs' Deployment job.
 
 
-<details open>
+<details close>
 <summary><u id="GovernanceResources"></u></summary> <pre class="powershell" id="code0"></pre>
 </details>
 
 This prestages the Network resources in Azure for the VMs' Deployment job.
 
 
-<details open>
+<details close>
 <summary><u id="NetworkResources"></u></summary> <pre class="powershell" id="code1"></pre>
 </details>
 
@@ -85,7 +85,7 @@ Here is a link to the [Governance resources deployment execution][2]
 
 This deploys the required virtual machines in the same resource group using the previously prestaged governance resources.
 
-<details open>
+<details close>
 <summary><u id="VirtualMachineCreation"></u></summary> <pre class="powershell" id="code3"></pre>
 </details>
 
