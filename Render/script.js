@@ -18,7 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   inverseCollapseButton.addEventListener('click', function (e)  {
     document.querySelectorAll('details').forEach((item) => {
-      item.open = !item.open;
+      if(this.textContent === '+') {
+        item.open = true;
+      } else {
+        item.open = false;
+      }
+
     });
     if(this.textContent === '+') {
       this.textContent = '-';
@@ -35,15 +40,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function renderMarkDownFile(fileUrl) {
     return fetch(fileUrl).then(response => response.text()).then(markdown => {
-      const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)`, regex = new RegExp(regexPattern, "g");
+      const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)(\\s*\\[open\\])?`, regex = new RegExp(regexPattern, "g");
       let groupIndex = 0;
       markdown = markdown.replaceAll(regex, (...groups) => {
+        let detailsBlock = '<details ';
         groupIndex++;
         const title = groups[1], path = groups[2].trim(), blockId = path.replace('.md', '') + groupIndex;
         const includeInfo = { filePath: path, blockId: blockId };
+        if(groups[3]) detailsBlock+= "open";
 
         contentIncludesInfo.push(includeInfo);
-        return `<details open id="${blockId}"><summary><strong><u>${title}</u></strong></summary></details>`;
+        return `${detailsBlock}  id="${blockId}"><summary><strong><u>${title}</u></strong></summary></details>`;
       });
 
       document.getElementById("content").innerHTML = marked.parse(markdown);
