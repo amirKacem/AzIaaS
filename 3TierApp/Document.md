@@ -25,11 +25,14 @@ Potential Tables: vNet details, NSG rules, VM details, storage account restricti
 Potential environment variables: RG name, KV, Sa, secret, admin name, 
 
 One could put all tabularizable configuration in a markdown table and the other configurations in a hash table.
+
 This gives you a single source of truth for configuration and documentation unlike other declarative methods that could result in a doc-config mismatch.
 And adding to configuration doesn't require you to add to the code. One could also parameterize the table paths once the table data has been validated. 
+
 The tables could be generated with proper Excel formulas.
 
 = Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
+
 https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
 https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
