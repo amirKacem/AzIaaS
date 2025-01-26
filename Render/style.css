@@ -1,7 +1,4 @@
-body {
-  background-color: black;
-  color: white;
-}
+
 a {
     color: #3CECFA;
 }
@@ -21,4 +18,36 @@ th,td{
   border: 1px solid white;
   padding: 8px;
   text-align: left;
+}
+
+.dark-theme {
+  background-color: black;
+  color: white;
+}
+
+.white-theme {
+  background-color: white;
+  color: #000;
+}
+
+.button-absolute {
+  position: absolute;
+  height: 25px;
+  cursor: pointer;
+}
+.button-switch-theme {
+  font-size: 20px;
+  font-weight: bold;
+  top: 20px;
+  right: 25px;
+  height: 25px;
+  width: 25px;
+}
+
+.button-inverse-collapse {
+  font-size: 20px;
+  font-weight: bold;
+  top: 50px;
+  right: 25px;
+  width: 25px;
 }
