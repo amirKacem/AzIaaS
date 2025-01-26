@@ -47,6 +47,11 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 </div>
 
 
+<figure style="float:right; margin:0; max-width: 30%;">
+  <img src="https://ayanmullick.github.io/AzIaaS/3TierApp/3TierApp.png" width="100%" alt="Visio diagram for output resources"/>
+  <figcaption style="text-decoration: underline">Visio diagram for output resources</figcaption>
+</figure>
+
 
 
 
