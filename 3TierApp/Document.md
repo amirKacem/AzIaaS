@@ -5,8 +5,10 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 <details>
 <summary><u>Naming Standard</u></summary>
-<div style="display:flex;gap:3rem;width: 80%">
+<div style="display:flex;gap:3rem">
+<div style="width: 80%">
 [Naming Convention] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NamingConvention.md %)
+</div>
 [Abbreviatons] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/Abbreviations.md %) 
 </div>
 </details>
