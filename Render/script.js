@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)`, regex = new RegExp(regexPattern, "g");
       let groupIndex = 0;
       markdown = markdown.replaceAll(regex, (...groups) => {
-        console.log(groups);
         groupIndex++;
         const title = groups[1], path = groups[2].trim(), blockId = path.replace('.md', '') + groupIndex;
         const includeInfo = { filePath: path, blockId: blockId };

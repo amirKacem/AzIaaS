@@ -30,6 +30,13 @@ th,td{
   color: #000;
 }
 
+.white-theme tr {
+  border: 1px solid black;
+}
+.white-theme th,.white-theme td{
+  border: 1px solid black;
+}
+
 .button-absolute {
   position: absolute;
   height: 25px;
