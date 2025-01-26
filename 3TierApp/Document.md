@@ -109,7 +109,7 @@ Here is a link to the [VM deployment execution][3]
 [3]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log>
 [4]: <https://github.com/actions/checkout/issues/1602#issuecomment-2048656906>
 
-<details open>
+<details>
 <summary><u>Azure portal screenshots</u></summary>
 <div style="display:flex;">
   <div>
