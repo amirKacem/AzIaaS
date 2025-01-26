@@ -8,9 +8,50 @@
     .clear { clear: both; }
     table { border-collapse: collapse; border: 1px solid black; margin: 20px 0; }
     tr { border: 1px solid white; }
-    th, td { border: 1px solid white; padding: 8px; text-align: left; }</style>
+    th, td { border: 1px solid white; padding: 8px; text-align: left; }
+    .dark-theme {
+        background-color: black;
+        color: white;
+    }
+
+    .white-theme {
+        background-color: white;
+        color: #000;
+    }
+
+    .white-theme tr {
+        border: 1px solid black;
+    }
+    .white-theme th,.white-theme td{
+        border: 1px solid black;
+    }
+
+    .button-absolute {
+        position: absolute;
+        height: 25px;
+        cursor: pointer;
+    }
+    .button-switch-theme {
+        font-size: 20px;
+        font-weight: bold;
+        top: 20px;
+        right: 25px;
+        height: 25px;
+        width: 25px;
+    }
+
+    .button-inverse-collapse {
+        font-size: 20px;
+        font-weight: bold;
+        top: 50px;
+        right: 25px;
+        width: 25px;
+    }
+    </style>
 </head>
-<body>
+<body class="dark-theme">
+<button id="switch-theme" class="button-absolute button-switch-theme">*</button>
+<button id="inverse-collapses" class="button-absolute button-inverse-collapse">+</button>
 <div id="content"></div>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
@@ -21,6 +62,34 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const themeSwitchButton = document.getElementById("switch-theme");
+        const inverseCollapseButton = document.getElementById("inverse-collapses");
+        themeSwitchButton.addEventListener("click", () => {
+            const highlightjsThemeElement = document.getElementById('highlightjs-theme');
+            if(document.body.classList.contains("dark-theme")) {
+                document.body.classList.remove("dark-theme");
+                document.body.classList.add("white-theme");
+                highlightjsThemeElement.href = highlightjsThemeElement.href
+                    .replace('atom-one-dark-reasonable.min.css','atom-one-light.min.css');
+            } else {
+                document.body.classList.remove("white-theme");
+                document.body.classList.add("dark-theme");
+                highlightjsThemeElement.href = highlightjsThemeElement.href
+                    .replace('atom-one-light.min.css','atom-one-dark-reasonable.min.css');
+            }
+        });
+
+        inverseCollapseButton.addEventListener('click', function (e)  {
+            document.querySelectorAll('details').forEach((item) => {
+                item.open = !item.open;
+            });
+            if(this.textContent === '+') {
+                this.textContent = '-';
+            } else {
+                this.textContent = '+';
+            }
+        });
+
         marked.use({ break: true });
 
         function renderFileContent(markdownFileUrl) {
@@ -29,19 +98,17 @@
 
         async function renderMarkDownFile(fileUrl) {
             return fetch(fileUrl).then(response => response.text()).then(markdown => {
-                const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)(\\s*\\[align=([a-zA-Z]+)\\])?`, regex = new RegExp(regexPattern, "g");
+                const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)(\\s*\\[open\\])?`, regex = new RegExp(regexPattern, "g");
                 let groupIndex = 0;
                 markdown = markdown.replaceAll(regex, (...groups) => {
+                    let detailsBlock = '<details ';
                     groupIndex++;
-
-
-
                     const title = groups[1], path = groups[2].trim(), blockId = path.replace('.md', '') + groupIndex;
                     const includeInfo = { filePath: path, blockId: blockId };
+                    if(groups[3]) detailsBlock+= "open";
 
-                    if(groups[4]) includeInfo['alignPosition'] = groups[4];
                     contentIncludesInfo.push(includeInfo);
-                    return `<details open id="${blockId}"><summary><strong><u>${title}</u></strong></summary></details>`;
+                    return `${detailsBlock}  id="${blockId}"><summary><strong><u>${title}</u></strong></summary></details>`;
                 });
 
                 document.getElementById("content").innerHTML = marked.parse(markdown);
@@ -62,7 +129,6 @@
                 contentIncludesInfo.forEach(async includeInfo => {
                     let blockWrapper = '<div';
                     const fileContent = await getMarkdownFileContent(includeInfo.filePath.trim());
-                    if(includeInfo['alignPosition']) blockWrapper += ` align=${includeInfo['alignPosition']}`;
                     document.getElementById(includeInfo.blockId).innerHTML += `${blockWrapper}>
           ${marked.parse(fileContent)}
         </div>`;

@@ -1,4 +1,37 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const themeSwitchButton = document.getElementById("switch-theme");
+  const inverseCollapseButton = document.getElementById("inverse-collapses");
+  themeSwitchButton.addEventListener("click", () => {
+    const highlightjsThemeElement = document.getElementById('highlightjs-theme');
+    if(document.body.classList.contains("dark-theme")) {
+      document.body.classList.remove("dark-theme");
+      document.body.classList.add("white-theme");
+      highlightjsThemeElement.href = highlightjsThemeElement.href
+          .replace('atom-one-dark-reasonable.min.css','atom-one-light.min.css');
+    } else {
+      document.body.classList.remove("white-theme");
+      document.body.classList.add("dark-theme");
+      highlightjsThemeElement.href = highlightjsThemeElement.href
+          .replace('atom-one-light.min.css','atom-one-dark-reasonable.min.css');
+    }
+  });
+
+  inverseCollapseButton.addEventListener('click', function (e)  {
+    document.querySelectorAll('details').forEach((item) => {
+      if(this.textContent === '+') {
+        item.open = true;
+      } else {
+        item.open = false;
+      }
+
+    });
+    if(this.textContent === '+') {
+      this.textContent = '-';
+    } else {
+      this.textContent = '+';
+    }
+  });
+
   marked.use({ break: true });
 
   function renderFileContent(markdownFileUrl) {
@@ -7,19 +40,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function renderMarkDownFile(fileUrl) {
     return fetch(fileUrl).then(response => response.text()).then(markdown => {
-      const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)(\\s*\\[align=([a-zA-Z]+)\\])?`, regex = new RegExp(regexPattern, "g");
+      const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)(\\s*\\[open\\])?`, regex = new RegExp(regexPattern, "g");
       let groupIndex = 0;
       markdown = markdown.replaceAll(regex, (...groups) => {
+        let detailsBlock = '<details ';
         groupIndex++;
-
-
-
         const title = groups[1], path = groups[2].trim(), blockId = path.replace('.md', '') + groupIndex;
         const includeInfo = { filePath: path, blockId: blockId };
+        if(groups[3]) detailsBlock+= "open";
 
-        if(groups[4]) includeInfo['alignPosition'] = groups[4];
         contentIncludesInfo.push(includeInfo);
-        return `<details open id="${blockId}"><summary><strong><u>${title}</u></strong></summary></details>`;
+        return `${detailsBlock}  id="${blockId}"><summary><strong><u>${title}</u></strong></summary></details>`;
       });
 
       document.getElementById("content").innerHTML = marked.parse(markdown);
@@ -40,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
       contentIncludesInfo.forEach(async includeInfo => {
         let blockWrapper = '<div';
         const fileContent = await getMarkdownFileContent(includeInfo.filePath.trim());
-        if(includeInfo['alignPosition']) blockWrapper += ` align=${includeInfo['alignPosition']}`;
         document.getElementById(includeInfo.blockId).innerHTML += `${blockWrapper}>
           ${marked.parse(fileContent)}
         </div>`;

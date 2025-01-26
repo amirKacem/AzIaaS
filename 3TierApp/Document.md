@@ -45,9 +45,8 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
 
 <div style="width: 80%">
-[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
+[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) [open]
 </div>
-
 
 <figure style="float:right; margin:0; max-width: 20%;">
   <img src="https://ayanmullick.github.io/AzIaaS/3TierApp/3TierApp.jpg" width="100%" alt="Visio diagram for output resources"/>
@@ -95,6 +94,7 @@ Here is a link to the [Governance resources deployment execution][2]
 
 This deploys the required virtual machines in the same resource group using the previously prestaged governance resources.
 
+
 <details close>
 <summary><u id="VirtualMachineCreation"></u></summary> <pre class="powershell" id="code3"></pre>
 </details>
@@ -108,3 +108,17 @@ Here is a link to the [VM deployment execution][3]
 [2]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log>
 [3]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log>
 [4]: <https://github.com/actions/checkout/issues/1602#issuecomment-2048656906>
+
+<details open>
+<summary><u>Azure portal screenshots</u></summary>
+<div style="display:flex;">
+  <div>
+      <img width="100%" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip1.jpg"> 
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip2.jpg"> 
+    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip3.jpg"> 
+    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip4.jpg"> 
+  </div>
+</div>
+</details>
