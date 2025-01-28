@@ -33,15 +33,6 @@ And adding to configuration doesn't require you to add to the code. One could al
 
 The tables could be generated with proper Excel formulas.
 
-= Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
-
-https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
-https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
-
-≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
-
-
-
 
 
 <div style="width: 80%">
@@ -121,4 +112,16 @@ Here is a link to the [VM deployment execution][3]
     <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip4.jpg"> 
   </div>
 </div>
+</details>
+
+
+<details>
+  <summary>Essential characteristics</summary>
+   
+ Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
+
+https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
+https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
+
+≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
 </details>
