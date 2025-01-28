@@ -33,7 +33,7 @@ And adding to configuration doesn't require you to add to the code. One could al
 
 The tables could be generated with proper Excel formulas.
 
-
+<br><br>
 
 <div style="width: 80%">
 [Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
