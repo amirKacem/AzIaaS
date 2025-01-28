@@ -95,10 +95,6 @@ Here is a link to the [VM deployment execution][3]
 
 
 
-[1]: <https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/#n-tier>
-[2]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log>
-[3]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log>
-[4]: <https://github.com/actions/checkout/issues/1602#issuecomment-2048656906>
 
 <details>
 <summary><u>Azure portal screenshots</u></summary>
@@ -115,8 +111,10 @@ Here is a link to the [VM deployment execution][3]
 </details>
 
 
+<br><br>
+
 <details>
-  <summary>Essential characteristics</summary>
+  <summary><u>Essential characteristics</u></summary>
    
  Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
 
@@ -125,3 +123,8 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 
 ≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
 </details>
+
+[1]: <https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/#n-tier>
+[2]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log>
+[3]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log>
+[4]: <https://github.com/actions/checkout/issues/1602#issuecomment-2048656906>
