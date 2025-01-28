@@ -3,6 +3,7 @@
 
 This is deploying a [three-tier application architecture][1] on virtual machines in Azure. 
 
+
 <details>
 <summary><u>Naming Standard</u></summary>
 <div style="display:flex;gap:3rem">
@@ -34,6 +35,8 @@ And adding to configuration doesn't require you to add to the code. One could al
 The tables could be generated with proper Excel formulas.
 
 <br><br>
+
+These are the NSG rules to allow SSL and Windows Admin Center traffic.
 
 <div style="width: 80%">
 [Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
