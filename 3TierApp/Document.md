@@ -114,7 +114,7 @@ Here is a link to the [VM deployment execution][3]
 </details>
 
 
-<br><br>
+<br>
 
 <details>
   <summary><u>Essential characteristics</u></summary>
