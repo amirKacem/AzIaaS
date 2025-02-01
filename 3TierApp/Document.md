@@ -3,6 +3,7 @@
 
 This is deploying a [three-tier application architecture][1] on virtual machines in Azure. 
 
+
 <details>
 <summary><u>Naming Standard</u></summary>
 <div style="display:flex;gap:3rem">
@@ -15,7 +16,7 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 
 
 <div style="float: right">
-[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %)
+[Virtual Machines] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/VMs.md %) [open]
 </div>
 
 Currently the 'Sparse checkout' feature is blocked by bug.
@@ -33,16 +34,9 @@ And adding to configuration doesn't require you to add to the code. One could al
 
 The tables could be generated with proper Excel formulas.
 
-= Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
+<br><br>
 
-https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
-https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
-
-≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
-
-
-
-
+These are the NSG rules to allow SSL and Windows Admin Center traffic.
 
 <div style="width: 80%">
 [Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) [open]
@@ -70,14 +64,14 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 This prestages the governance resources in Azure for the VMs' Deployment job.
 
 
-<details close>
+<details>
 <summary><u id="GovernanceResources"></u></summary> <pre class="powershell" id="code0"></pre>
 </details>
 
 This prestages the Network resources in Azure for the VMs' Deployment job.
 
 
-<details close>
+<details>
 <summary><u id="NetworkResources"></u></summary> <pre class="powershell" id="code1"></pre>
 </details>
 
@@ -103,6 +97,35 @@ This deploys the required virtual machines in the same resource group using the 
 Here is a link to the [VM deployment execution][3]
 
 
+
+
+<details>
+<summary><u>Azure portal screenshots</u></summary>
+<div style="display:flex;">
+  <div>
+      <img width="100%" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip1.jpg"> 
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip2.jpg"> 
+    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip3.jpg"> 
+    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip4.jpg"> 
+  </div>
+</div>
+</details>
+
+
+<br>
+
+<details>
+  <summary><u>Essential characteristics</u></summary>
+   
+ Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
+
+https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
+https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
+
+≠ Idempotent\Incremental,Stateless  #How many orders of magnitude more lines of code just for this
+</details>
 
 [1]: <https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/#n-tier>
 [2]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log>
