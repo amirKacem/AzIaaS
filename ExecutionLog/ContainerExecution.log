@@ -1,0 +1,578 @@
+2025-02-01T23:57:27.2345267Z Current runner version: '2.322.0'
+2025-02-01T23:57:27.2372595Z ##[group]Operating System
+2025-02-01T23:57:27.2373315Z Ubuntu
+2025-02-01T23:57:27.2373876Z 24.04.1
+2025-02-01T23:57:27.2374401Z LTS
+2025-02-01T23:57:27.2374850Z ##[endgroup]
+2025-02-01T23:57:27.2375395Z ##[group]Runner Image
+2025-02-01T23:57:27.2375979Z Image: ubuntu-24.04
+2025-02-01T23:57:27.2376491Z Version: 20250126.1.0
+2025-02-01T23:57:27.2377506Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250126.1/images/ubuntu/Ubuntu2404-Readme.md
+2025-02-01T23:57:27.2379177Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250126.1
+2025-02-01T23:57:27.2380087Z ##[endgroup]
+2025-02-01T23:57:27.2380673Z ##[group]Runner Image Provisioner
+2025-02-01T23:57:27.2381221Z 2.0.422.1
+2025-02-01T23:57:27.2381680Z ##[endgroup]
+2025-02-01T23:57:27.2383945Z ##[group]GITHUB_TOKEN Permissions
+2025-02-01T23:57:27.2386129Z Actions: write
+2025-02-01T23:57:27.2386938Z Attestations: write
+2025-02-01T23:57:27.2387541Z Checks: write
+2025-02-01T23:57:27.2388085Z Contents: write
+2025-02-01T23:57:27.2388813Z Deployments: write
+2025-02-01T23:57:27.2389310Z Discussions: write
+2025-02-01T23:57:27.2389845Z Issues: write
+2025-02-01T23:57:27.2390351Z Metadata: read
+2025-02-01T23:57:27.2390826Z Packages: write
+2025-02-01T23:57:27.2391395Z Pages: write
+2025-02-01T23:57:27.2391848Z PullRequests: write
+2025-02-01T23:57:27.2392360Z RepositoryProjects: write
+2025-02-01T23:57:27.2392996Z SecurityEvents: write
+2025-02-01T23:57:27.2393487Z Statuses: write
+2025-02-01T23:57:27.2393967Z ##[endgroup]
+2025-02-01T23:57:27.2396239Z Secret source: Actions
+2025-02-01T23:57:27.2397206Z Prepare workflow directory
+2025-02-01T23:57:27.2769536Z Prepare all required actions
+2025-02-01T23:57:27.2805965Z Getting action download info
+2025-02-01T23:57:27.4556139Z Download action repository 'actions/checkout@v4' (SHA:11bd71901bbe5b1630ceea73d27597364c9af683)
+2025-02-01T23:57:27.6237906Z Complete job name: Resources
+2025-02-01T23:57:27.6735930Z ##[group]Checking docker version
+2025-02-01T23:57:27.6748721Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2025-02-01T23:57:27.7593809Z '1.45'
+2025-02-01T23:57:27.7605529Z Docker daemon API version: '1.45'
+2025-02-01T23:57:27.7606254Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2025-02-01T23:57:27.7761719Z '1.45'
+2025-02-01T23:57:27.7774378Z Docker client API version: '1.45'
+2025-02-01T23:57:27.7779214Z ##[endgroup]
+2025-02-01T23:57:27.7782562Z ##[group]Clean up resources from previous jobs
+2025-02-01T23:57:27.7787540Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=996152"
+2025-02-01T23:57:27.7937737Z ##[command]/usr/bin/docker network prune --force --filter "label=996152"
+2025-02-01T23:57:27.8069911Z ##[endgroup]
+2025-02-01T23:57:27.8070382Z ##[group]Create local container network
+2025-02-01T23:57:27.8080106Z ##[command]/usr/bin/docker network create --label 996152 github_network_9a5db2b6af454cbc89d71a7213c61dd0
+2025-02-01T23:57:27.8810231Z 09758187e7875262da0a67ca1e923fe15e84211fc183a16c3582f3439a2d887e
+2025-02-01T23:57:27.8831650Z ##[endgroup]
+2025-02-01T23:57:27.8856774Z ##[group]Starting job container
+2025-02-01T23:57:27.8879079Z ##[command]/usr/bin/docker pull mcr.microsoft.com/azure-powershell:latest
+2025-02-01T23:57:28.1023813Z latest: Pulling from azure-powershell
+2025-02-01T23:57:28.1030356Z 86e5016c2693: Pulling fs layer
+2025-02-01T23:57:28.1031320Z 789200447129: Pulling fs layer
+2025-02-01T23:57:28.1032003Z 79df21fd5a2e: Pulling fs layer
+2025-02-01T23:57:28.1032706Z 8a5727a1663d: Pulling fs layer
+2025-02-01T23:57:28.1033551Z 4f4fb700ef54: Pulling fs layer
+2025-02-01T23:57:28.1034118Z 5b2a8b8d477d: Pulling fs layer
+2025-02-01T23:57:28.1034581Z 47d9d8696f7e: Pulling fs layer
+2025-02-01T23:57:28.1035119Z 47d9d8696f7e: Waiting
+2025-02-01T23:57:28.1035559Z 4f4fb700ef54: Waiting
+2025-02-01T23:57:28.1035968Z 5b2a8b8d477d: Waiting
+2025-02-01T23:57:28.1036368Z 8a5727a1663d: Waiting
+2025-02-01T23:57:28.3212387Z 86e5016c2693: Download complete
+2025-02-01T23:57:28.3302014Z 79df21fd5a2e: Verifying Checksum
+2025-02-01T23:57:28.3303167Z 79df21fd5a2e: Download complete
+2025-02-01T23:57:28.4188738Z 8a5727a1663d: Verifying Checksum
+2025-02-01T23:57:28.4190309Z 8a5727a1663d: Download complete
+2025-02-01T23:57:28.4248385Z 4f4fb700ef54: Verifying Checksum
+2025-02-01T23:57:28.4249428Z 4f4fb700ef54: Download complete
+2025-02-01T23:57:28.4916401Z 789200447129: Verifying Checksum
+2025-02-01T23:57:28.5194142Z 789200447129: Download complete
+2025-02-01T23:57:28.5195041Z 47d9d8696f7e: Verifying Checksum
+2025-02-01T23:57:28.5195882Z 47d9d8696f7e: Download complete
+2025-02-01T23:57:28.9337923Z 5b2a8b8d477d: Verifying Checksum
+2025-02-01T23:57:28.9339783Z 5b2a8b8d477d: Download complete
+2025-02-01T23:57:29.3151914Z 86e5016c2693: Pull complete
+2025-02-01T23:57:30.9822683Z 789200447129: Pull complete
+2025-02-01T23:57:31.9953240Z 79df21fd5a2e: Pull complete
+2025-02-01T23:57:32.0132701Z 8a5727a1663d: Pull complete
+2025-02-01T23:57:32.0227303Z 4f4fb700ef54: Pull complete
+2025-02-01T23:57:35.5409967Z 5b2a8b8d477d: Pull complete
+2025-02-01T23:57:35.5508895Z 47d9d8696f7e: Pull complete
+2025-02-01T23:57:35.5543386Z Digest: sha256:13b5d958192256c260963e6e36f88cf017a77a1697035120488c6c5fe9de8f38
+2025-02-01T23:57:35.5556678Z Status: Downloaded newer image for mcr.microsoft.com/azure-powershell:latest
+2025-02-01T23:57:35.5568692Z mcr.microsoft.com/azure-powershell:latest
+2025-02-01T23:57:35.5648346Z ##[command]/usr/bin/docker create --name fa6d81d862794181bc4063c11e56f373_mcrmicrosoftcomazurepowershelllatest_857e64 --label 996152 --workdir /__w/AzIaaS/AzIaaS --network github_network_9a5db2b6af454cbc89d71a7213c61dd0  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/runners/2.322.0/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" mcr.microsoft.com/azure-powershell:latest "-f" "/dev/null"
+2025-02-01T23:57:35.5907588Z 20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe
+2025-02-01T23:57:35.5928250Z ##[command]/usr/bin/docker start 20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe
+2025-02-01T23:57:35.8319436Z 20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe
+2025-02-01T23:57:35.8334592Z ##[command]/usr/bin/docker ps --all --filter id=20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2025-02-01T23:57:35.8455695Z 20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe Up Less than a second
+2025-02-01T23:57:35.8474127Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe
+2025-02-01T23:57:35.8589474Z HOME=/github/home
+2025-02-01T23:57:35.8589810Z GITHUB_ACTIONS=true
+2025-02-01T23:57:35.8590056Z CI=true
+2025-02-01T23:57:35.8590363Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2025-02-01T23:57:35.8590762Z PS_INSTALL_FOLDER=/opt/microsoft/powershell/7
+2025-02-01T23:57:35.8591512Z DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+2025-02-01T23:57:35.8591877Z LC_ALL=en_US.UTF-8
+2025-02-01T23:57:35.8592109Z LANG=en_US.UTF-8
+2025-02-01T23:57:35.8594755Z PSModuleAnalysisCachePath=/var/cache/microsoft/powershell/PSModuleAnalysisCache/ModuleAnalysisCache
+2025-02-01T23:57:35.8595831Z POWERSHELL_DISTRIBUTION_CHANNEL=PSDocker-Ubuntu-20.04
+2025-02-01T23:57:35.8596531Z AZUREPS_HOST_ENVIRONMENT=dockerImage/13.1.0-ubuntu-20.04
+2025-02-01T23:57:35.8614895Z ##[endgroup]
+2025-02-01T23:57:35.8631494Z ##[group]Waiting for all services to be ready
+2025-02-01T23:57:35.8634483Z ##[endgroup]
+2025-02-01T23:57:35.8892963Z ##[group]Run actions/checkout@v4
+2025-02-01T23:57:35.8893563Z with:
+2025-02-01T23:57:35.8893820Z   sparse-checkout-cone-mode: false
+2025-02-01T23:57:35.8894471Z   sparse-checkout: GHActionTest/                             
+3TierApp/                 
+2025-02-01T23:57:35.8894909Z   repository: Ayanmullick/AzIaaS
+2025-02-01T23:57:35.8895371Z   token: ***
+2025-02-01T23:57:35.8895590Z   ssh-strict: true
+2025-02-01T23:57:35.8895812Z   ssh-user: git
+2025-02-01T23:57:35.8896046Z   persist-credentials: true
+2025-02-01T23:57:35.8896295Z   clean: true
+2025-02-01T23:57:35.8896559Z   fetch-depth: 1
+2025-02-01T23:57:35.8896787Z   fetch-tags: false
+2025-02-01T23:57:35.8897017Z   show-progress: true
+2025-02-01T23:57:35.8897246Z   lfs: false
+2025-02-01T23:57:35.8897457Z   submodules: false
+2025-02-01T23:57:35.8897694Z   set-safe-directory: true
+2025-02-01T23:57:35.8898191Z ##[endgroup]
+2025-02-01T23:57:35.8952536Z ##[command]/usr/bin/docker exec  20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe sh -c "cat /etc/*release | grep ^ID"
+2025-02-01T23:57:36.2255864Z Syncing repository: Ayanmullick/AzIaaS
+2025-02-01T23:57:36.2257754Z ##[group]Getting Git version info
+2025-02-01T23:57:36.2258322Z Working directory is '/__w/AzIaaS/AzIaaS'
+2025-02-01T23:57:36.2259399Z ##[endgroup]
+2025-02-01T23:57:36.2259795Z Deleting the contents of '/__w/AzIaaS/AzIaaS'
+2025-02-01T23:57:36.2260411Z The repository will be downloaded using the GitHub REST API
+2025-02-01T23:57:36.2261178Z To create a local Git repository instead, add Git 2.18 or higher to the PATH
+2025-02-01T23:57:36.2261854Z Downloading the archive
+2025-02-01T23:57:36.8396425Z Writing archive to disk
+2025-02-01T23:57:36.8411553Z Extracting the archive
+2025-02-01T23:57:36.8493331Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /__w/AzIaaS/AzIaaS/2ae39557-6a17-46d2-b0c9-28936138d04b -f /__w/AzIaaS/AzIaaS/2ae39557-6a17-46d2-b0c9-28936138d04b.tar.gz
+2025-02-01T23:57:36.8629861Z Resolved version Ayanmullick-AzIaaS-ac0099b
+2025-02-01T23:57:36.8957564Z ##[group]Run . ./3TierApp/HelperFunctions.ps1 
+2025-02-01T23:57:36.8957972Z . ./3TierApp/HelperFunctions.ps1 
+2025-02-01T23:57:36.8959193Z Connect-MySubscription 1054d918-a880-46d0-aa19-2dd47c7588d3 8b77f191-3d4a-498e-8bb1-9e1fbb927ea7 11d272b6-4221-44d7-9f18-d1830ca541ea ***
+2025-02-01T23:57:36.8959809Z Get-ChildItem -Recurse
+2025-02-01T23:57:36.8960046Z   
+2025-02-01T23:57:36.8964154Z shell: pwsh -command ". '{0}'"
+2025-02-01T23:57:36.8964411Z ##[endgroup]
+2025-02-01T23:57:37.7524688Z WARNING: The provided service principal secret or certifcate password will be included in the 'keystore.cache' file found in the user profile ( /github/home/.Azure ). Please ensure that this directory has appropriate protections.
+2025-02-01T23:57:37.7528309Z VERBOSE: Performing the operation "log in" on target "ServicePrincipal account in environment 'AzureCloud'".
+2025-02-01T23:57:38.6407217Z 
+2025-02-01T23:57:38.7753716Z Subscription name                         Tenant
+2025-02-01T23:57:38.7763963Z -----------------                         ------
+2025-02-01T23:57:38.7764941Z FTE Visual Studio Enterprise Subscription 1054d918-a880-46d0-aa19-2dd47c7588d3
+2025-02-01T23:57:38.7765704Z 
+2025-02-01T23:57:38.7781065Z PSPath              : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS/
+2025-02-01T23:57:38.7781952Z                       3TierApp
+2025-02-01T23:57:38.7782891Z PSParentPath        : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7783654Z PSChildName         : 3TierApp
+2025-02-01T23:57:38.7784395Z UnixStat            : System.Management.Automation.Platform+Unix+CommonStat
+2025-02-01T23:57:38.7785062Z PSDrive             : /
+2025-02-01T23:57:38.7785699Z PSProvider          : Microsoft.PowerShell.Core\FileSystem
+2025-02-01T23:57:38.7786306Z PSIsContainer       : True
+2025-02-01T23:57:38.7787945Z Name                : 3TierApp
+2025-02-01T23:57:38.7788914Z Parent              : /__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7789431Z Root                : /
+2025-02-01T23:57:38.7790203Z Exists              : True
+2025-02-01T23:57:38.7790753Z FullName            : /__w/AzIaaS/AzIaaS/3TierApp
+2025-02-01T23:57:38.7791108Z Extension           : 
+2025-02-01T23:57:38.7791430Z CreationTime        : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7791799Z CreationTimeUtc     : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7792138Z LastAccessTime      : 2/1/2025 11:57:37 PM
+2025-02-01T23:57:38.7792466Z LastAccessTimeUtc   : 2/1/2025 11:57:37 PM
+2025-02-01T23:57:38.7792787Z LastWriteTime       : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7793121Z LastWriteTimeUtc    : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7793415Z LinkTarget          : 
+2025-02-01T23:57:38.7793818Z UnixFileMode        : OtherExecute, OtherRead, GroupExecute, GroupWrite, 
+2025-02-01T23:57:38.7794200Z                       GroupRead, UserExecute, UserWrite, UserRead
+2025-02-01T23:57:38.7794628Z Attributes          : Directory
+2025-02-01T23:57:38.7795153Z UnixMode            : drwxrwxr-x
+2025-02-01T23:57:38.7795597Z User                : root
+2025-02-01T23:57:38.7796039Z Group               : root
+2025-02-01T23:57:38.7796506Z Size                : 4096
+2025-02-01T23:57:38.7796979Z Mode                : d----
+2025-02-01T23:57:38.7797469Z ModeWithoutHardLink : d----
+2025-02-01T23:57:38.7797971Z BaseName            : 3TierApp
+2025-02-01T23:57:38.7798797Z ResolvedTarget      : /__w/AzIaaS/AzIaaS/3TierApp
+2025-02-01T23:57:38.7799384Z Target              : 
+2025-02-01T23:57:38.7799836Z LinkType            : 
+2025-02-01T23:57:38.7800124Z 
+2025-02-01T23:57:38.7800134Z 
+2025-02-01T23:57:38.7801045Z PSPath              : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS/
+2025-02-01T23:57:38.7801695Z                       Blog
+2025-02-01T23:57:38.7802466Z PSParentPath        : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7803142Z PSChildName         : Blog
+2025-02-01T23:57:38.7803834Z UnixStat            : System.Management.Automation.Platform+Unix+CommonStat
+2025-02-01T23:57:38.7804525Z PSDrive             : /
+2025-02-01T23:57:38.7805153Z PSProvider          : Microsoft.PowerShell.Core\FileSystem
+2025-02-01T23:57:38.7805766Z PSIsContainer       : True
+2025-02-01T23:57:38.7806061Z Name                : Blog
+2025-02-01T23:57:38.7806444Z Parent              : /__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7806729Z Root                : /
+2025-02-01T23:57:38.7806988Z Exists              : True
+2025-02-01T23:57:38.7807303Z FullName            : /__w/AzIaaS/AzIaaS/Blog
+2025-02-01T23:57:38.7807598Z Extension           : 
+2025-02-01T23:57:38.7807888Z CreationTime        : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7808243Z CreationTimeUtc     : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7808794Z LastAccessTime      : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7809151Z LastAccessTimeUtc   : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7809477Z LastWriteTime       : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7809799Z LastWriteTimeUtc    : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7810089Z LinkTarget          : 
+2025-02-01T23:57:38.7810478Z UnixFileMode        : OtherExecute, OtherRead, GroupExecute, GroupWrite, 
+2025-02-01T23:57:38.7810868Z                       GroupRead, UserExecute, UserWrite, UserRead
+2025-02-01T23:57:38.7811187Z Attributes          : Directory
+2025-02-01T23:57:38.7811477Z UnixMode            : drwxrwxr-x
+2025-02-01T23:57:38.7811752Z User                : root
+2025-02-01T23:57:38.7812010Z Group               : root
+2025-02-01T23:57:38.7812263Z Size                : 4096
+2025-02-01T23:57:38.7812734Z Mode                : d----
+2025-02-01T23:57:38.7813057Z ModeWithoutHardLink : d----
+2025-02-01T23:57:38.7813323Z BaseName            : Blog
+2025-02-01T23:57:38.7813635Z ResolvedTarget      : /__w/AzIaaS/AzIaaS/Blog
+2025-02-01T23:57:38.7813938Z Target              : 
+2025-02-01T23:57:38.7814186Z LinkType            : 
+2025-02-01T23:57:38.7814335Z 
+2025-02-01T23:57:38.7814341Z 
+2025-02-01T23:57:38.7814668Z PSPath              : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS/
+2025-02-01T23:57:38.7815025Z                       ExecutionLog
+2025-02-01T23:57:38.7815478Z PSParentPath        : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7815905Z PSChildName         : ExecutionLog
+2025-02-01T23:57:38.7816327Z UnixStat            : System.Management.Automation.Platform+Unix+CommonStat
+2025-02-01T23:57:38.7816716Z PSDrive             : /
+2025-02-01T23:57:38.7817064Z PSProvider          : Microsoft.PowerShell.Core\FileSystem
+2025-02-01T23:57:38.7817406Z PSIsContainer       : True
+2025-02-01T23:57:38.7817681Z Name                : ExecutionLog
+2025-02-01T23:57:38.7818008Z Parent              : /__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7818289Z Root                : /
+2025-02-01T23:57:38.7818734Z Exists              : True
+2025-02-01T23:57:38.7819060Z FullName            : /__w/AzIaaS/AzIaaS/ExecutionLog
+2025-02-01T23:57:38.7819373Z Extension           : 
+2025-02-01T23:57:38.7819668Z CreationTime        : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7820250Z CreationTimeUtc     : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7821061Z LastAccessTime      : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7821689Z LastAccessTimeUtc   : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7822280Z LastWriteTime       : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7822871Z LastWriteTimeUtc    : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7823364Z LinkTarget          : 
+2025-02-01T23:57:38.7823896Z UnixFileMode        : OtherExecute, OtherRead, GroupExecute, GroupWrite, 
+2025-02-01T23:57:38.7824456Z                       GroupRead, UserExecute, UserWrite, UserRead
+2025-02-01T23:57:38.7824805Z Attributes          : Directory
+2025-02-01T23:57:38.7825098Z UnixMode            : drwxrwxr-x
+2025-02-01T23:57:38.7825374Z User                : root
+2025-02-01T23:57:38.7825638Z Group               : root
+2025-02-01T23:57:38.7825889Z Size                : 4096
+2025-02-01T23:57:38.7826131Z Mode                : d----
+2025-02-01T23:57:38.7826409Z ModeWithoutHardLink : d----
+2025-02-01T23:57:38.7826735Z BaseName            : ExecutionLog
+2025-02-01T23:57:38.7827254Z ResolvedTarget      : /__w/AzIaaS/AzIaaS/ExecutionLog
+2025-02-01T23:57:38.7827837Z Target              : 
+2025-02-01T23:57:38.7828245Z LinkType            : 
+2025-02-01T23:57:38.7828695Z 
+2025-02-01T23:57:38.7828857Z 
+2025-02-01T23:57:38.7829411Z PSPath              : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS/
+2025-02-01T23:57:38.7829846Z                       GHActionTest
+2025-02-01T23:57:38.7830293Z PSParentPath        : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7830706Z PSChildName         : GHActionTest
+2025-02-01T23:57:38.7831126Z UnixStat            : System.Management.Automation.Platform+Unix+CommonStat
+2025-02-01T23:57:38.7831509Z PSDrive             : /
+2025-02-01T23:57:38.7831840Z PSProvider          : Microsoft.PowerShell.Core\FileSystem
+2025-02-01T23:57:38.7832192Z PSIsContainer       : True
+2025-02-01T23:57:38.7832466Z Name                : GHActionTest
+2025-02-01T23:57:38.7832764Z Parent              : /__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7833229Z Root                : /
+2025-02-01T23:57:38.7833480Z Exists              : True
+2025-02-01T23:57:38.7833808Z FullName            : /__w/AzIaaS/AzIaaS/GHActionTest
+2025-02-01T23:57:38.7834116Z Extension           : 
+2025-02-01T23:57:38.7834406Z CreationTime        : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7834739Z CreationTimeUtc     : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7835066Z LastAccessTime      : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7835382Z LastAccessTimeUtc   : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7835702Z LastWriteTime       : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7836018Z LastWriteTimeUtc    : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7836306Z LinkTarget          : 
+2025-02-01T23:57:38.7836682Z UnixFileMode        : OtherExecute, OtherRead, GroupExecute, GroupWrite, 
+2025-02-01T23:57:38.7837071Z                       GroupRead, UserExecute, UserWrite, UserRead
+2025-02-01T23:57:38.7837381Z Attributes          : Directory
+2025-02-01T23:57:38.7837663Z UnixMode            : drwxrwxr-x
+2025-02-01T23:57:38.7837928Z User                : root
+2025-02-01T23:57:38.7838181Z Group               : root
+2025-02-01T23:57:38.7838649Z Size                : 4096
+2025-02-01T23:57:38.7838914Z Mode                : d----
+2025-02-01T23:57:38.7839187Z ModeWithoutHardLink : d----
+2025-02-01T23:57:38.7839470Z BaseName            : GHActionTest
+2025-02-01T23:57:38.7839821Z ResolvedTarget      : /__w/AzIaaS/AzIaaS/GHActionTest
+2025-02-01T23:57:38.7840140Z Target              : 
+2025-02-01T23:57:38.7840529Z LinkType            : 
+2025-02-01T23:57:38.7840677Z 
+2025-02-01T23:57:38.7840684Z 
+2025-02-01T23:57:38.7840996Z PSPath              : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS/
+2025-02-01T23:57:38.7841350Z                       Images
+2025-02-01T23:57:38.7841773Z PSParentPath        : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7842168Z PSChildName         : Images
+2025-02-01T23:57:38.7842569Z UnixStat            : System.Management.Automation.Platform+Unix+CommonStat
+2025-02-01T23:57:38.7842955Z PSDrive             : /
+2025-02-01T23:57:38.7843289Z PSProvider          : Microsoft.PowerShell.Core\FileSystem
+2025-02-01T23:57:38.7843637Z PSIsContainer       : True
+2025-02-01T23:57:38.7843895Z Name                : Images
+2025-02-01T23:57:38.7844172Z Parent              : /__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7844454Z Root                : /
+2025-02-01T23:57:38.7844706Z Exists              : True
+2025-02-01T23:57:38.7845008Z FullName            : /__w/AzIaaS/AzIaaS/Images
+2025-02-01T23:57:38.7845301Z Extension           : 
+2025-02-01T23:57:38.7845594Z CreationTime        : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7845919Z CreationTimeUtc     : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7846238Z LastAccessTime      : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7846554Z LastAccessTimeUtc   : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7846870Z LastWriteTime       : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7847187Z LastWriteTimeUtc    : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7847469Z LinkTarget          : 
+2025-02-01T23:57:38.7847843Z UnixFileMode        : OtherExecute, OtherRead, GroupExecute, GroupWrite, 
+2025-02-01T23:57:38.7848221Z                       GroupRead, UserExecute, UserWrite, UserRead
+2025-02-01T23:57:38.7848772Z Attributes          : Directory
+2025-02-01T23:57:38.7849075Z UnixMode            : drwxrwxr-x
+2025-02-01T23:57:38.7849350Z User                : root
+2025-02-01T23:57:38.7849614Z Group               : root
+2025-02-01T23:57:38.7850039Z Size                : 4096
+2025-02-01T23:57:38.7850289Z Mode                : d----
+2025-02-01T23:57:38.7850555Z ModeWithoutHardLink : d----
+2025-02-01T23:57:38.7850823Z BaseName            : Images
+2025-02-01T23:57:38.7851144Z ResolvedTarget      : /__w/AzIaaS/AzIaaS/Images
+2025-02-01T23:57:38.7851447Z Target              : 
+2025-02-01T23:57:38.7851687Z LinkType            : 
+2025-02-01T23:57:38.7851824Z 
+2025-02-01T23:57:38.7851832Z 
+2025-02-01T23:57:38.7852132Z PSPath              : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS/
+2025-02-01T23:57:38.7852485Z                       Render
+2025-02-01T23:57:38.7852912Z PSParentPath        : Microsoft.PowerShell.Core\FileSystem::/__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7853313Z PSChildName         : Render
+2025-02-01T23:57:38.7853720Z UnixStat            : System.Management.Automation.Platform+Unix+CommonStat
+2025-02-01T23:57:38.7854107Z PSDrive             : /
+2025-02-01T23:57:38.7854449Z PSProvider          : Microsoft.PowerShell.Core\FileSystem
+2025-02-01T23:57:38.7854795Z PSIsContainer       : True
+2025-02-01T23:57:38.7855062Z Name                : Render
+2025-02-01T23:57:38.7855348Z Parent              : /__w/AzIaaS/AzIaaS
+2025-02-01T23:57:38.7855635Z Root                : /
+2025-02-01T23:57:38.7855886Z Exists              : True
+2025-02-01T23:57:38.7856192Z FullName            : /__w/AzIaaS/AzIaaS/Render
+2025-02-01T23:57:38.7856492Z Extension           : 
+2025-02-01T23:57:38.7856784Z CreationTime        : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7857237Z CreationTimeUtc     : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7857565Z LastAccessTime      : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7857894Z LastAccessTimeUtc   : 2/1/2025 11:57:36 PM
+2025-02-01T23:57:38.7858223Z LastWriteTime       : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7858751Z LastWriteTimeUtc    : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7859057Z LinkTarget          : 
+2025-02-01T23:57:38.7859441Z UnixFileMode        : OtherExecute, OtherRead, GroupExecute, GroupWrite, 
+2025-02-01T23:57:38.7859839Z                       GroupRead, UserExecute, UserWrite, UserRead
+2025-02-01T23:57:38.7860198Z Attributes          : Directory
+2025-02-01T23:57:38.7860483Z UnixMode            : drwxrwxr-x
+2025-02-01T23:57:38.7860752Z User                : root
+2025-02-01T23:57:38.7861001Z Group               : root
+2025-02-01T23:57:38.7861252Z Size                : 4096
+2025-02-01T23:57:38.7861504Z Mode                : d----
+2025-02-01T23:57:38.7861772Z ModeWithoutHardLink : d----
+2025-02-01T23:57:38.7862036Z BaseName            : Render
+2025-02-01T23:57:38.7862363Z ResolvedTarget      : /__w/AzIaaS/AzIaaS/Render
+2025-02-01T23:57:38.7862670Z Target              : 
+2025-02-01T23:57:38.7862906Z LinkType            : 
+2025-02-01T23:57:38.7863050Z 
+2025-02-01T23:57:38.7863057Z 
+2025-02-01T23:57:38.7863195Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7863474Z Length        : 4317
+2025-02-01T23:57:38.7863718Z Name          : AKS.ps1
+2025-02-01T23:57:38.7863860Z 
+2025-02-01T23:57:38.7863866Z 
+2025-02-01T23:57:38.7864002Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7864274Z Length        : 1467
+2025-02-01T23:57:38.7864514Z Name          : AzDisk.ps1
+2025-02-01T23:57:38.7864663Z 
+2025-02-01T23:57:38.7864668Z 
+2025-02-01T23:57:38.7864807Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7865069Z Length        : 17293
+2025-02-01T23:57:38.7865324Z Name          : AzNetwork.ps1
+2025-02-01T23:57:38.7865487Z 
+2025-02-01T23:57:38.7865623Z 
+2025-02-01T23:57:38.7865758Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7866023Z Length        : 688
+2025-02-01T23:57:38.7866263Z Name          : AzSqlVm.ps1
+2025-02-01T23:57:38.7866422Z 
+2025-02-01T23:57:38.7866427Z 
+2025-02-01T23:57:38.7866557Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7866826Z Length        : 2218
+2025-02-01T23:57:38.7867065Z Name          : AzVM.ps1
+2025-02-01T23:57:38.7867215Z 
+2025-02-01T23:57:38.7867221Z 
+2025-02-01T23:57:38.7867350Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7867621Z Length        : 11999
+2025-02-01T23:57:38.7867870Z Name          : HyperV.ps1
+2025-02-01T23:57:38.7868021Z 
+2025-02-01T23:57:38.7868026Z 
+2025-02-01T23:57:38.7868165Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7868571Z Length        : 955
+2025-02-01T23:57:38.7868826Z Name          : index.html
+2025-02-01T23:57:38.7868989Z 
+2025-02-01T23:57:38.7868995Z 
+2025-02-01T23:57:38.7869123Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7869393Z Length        : 337
+2025-02-01T23:57:38.7869623Z Name          : README.md
+2025-02-01T23:57:38.7869779Z 
+2025-02-01T23:57:38.7869784Z 
+2025-02-01T23:57:38.7869913Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7870186Z Length        : 15735
+2025-02-01T23:57:38.7870437Z Name          : execution.log
+2025-02-01T23:57:38.7870592Z 
+2025-02-01T23:57:38.7870598Z 
+2025-02-01T23:57:38.7870725Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7870989Z Length        : 177
+2025-02-01T23:57:38.7871222Z Name          : Logs.md
+2025-02-01T23:57:38.7871364Z 
+2025-02-01T23:57:38.7871370Z 
+2025-02-01T23:57:38.7871627Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7871900Z Length        : 5187
+2025-02-01T23:57:38.7872160Z Name          : DeployWin11ArmVM.md
+2025-02-01T23:57:38.7872339Z 
+2025-02-01T23:57:38.7872345Z 
+2025-02-01T23:57:38.7872473Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7872734Z Length        : 3753
+2025-02-01T23:57:38.7873001Z Name          : DeployWindows11ArmVM.md
+2025-02-01T23:57:38.7873188Z 
+2025-02-01T23:57:38.7873193Z 
+2025-02-01T23:57:38.7873323Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7873603Z Length        : 69801
+2025-02-01T23:57:38.7873896Z Name          : DeployWindows11ArmVM.png
+2025-02-01T23:57:38.7874083Z 
+2025-02-01T23:57:38.7874090Z 
+2025-02-01T23:57:38.7874223Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7874483Z Length        : 1638
+2025-02-01T23:57:38.7874730Z Name          : FuncVar.ps1
+2025-02-01T23:57:38.7874882Z 
+2025-02-01T23:57:38.7874887Z 
+2025-02-01T23:57:38.7875021Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7875288Z Length        : 113
+2025-02-01T23:57:38.7875528Z Name          : GetRG.ps1
+2025-02-01T23:57:38.7875682Z 
+2025-02-01T23:57:38.7875688Z 
+2025-02-01T23:57:38.7875819Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7876093Z Length        : 182634
+2025-02-01T23:57:38.7876343Z Name          : 3TierApp.jpg
+2025-02-01T23:57:38.7876502Z 
+2025-02-01T23:57:38.7876507Z 
+2025-02-01T23:57:38.7876636Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7876901Z Length        : 88753
+2025-02-01T23:57:38.7877152Z Name          : 3TierApp.vsdx
+2025-02-01T23:57:38.7877308Z 
+2025-02-01T23:57:38.7877314Z 
+2025-02-01T23:57:38.7877447Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7877708Z Length        : 1378
+2025-02-01T23:57:38.7877972Z Name          : Abbreviations.md
+2025-02-01T23:57:38.7878135Z 
+2025-02-01T23:57:38.7878140Z 
+2025-02-01T23:57:38.7878275Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7878916Z Length        : 108877
+2025-02-01T23:57:38.7879336Z Name          : AzPSImageInfraDeploymentWithApproval DeployVirtualMachines.log
+2025-02-01T23:57:38.7879647Z 
+2025-02-01T23:57:38.7879652Z 
+2025-02-01T23:57:38.7879789Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7880065Z Length        : 17396
+2025-02-01T23:57:38.7880481Z Name          : AzPSImageInfraDeploymentWithApproval GovernanceResourcesJob.log
+2025-02-01T23:57:38.7880789Z 
+2025-02-01T23:57:38.7880795Z 
+2025-02-01T23:57:38.7880939Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7881220Z Length        : 5423
+2025-02-01T23:57:38.7881472Z Name          : Document.md
+2025-02-01T23:57:38.7881628Z 
+2025-02-01T23:57:38.7881642Z 
+2025-02-01T23:57:38.7881781Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7882048Z Length        : 2888
+2025-02-01T23:57:38.7882317Z Name          : GovResource.ps1
+2025-02-01T23:57:38.7882497Z 
+2025-02-01T23:57:38.7882509Z 
+2025-02-01T23:57:38.7882643Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7882916Z Length        : 1794
+2025-02-01T23:57:38.7883179Z Name          : HelperFunctions.ps1
+2025-02-01T23:57:38.7883360Z 
+2025-02-01T23:57:38.7883366Z 
+2025-02-01T23:57:38.7883498Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7883767Z Length        : 2357
+2025-02-01T23:57:38.7884031Z Name          : NamingConvention.md
+2025-02-01T23:57:38.7884197Z 
+2025-02-01T23:57:38.7884202Z 
+2025-02-01T23:57:38.7884332Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7884599Z Length        : 583
+2025-02-01T23:57:38.7884976Z Name          : NsgRules.md
+2025-02-01T23:57:38.7885137Z 
+2025-02-01T23:57:38.7885143Z 
+2025-02-01T23:57:38.7885280Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7885546Z Length        : 266321
+2025-02-01T23:57:38.7885815Z Name          : PortalClip1.jpg
+2025-02-01T23:57:38.7885976Z 
+2025-02-01T23:57:38.7885987Z 
+2025-02-01T23:57:38.7886115Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7886382Z Length        : 173286
+2025-02-01T23:57:38.7886637Z Name          : PortalClip2.jpg
+2025-02-01T23:57:38.7886800Z 
+2025-02-01T23:57:38.7886805Z 
+2025-02-01T23:57:38.7886931Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7887197Z Length        : 174918
+2025-02-01T23:57:38.7887452Z Name          : PortalClip3.jpg
+2025-02-01T23:57:38.7887611Z 
+2025-02-01T23:57:38.7887616Z 
+2025-02-01T23:57:38.7887743Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7888011Z Length        : 171453
+2025-02-01T23:57:38.7888270Z Name          : PortalClip4.jpg
+2025-02-01T23:57:38.7888619Z 
+2025-02-01T23:57:38.7888625Z 
+2025-02-01T23:57:38.7888778Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7889056Z Length        : 615
+2025-02-01T23:57:38.7889291Z Name          : VMs.md
+2025-02-01T23:57:38.7889436Z 
+2025-02-01T23:57:38.7889441Z 
+2025-02-01T23:57:38.7889569Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7889836Z Length        : 2388
+2025-02-01T23:57:38.7890066Z Name          : VMs.ps1
+2025-02-01T23:57:38.7890216Z 
+2025-02-01T23:57:38.7890221Z 
+2025-02-01T23:57:38.7890349Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7890616Z Length        : 7393
+2025-02-01T23:57:38.7890868Z Name          : DocRender.html
+2025-02-01T23:57:38.7891025Z 
+2025-02-01T23:57:38.7891030Z 
+2025-02-01T23:57:38.7891159Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7891435Z Length        : 289
+2025-02-01T23:57:38.7891683Z Name          : Libraries.log
+2025-02-01T23:57:38.7891841Z 
+2025-02-01T23:57:38.7891846Z 
+2025-02-01T23:57:38.7892117Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7892379Z Length        : 6616
+2025-02-01T23:57:38.7892629Z Name          : LogRender.html
+2025-02-01T23:57:38.7892790Z 
+2025-02-01T23:57:38.7892796Z 
+2025-02-01T23:57:38.7892923Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7893191Z Length        : 955
+2025-02-01T23:57:38.7893429Z Name          : MdRender.html
+2025-02-01T23:57:38.7893589Z 
+2025-02-01T23:57:38.7893594Z 
+2025-02-01T23:57:38.7893721Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7893987Z Length        : 4741
+2025-02-01T23:57:38.7894228Z Name          : script.js
+2025-02-01T23:57:38.7894376Z 
+2025-02-01T23:57:38.7894381Z 
+2025-02-01T23:57:38.7894539Z LastWriteTime : 1/29/2025 3:10:12 PM
+2025-02-01T23:57:38.7894831Z Length        : 822
+2025-02-01T23:57:38.7895067Z Name          : style.css
+2025-02-01T23:57:38.7895212Z 
+2025-02-01T23:57:38.7895223Z 
+2025-02-01T23:57:39.0197658Z ##[group]Run ./GHActionTest/GetRG.ps1
+2025-02-01T23:57:39.0197989Z ./GHActionTest/GetRG.ps1
+2025-02-01T23:57:39.0198361Z shell: pwsh -command ". '{0}'"
+2025-02-01T23:57:39.0199547Z ##[endgroup]
+2025-02-01T23:57:41.3422813Z 
+2025-02-01T23:57:41.3425820Z ResourceGroupName : GitHubAction24
+2025-02-01T23:57:41.3426424Z Location          : northcentralus
+2025-02-01T23:57:41.3426905Z ProvisioningState : Succeeded
+2025-02-01T23:57:41.3427340Z Tags              : 
+2025-02-01T23:57:41.3428004Z ResourceId        : /subscriptions/8b77f191-3d4a-498e-8bb1-9e1fbb927ea7/resourc
+2025-02-01T23:57:41.3429453Z                     eGroups/GitHubAction24
+2025-02-01T23:57:41.3429718Z 
+2025-02-01T23:57:41.4429176Z Post job cleanup.
+2025-02-01T23:57:41.4433198Z ##[command]/usr/bin/docker exec  20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe sh -c "cat /etc/*release | grep ^ID"
+2025-02-01T23:57:41.6421644Z Stop and remove container: fa6d81d862794181bc4063c11e56f373_mcrmicrosoftcomazurepowershelllatest_857e64
+2025-02-01T23:57:41.6426030Z ##[command]/usr/bin/docker rm --force 20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe
+2025-02-01T23:57:41.7397952Z 20f278f0d37aa0defd542825726e2b67f2bdf42d18f843873d1103c2e5eb69fe
+2025-02-01T23:57:41.7426624Z Remove container network: github_network_9a5db2b6af454cbc89d71a7213c61dd0
+2025-02-01T23:57:41.7431120Z ##[command]/usr/bin/docker network rm github_network_9a5db2b6af454cbc89d71a7213c61dd0
+2025-02-01T23:57:41.8569275Z github_network_9a5db2b6af454cbc89d71a7213c61dd0
+2025-02-01T23:57:41.8625411Z Cleaning up orphan processes
