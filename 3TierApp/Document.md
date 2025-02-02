@@ -1,7 +1,7 @@
 # Three Tier Applicaiton Infrastructure deployment in Azure
 
 
-This is deploying a [three-tier application architecture][1] on virtual machines in Azure. 
+This is deploying a [three-tier application architecture][1] on virtual machines in Azure.
 
 
 <details>
@@ -20,17 +20,17 @@ This is deploying a [three-tier application architecture][1] on virtual machines
 </div>
 
 Currently the 'Sparse checkout' feature is blocked by bug.
-[sparse-checkout not working when running in a container. · Issue #1602 · actions/checkout][4] 
+[sparse-checkout not working when running in a container. · Issue #1602 · actions/checkout][4]
 
- 
-One could get more detailed in their implementation of the code. 
+
+One could get more detailed in their implementation of the code.
 Potential Tables: vNet details, NSG rules, VM details, storage account restrictions
-Potential environment variables: RG name, KV, Sa, secret, admin name, 
+Potential environment variables: RG name, KV, Sa, secret, admin name,
 
 One could put all tabularizable configuration in a markdown table and the other configurations in a hash table.
 
 This gives you a single source of truth for configuration and documentation unlike other declarative methods that could result in a doc-config mismatch.
-And adding to configuration doesn't require you to add to the code. One could also parameterize the table paths once the table data has been validated. 
+And adding to configuration doesn't require you to add to the code. One could also parameterize the table paths once the table data has been validated.
 
 The tables could be generated with proper Excel formulas.
 
@@ -39,7 +39,7 @@ The tables could be generated with proper Excel formulas.
 These are the NSG rules to allow SSL and Windows Admin Center traffic.
 
 <div style="width: 80%">
-[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) [open]
+[Network Security Group Rules] (% include https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/NsgRules.md %) 
 </div>
 
 <figure style="float:right; margin:0; max-width: 20%;">
@@ -83,7 +83,7 @@ This passes the resources' details between the Governance resources and the VM d
 </details>
 
 
-Here is a link to the [Governance resources deployment execution][2] 
+Here is a link to the [Governance resources deployment execution][2]
 
 
 This deploys the required virtual machines in the same resource group using the previously prestaged governance resources.
@@ -118,8 +118,8 @@ Here is a link to the [VM deployment execution][3]
 
 <details>
   <summary><u>Essential characteristics</u></summary>
-   
- Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
+
+Correct, Deterministic, Efficient, Robust, Maintainable, Testable, Reliable, Reusable, Flexible, Scalable, Secure, BAU\BC lang parity
 
 https://www.geeksforgeeks.org/software-engineering-characteristics-of-good-software
 https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
@@ -131,17 +131,3 @@ https://biosistemika.com/blog/dont-save-on-quality-key-attributes-of-software
 [2]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20GovernanceResourcesJob.log>
 [3]: <https://ayanmullick.github.io/AzIaaS/Render/LogRender.html?path=https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/AzPSImageInfraDeploymentWithApproval%20DeployVirtualMachines.log>
 [4]: <https://github.com/actions/checkout/issues/1602#issuecomment-2048656906>
-
-<details open>
-<summary><u>Azure portal screenshots</u></summary>
-<div style="display:flex;">
-  <div>
-      <img width="100%" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip1.jpg"> 
-  </div>
-  <div style="display:flex;flex-direction:column">
-    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip2.jpg"> 
-    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip3.jpg"> 
-    <img height="300" src="https://raw.githubusercontent.com/Ayanmullick/AzIaaS/refs/heads/main/3TierApp/PortalClip4.jpg"> 
-  </div>
-</div>
-</details>
