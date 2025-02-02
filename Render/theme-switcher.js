@@ -1,7 +1,8 @@
+export const lightModeQuery = window.matchMedia('(prefers-color-scheme: light)');
+export const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
 export const applyColorScheme = (handleThemeChange) => {
     if (window.matchMedia) {
-        const lightModeQuery = window.matchMedia('(prefers-color-scheme: light)');
-        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
         handleThemeChange(lightModeQuery,darkModeQuery);
         lightModeQuery.addEventListener('change', handleThemeChange);
         darkModeQuery.addEventListener('change', handleThemeChange);
@@ -9,7 +10,7 @@ export const applyColorScheme = (handleThemeChange) => {
 };
 
 
-export const handleDocRenderThemeChange = (lightModeQuery,darkModeQuery) => {
+export const handleDocRenderThemeChange = () => {
     if (lightModeQuery.matches) {
         document.body.classList.remove('dark-theme');
         document.body.classList.add('white-theme');
@@ -21,7 +22,7 @@ export const handleDocRenderThemeChange = (lightModeQuery,darkModeQuery) => {
     }
 };
 
-export const handleLogPageThemeChange = (lightModeQuery,darkModeQuery) => {
+export const handleLogPageThemeChange = () => {
     const htmlElementDataSet = document.documentElement.dataset;
     if (lightModeQuery.matches) {
         htmlElementDataSet.colorMode = "light";
