@@ -37,12 +37,11 @@ th,td{
   border: 1px solid black;
 }
 
-.button-absolute {
-  position: absolute;
+.button-fixed {
+  position: fixed;
   height: 25px;
   cursor: pointer;
 }
-
 
 .button-switch-theme {
     font-size: 16px;
