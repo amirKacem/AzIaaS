@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const themeSwitchButton = document.getElementById("switch-theme");
   const inverseCollapseButton = document.getElementById("inverse-collapses");
+  const token= "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";
   themeSwitchButton.addEventListener("click", () => {
     const highlightjsThemeElement = document.getElementById('highlightjs-theme');
     if(document.body.classList.contains("dark-theme")) {
@@ -35,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function renderMarkDownFile(fileUrl) {
-    return fetch(fileUrl).then(response => response.text()).then(markdown => {
+    const headers = { 'Authorization': 'Bearer '+token };
+    return fetch(fileUrl, {headers}).then(response => response.text()).then(markdown => {
       const contentIncludesInfo = [], regexPattern = `\\[(.*)\\].+\\(% include(.+)%\\)(\\s*\\[open\\])?`, regex = new RegExp(regexPattern, "g");
       let groupIndex = 0;
       markdown = markdown.replaceAll(regex, (...groups) => {
